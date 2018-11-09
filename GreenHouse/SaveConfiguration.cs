@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GreenHouse
 {
-    public partial class Form1 : Form
+    public partial class SaveConfiguration : Form
     {
-        public Form1()
+        public SaveConfiguration()
         {
             InitializeComponent();
         }
