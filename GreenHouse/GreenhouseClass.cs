@@ -6,8 +6,9 @@ using System.Windows.Forms;
 
 namespace GreenHouse
 {
-    static class Program
+    static class GreenhouseClass
     {
+        static List<IController> listOfControllers;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -18,5 +19,8 @@ namespace GreenHouse
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Greenhouse());
         }
+
+        static void initialize() { }
+        static void simulate() { }
     }
 }
