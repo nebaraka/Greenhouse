@@ -15,6 +15,35 @@ namespace GreenHouse
         public Greenhouse()
         {
             InitializeComponent();
+            button2.Click += new EventHandler(button2_click);
+        }
+        private void button2_click(object sender, EventArgs e)
+        {
+            PlanConfiguration pc = new PlanConfiguration();
+            pc.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            AddDevices ad = new AddDevices();
+            ad.Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            GrowthRates gr = new GrowthRates();
+            gr.Show();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            SaveConfiguration sc = new SaveConfiguration();
+            sc.Show();
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
