@@ -49,6 +49,7 @@
     <Compile Include="Controllers\AcidityController.cs" />
     <Compile Include="Controllers\LightController.cs" />
     <Compile Include="Controllers\WetnessController.cs" />
+    <Compile Include="paramStruct.cs" />
     <Compile Include="Regulators\AcidityRegulator.cs" />
     <Compile Include="Regulators\LightRegulator.cs" />
     <Compile Include="Regulators\TemperatureRegulator.cs" />

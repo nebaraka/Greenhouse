@@ -31,7 +31,18 @@ namespace GreenHouse.Regulators
 
         private void work(double currentPower)
         {
-
+            double[] result = new double[3];
+            result[0] = (double)x;
+            result[1] = (double)y;
+            if (this.status == true)
+            {
+                result[2] = (double)maxPower;
+            }
+            else
+            {
+                result[2] = 0.0;
+            }
+            Environment.lightRegValues.Add(result);
         }
 
         public int getX() { return x; }

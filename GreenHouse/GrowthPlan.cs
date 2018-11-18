@@ -2,33 +2,119 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace GreenHouse
 {
     class GrowthPlan
     {
         public const int NUMBER_OF_INTERVALS = 3;
-
-        private static double[,] acidity;
-        private static double[,] light;
-        private static double[,] temperature;
-        private static double[,] wetness;
+        
+        private static paramStruct acidity;
+        private static paramStruct light;
+        private static paramStruct temperature;
+        private static paramStruct wetness;
         private static int time;
+        private static int tickSize;
 
         static GrowthPlan()
         {
-            acidity = new double[NUMBER_OF_INTERVALS, 2];
-            light = new double[NUMBER_OF_INTERVALS, 2];
-            temperature = new double[NUMBER_OF_INTERVALS, 2];
-            wetness = new double[NUMBER_OF_INTERVALS, 2];
             time = 0;
-            //timer initialization
+            tickSize = 1;
         }
 
-        public double[] getAcididty() { return new double[2]; }
-        public double[] getLight() { return new double[2]; }
-        public double[] getTemperature() { return new double[2]; }
-        public double[] getWetness() { return new double[2]; }
+        public static void initialize(paramStruct a, paramStruct l, paramStruct t, paramStruct w)
+        {
+            acidity = a;
+            light = l;
+            temperature = t;
+            wetness = w;
+            //timer initialization
+            TimerCallback tcb = new TimerCallback(tick);
+            Timer timer = new Timer(tcb, null, 0, 1000);
+        }
+
+        private static void tick(object ob)
+        {
+            time += tickSize;
+        }
+
+        public void setTickSize(int size)
+        {
+            tickSize = size;
+        }
+
+        public double[] getAcididty()
+        {
+            if (acidity.intervals[2] <= time)
+            {
+                double[] result = {acidity.vals[2, 0], acidity.vals[2, 1] };
+                return result;
+            }
+            else if (acidity.intervals[1] <= time)
+            {
+                double[] result = { acidity.vals[1, 0], acidity.vals[1, 1] };
+                return result;
+            }
+            else
+            {
+                double[] result = { acidity.vals[0, 0], acidity.vals[0, 1] };
+                return result;
+            }
+        }
+        public double[] getLight()
+        {
+            if (light.intervals[2] <= time)
+            {
+                double[] result = { light.vals[2, 0], light.vals[2, 1] };
+                return result;
+            }
+            else if (light.intervals[1] <= time)
+            {
+                double[] result = { light.vals[1, 0], light.vals[1, 1] };
+                return result;
+            }
+            else
+            {
+                double[] result = { light.vals[0, 0], light.vals[0, 1] };
+                return result;
+            }
+        }
+        public double[] getTemperature()
+        {
+            if (temperature.intervals[2] <= time)
+            {
+                double[] result = { temperature.vals[2, 0], temperature.vals[2, 1] };
+                return result;
+            }
+            else if (temperature.intervals[1] <= time)
+            {
+                double[] result = { temperature.vals[1, 0], temperature.vals[1, 1] };
+                return result;
+            }
+            else
+            {
+                double[] result = { temperature.vals[0, 0], temperature.vals[0, 1] };
+                return result;
+            }
+        }
+        public double[] getWetness()
+        {
+            if (wetness.intervals[2] <= time)
+            {
+                double[] result = { wetness.vals[2, 0], wetness.vals[2, 1] };
+                return result;
+            }
+            else if (wetness.intervals[1] <= time)
+            {
+                double[] result = { wetness.vals[1, 0], wetness.vals[1, 1] };
+                return result;
+            }
+            else
+            {
+                double[] result = { wetness.vals[0, 0], wetness.vals[0, 1] };
+                return result;
+            }
+        }
     }
 }
