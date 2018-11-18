@@ -35,6 +35,8 @@ namespace GreenHouse
         {
             recountTemperature();
             recountLight();
+            recountAcidity();
+            recountWetness();
         }
         private static void recountTemperature()
         {
@@ -53,7 +55,7 @@ namespace GreenHouse
                 {
                     int x = (int)regulator[0];
                     int y = (int)regulator[1];
-                    double dt = regulator[3];
+                    double dt = regulator[2];
                     temperature[x, y] += dt;
                 }
                 for (int i = 0; i < X_SIZE; i++)
@@ -136,6 +138,156 @@ namespace GreenHouse
                         double r1_2 = r - Math.Sqrt(2) / 2;
                         double R1_2 = Math.Sqrt(r1_2 * r1_2 + h * h);
                         light[i, j] += regulator[2] * h * h * h / (R * R * R * R * R) * R1_2 * R1_2;//F*h^3*R1_2^2/R^5
+                    }
+                }
+            }
+        }
+        public static void recountAcidity()
+        {
+            const int t = 1;//Time scale(in mins)
+            int kt = 60 / t;//Time intervals quantitaty
+            for (int k = 0; k < kt; k++)
+            {
+                foreach (double[] regulator in acidityRegValues)//Active regulators recount
+                {
+                    int x = (int)regulator[0];
+                    int y = (int)regulator[1];
+                    double dA = regulator[2];//Delta Acidity
+                    acidity[x, y] += dA;
+                }
+                for (int i = 0; i < X_SIZE; i++)
+                {
+                    for (int j = 0; j < Y_SIZE; j++)
+                    {
+                        bool isActiveRegulator = false;
+                        foreach (double[] regulator in acidityRegValues)
+                            if ((i == regulator[0]) && (j == regulator[1]) && (regulator[2] != 0))
+                            {
+                                isActiveRegulator = true;
+                                break;
+                            }
+                        if (isActiveRegulator == false)//Recount others
+                        {
+                            double coef = 0;//Coefficient to divide
+                            double sum = 0;//Nearby cells sum
+                            if (i != 0)
+                            {
+                                sum += acidity[i - 1, j];
+                                coef++;
+                            }
+                            if (i != X_SIZE - 1)
+                            {
+                                sum += acidity[i + 1, j];
+                                coef++;
+                            }
+                            if (j != 0)
+                            {
+                                sum += acidity[i, j - 1];
+                                coef++;
+                            }
+                            if (j != Y_SIZE - 1)
+                            {
+                                sum += acidity[i, j + 1];
+                                coef++;
+                            }
+                            if (i != 0 && j != 0)
+                            {
+                                sum += acidity[i - 1, j - 1] / 2;
+                                coef += 0.5;
+                            }
+                            if (i != 0 && j != Y_SIZE - 1)
+                            {
+                                sum += acidity[i - 1, j + 1] / 2;
+                                coef += 0.5;
+                            }
+                            if (i != X_SIZE - 1 && j != 0)
+                            {
+                                sum += acidity[i + 1, j - 1] / 2;
+                                coef += 0.5;
+                            }
+                            if (i != X_SIZE - 1 && j != Y_SIZE - 1)
+                            {
+                                sum += acidity[i + 1, j + 1] / 2;
+                                coef += 0.5;
+                            }
+                            double delta = (sum / coef) - acidity[i, j];
+                            acidity[i, j] += delta * 1.5;//1.5 - relaxation coefficient
+                        }
+                    }
+                }
+            }
+        }
+        public static void recountWetness()
+        {
+            const int t = 1;//Time scale(in mins)
+            int kt = 60 / t;//Time intervals quantitaty
+            for (int k = 0; k < kt; k++)
+            {
+                foreach (double[] regulator in wetnessRegValues)//Active regulators recount
+                {
+                    int x = (int)regulator[0];
+                    int y = (int)regulator[1];
+                    double dW = regulator[2];//Delta Wetness
+                    wetness[x, y] += dW;
+                }
+                for (int i = 0; i < X_SIZE; i++)
+                {
+                    for (int j = 0; j < Y_SIZE; j++)
+                    {
+                        bool isActiveRegulator = false;
+                        foreach (double[] regulator in wetnessRegValues)
+                            if ((i == regulator[0]) && (j == regulator[1]) && (regulator[2] != 0))
+                            {
+                                isActiveRegulator = true;
+                                break;
+                            }
+                        if (isActiveRegulator == false)//Recount others
+                        {
+                            double coef = 0;//Coefficient to divide
+                            double sum = 0;//Nearby cells sum
+                            if (i != 0)
+                            {
+                                sum += wetness[i - 1, j];
+                                coef++;
+                            }
+                            if (i != X_SIZE - 1)
+                            {
+                                sum += wetness[i + 1, j];
+                                coef++;
+                            }
+                            if (j != 0)
+                            {
+                                sum += wetness[i, j - 1];
+                                coef++;
+                            }
+                            if (j != Y_SIZE - 1)
+                            {
+                                sum += wetness[i, j + 1];
+                                coef++;
+                            }
+                            if (i != 0 && j != 0)
+                            {
+                                sum += wetness[i - 1, j - 1] / 2;
+                                coef += 0.5;
+                            }
+                            if (i != 0 && j != Y_SIZE - 1)
+                            {
+                                sum += wetness[i - 1, j + 1] / 2;
+                                coef += 0.5;
+                            }
+                            if (i != X_SIZE - 1 && j != 0)
+                            {
+                                sum += wetness[i + 1, j - 1] / 2;
+                                coef += 0.5;
+                            }
+                            if (i != X_SIZE - 1 && j != Y_SIZE - 1)
+                            {
+                                sum += wetness[i + 1, j + 1] / 2;
+                                coef += 0.5;
+                            }
+                            double delta = (sum / coef) - wetness[i, j];
+                            wetness[i, j] += delta * 1.5;//1.5 - relaxation coefficient
+                        }
                     }
                 }
             }
