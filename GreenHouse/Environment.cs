@@ -34,6 +34,7 @@ namespace GreenHouse
         public static void recount()
         {
             recountTemperature();
+            recountLight();
         }
         private static void recountTemperature()
         {
@@ -115,6 +116,27 @@ namespace GreenHouse
                         }
                     }
 
+                }
+            }
+        }
+        public static void recountLight()
+        {
+            double h = 2;//Height
+            for (int i = 0; i < X_SIZE; i++)
+            {
+                for (int j = 0; j < Y_SIZE; j++)
+                {
+                    light[i, j] = 0;
+                    foreach (double[] regulator in lightRegValues)
+                    {//regulator[2] in lumens
+                        double dx = regulator[0] - i;
+                        double dy = regulator[1] - j;
+                        double r = Math.Sqrt(dx * dx + dy * dy);
+                        double R = Math.Sqrt(r * r + h * h);
+                        double r1_2 = r - Math.Sqrt(2) / 2;
+                        double R1_2 = Math.Sqrt(r1_2 * r1_2 + h * h);
+                        light[i, j] += regulator[2] * h * h * h / (R * R * R * R * R) * R1_2 * R1_2;//F*h^3*R1_2^2/R^5
+                    }
                 }
             }
         }
