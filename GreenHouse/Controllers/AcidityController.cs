@@ -33,7 +33,12 @@ namespace GreenHouse.Controllers
         }
         public void askSensors()
         {
-
+            int i = 0;//Counter
+            foreach (AciditySensor sensor in listOfSensors)
+            {
+                recievedValues[i] = sensor.returnValue();
+                i++;
+            }
         }
         public void calculate()
         {

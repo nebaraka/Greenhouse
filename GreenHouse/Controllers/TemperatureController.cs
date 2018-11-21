@@ -34,7 +34,12 @@ namespace GreenHouse
         }
         public void askSensors()
         {
-
+            int i = 0;//Counter
+            foreach(TemperatureSensor sensor in listOfSensors)
+            {
+                recievedValues[i] = sensor.returnValue();
+                i++;
+            }
         }
         public void calculate()
         {
