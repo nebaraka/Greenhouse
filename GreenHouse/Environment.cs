@@ -95,23 +95,23 @@ namespace GreenHouse
                             }
                             if (i != 0 && j != 0)
                             {
-                                sum += temperature[i - 1, j - 1] / 2;
-                                coef += 0.5;
+                                sum += temperature[i - 1, j - 1] / Math.Sqrt(2);
+                                coef += Math.Sqrt(2);
                             }
                             if (i != 0 && j != Y_SIZE - 1)
                             {
-                                sum += temperature[i - 1, j + 1] / 2;
-                                coef += 0.5;
+                                sum += temperature[i - 1, j + 1] / Math.Sqrt(2);
+                                coef += Math.Sqrt(2);
                             }
                             if (i != X_SIZE - 1 && j != 0)
                             {
-                                sum += temperature[i + 1, j - 1] / 2;
-                                coef += 0.5;
+                                sum += temperature[i + 1, j - 1] / Math.Sqrt(2);
+                                coef += Math.Sqrt(2);
                             }
                             if (i != X_SIZE - 1 && j != Y_SIZE - 1)
                             {
-                                sum += temperature[i + 1, j + 1] / 2;
-                                coef += 0.5;
+                                sum += temperature[i + 1, j + 1] / Math.Sqrt(2);
+                                coef += Math.Sqrt(2);
                             }
                             double delta = (sum / coef) - temperature[i, j];
                             temperature[i, j] += delta * 1.5;//1.5 - relaxation coefficient
@@ -192,23 +192,23 @@ namespace GreenHouse
                             }
                             if (i != 0 && j != 0)
                             {
-                                sum += acidity[i - 1, j - 1] / 2;
-                                coef += 0.5;
+                                sum += acidity[i - 1, j - 1] / Math.Sqrt(2);
+                                coef += Math.Sqrt(2);
                             }
                             if (i != 0 && j != Y_SIZE - 1)
                             {
-                                sum += acidity[i - 1, j + 1] / 2;
-                                coef += 0.5;
+                                sum += acidity[i - 1, j + 1] / Math.Sqrt(2);
+                                coef += Math.Sqrt(2);
                             }
                             if (i != X_SIZE - 1 && j != 0)
                             {
-                                sum += acidity[i + 1, j - 1] / 2;
-                                coef += 0.5;
+                                sum += acidity[i + 1, j - 1] / Math.Sqrt(2);
+                                coef += Math.Sqrt(2);
                             }
                             if (i != X_SIZE - 1 && j != Y_SIZE - 1)
                             {
-                                sum += acidity[i + 1, j + 1] / 2;
-                                coef += 0.5;
+                                sum += acidity[i + 1, j + 1] / Math.Sqrt(2);
+                                coef += Math.Sqrt(2);
                             }
                             double delta = (sum / coef) - acidity[i, j];
                             acidity[i, j] += delta * 1.5;//1.5 - relaxation coefficient
@@ -267,23 +267,23 @@ namespace GreenHouse
                             }
                             if (i != 0 && j != 0)
                             {
-                                sum += wetness[i - 1, j - 1] / 2;
-                                coef += 0.5;
+                                sum += wetness[i - 1, j - 1] / Math.Sqrt(2);
+                                coef += Math.Sqrt(2);
                             }
                             if (i != 0 && j != Y_SIZE - 1)
                             {
-                                sum += wetness[i - 1, j + 1] / 2;
-                                coef += 0.5;
+                                sum += wetness[i - 1, j + 1] / Math.Sqrt(2);
+                                coef += Math.Sqrt(2);
                             }
                             if (i != X_SIZE - 1 && j != 0)
                             {
-                                sum += wetness[i + 1, j - 1] / 2;
-                                coef += 0.5;
+                                sum += wetness[i + 1, j - 1] / Math.Sqrt(2);
+                                coef += Math.Sqrt(2);
                             }
                             if (i != X_SIZE - 1 && j != Y_SIZE - 1)
                             {
-                                sum += wetness[i + 1, j + 1] / 2;
-                                coef += 0.5;
+                                sum += wetness[i + 1, j + 1] / Math.Sqrt(2);
+                                coef += Math.Sqrt(2);
                             }
                             double delta = (sum / coef) - wetness[i, j];
                             wetness[i, j] += delta * 1.5;//1.5 - relaxation coefficient
