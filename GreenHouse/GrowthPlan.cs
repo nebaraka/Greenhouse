@@ -29,29 +29,30 @@ namespace GreenHouse
             light = l;
             temperature = t;
             wetness = w;
-            //timer initialization
-            TimerCallback tcb = new TimerCallback(tick);
-            Timer timer = new Timer(tcb, null, 0, 1000);
+            //timer initialization as an alternative way
+           /* TimerCallback tcb = new TimerCallback(tick);
+            Timer timer = new Timer(tcb, null, 0, 1000);*/
         }
 
-        private static void tick(object ob)
+        public static void tick()
         {
             time += tickSize;
         }
 
-        public void setTickSize(int size)
+        public static void setTickSize(int size)
         {
             tickSize = size;
         }
 
-        public double[] getAcididty()
+        //For extensibility algorythms of all theese getters have to be Generizied
+        public static double[] getAcididty()
         {
-            if (acidity.intervals[2] <= time)
+            if (acidity.intervals[0] + acidity.intervals[1] + acidity.intervals[2] <= time)
             {
                 double[] result = {acidity.vals[2, 0], acidity.vals[2, 1] };
                 return result;
             }
-            else if (acidity.intervals[1] <= time)
+            else if (acidity.intervals[0] + acidity.intervals[1] <= time)
             {
                 double[] result = { acidity.vals[1, 0], acidity.vals[1, 1] };
                 return result;
@@ -62,14 +63,14 @@ namespace GreenHouse
                 return result;
             }
         }
-        public double[] getLight()
+        public static double[] getLight()
         {
-            if (light.intervals[2] <= time)
+            if (light.intervals[0] + light.intervals[1] + light.intervals[2] <= time)
             {
                 double[] result = { light.vals[2, 0], light.vals[2, 1] };
                 return result;
             }
-            else if (light.intervals[1] <= time)
+            else if (light.intervals[0] + light.intervals[1] <= time)
             {
                 double[] result = { light.vals[1, 0], light.vals[1, 1] };
                 return result;
@@ -80,14 +81,14 @@ namespace GreenHouse
                 return result;
             }
         }
-        public double[] getTemperature()
+        public static double[] getTemperature()
         {
-            if (temperature.intervals[2] <= time)
+            if (temperature.intervals[0] + temperature.intervals[1] + temperature.intervals[2] <= time)
             {
                 double[] result = { temperature.vals[2, 0], temperature.vals[2, 1] };
                 return result;
             }
-            else if (temperature.intervals[1] <= time)
+            else if (temperature.intervals[0] + temperature.intervals[1] <= time)
             {
                 double[] result = { temperature.vals[1, 0], temperature.vals[1, 1] };
                 return result;
@@ -98,14 +99,14 @@ namespace GreenHouse
                 return result;
             }
         }
-        public double[] getWetness()
+        public static double[] getWetness()
         {
-            if (wetness.intervals[2] <= time)
+            if (wetness.intervals[0] + wetness.intervals[1] + wetness.intervals[2] <= time)
             {
                 double[] result = { wetness.vals[2, 0], wetness.vals[2, 1] };
                 return result;
             }
-            else if (wetness.intervals[1] <= time)
+            else if (wetness.intervals[0] + wetness.intervals[1] <= time)
             {
                 double[] result = { wetness.vals[1, 0], wetness.vals[1, 1] };
                 return result;
