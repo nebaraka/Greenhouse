@@ -32,6 +32,14 @@ namespace GreenHouse
         {
             listOfSensors.Add((TemperatureSensor)s);
         }
+        public void deleteRegulator(string[] strs)
+        {
+            //TODO
+        }
+        public void deleteSensor(string[] strs)
+        {
+            //TODO
+        }
         public void askSensors()
         {
             int i = 0;//Counter

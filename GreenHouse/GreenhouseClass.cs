@@ -20,13 +20,9 @@ namespace GreenHouse
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Greenhouse());
         }
-
-        static void initialize(/*Params from GUI init*/)//I really don`t know what numbers paste
+        public static void set(List<IController> controllers)
         {
-            listOfControllers.Add(new AcidityController(1, 1));
-            listOfControllers.Add(new LightController(1, 1));
-            listOfControllers.Add(new TemperatureController(1, 1));
-            listOfControllers.Add(new WetnessController(1, 1));
+            listOfControllers = controllers;
             //Init cycle??
         }
         static void simulate()
@@ -40,6 +36,7 @@ namespace GreenHouse
                     c.setRegulators();
                 }
                 Environment.recount();
+                //graphs
             }
         }
     }
