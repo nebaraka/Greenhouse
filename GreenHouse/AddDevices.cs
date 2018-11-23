@@ -139,7 +139,7 @@ namespace GreenHouse
             switch (strArr[0])
             {
                 case "Acidity Sensor":
-                    listOfControllers[0].deleteSensor(string[] strs);
+                    //listOfControllers[0].deleteSensor(string[] strs);
                     break;
             }
            // listOfControllers.Remove();
