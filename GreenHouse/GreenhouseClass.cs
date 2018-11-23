@@ -9,7 +9,7 @@ namespace GreenHouse
 {
     static class GreenhouseClass
     {
-        static List<IController> listOfControllers;
+        private static List<IController> listOfControllers;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -20,12 +20,16 @@ namespace GreenHouse
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Greenhouse());
         }
+        public static bool isListNull()
+        {
+            return listOfControllers == null ? true : false;
+        }
         public static void set(List<IController> controllers)
         {
             listOfControllers = controllers;
             //Init cycle??
         }
-        static void simulate()
+        public static void simulate()
         {
             while(true)//Control cycle
             {

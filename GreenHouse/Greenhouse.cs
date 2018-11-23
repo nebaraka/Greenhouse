@@ -45,5 +45,15 @@ namespace GreenHouse
         {
             Application.Exit();
         }
+        //start simulation
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (GreenhouseClass.isListNull())
+            {
+                MessageBox.Show("Ya canna start dat method weil n' devices!\n"
+                    + "(You cannot simulate while there`s no devices)");
+            }
+            else GreenhouseClass.simulate();
+        }
     }
 }

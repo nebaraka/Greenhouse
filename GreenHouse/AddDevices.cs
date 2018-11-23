@@ -134,15 +134,43 @@ namespace GreenHouse
         //delete
         private void button2_Click(object sender, EventArgs e)
         {
-            string str = ListOfDevices.SelectedItem.ToString();
-            string[] strArr = str.Split(' ');
-            switch (strArr[0])
+            try
             {
-                case "Acidity Sensor":
-                    //listOfControllers[0].deleteSensor(string[] strs);
-                    break;
+                string str = ListOfDevices.SelectedItem.ToString();
+                string[] strArr = str.Split(' ');
+                switch (strArr[0])
+                {
+                    case "Acidity Sensor":
+                        listOfControllers[0].deleteSensor(strArr);
+                        break;
+                    case "Light Sensor":
+                        listOfControllers[1].deleteSensor(strArr);
+                        break;
+                    case "Temperature Sensor":
+                        listOfControllers[2].deleteSensor(strArr);
+                        break;
+                    case "Wetness Sensor":
+                        listOfControllers[3].deleteSensor(strArr);
+                        break;
+                    case "Acidity Regulator":
+                        listOfControllers[0].deleteRegulator(strArr);
+                        break;
+                    case "Light Regulator":
+                        listOfControllers[1].deleteRegulator(strArr);
+                        break;
+                    case "Temperature Regulator":
+                        listOfControllers[2].deleteRegulator(strArr);
+                        break;
+                    case "Wetness Regulator":
+                        listOfControllers[3].deleteRegulator(strArr);
+                        break;
+                }
+                ListOfDevices.Items.Remove(ListOfDevices.SelectedItem);
             }
-           // listOfControllers.Remove();
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("You cannot delete unselected item!");
+            }
         }
     }
 }
