@@ -11,6 +11,7 @@ namespace GreenHouse.Controllers
     class WetnessController : IController
     {
         private bool[] commandValues;
+        private double[] powerValues;
         private double[] recievedValues;
         private List<WetnessRegulator> listOfRegulators;
         private List<WetnessSensor> listOfSensors;
@@ -18,6 +19,7 @@ namespace GreenHouse.Controllers
         public WetnessController(int sensorsAmount, int regulatorsAmount)
         {
             commandValues = new bool[regulatorsAmount];
+            powerValues = new double[regulatorsAmount];
             recievedValues = new double[sensorsAmount];
             listOfRegulators = new List<WetnessRegulator>(regulatorsAmount);
             listOfSensors = new List<WetnessSensor>(sensorsAmount);
@@ -76,9 +78,15 @@ namespace GreenHouse.Controllers
             Cmatrix H = new Cmatrix(regQuantity, 1);//Step
             for (i = 0; i < regQuantity; i++)
             {
-                H.M[i, 1] = 1;
+                H.M[i, 0] = 5;
             }
             regValues = hookJivsMethod(regValues, sensValues, weightCoefficients, H, 2.5, 0.1, averageValue, neededValues);
+            for (i = 0; i < regQuantity; i++)
+            {
+                powerValues[i] = regValues.M[i, 0];
+                if (powerValues[i] == 0) commandValues[i] = false;
+                else commandValues[i] = true;
+            }
         }
         private double tuskFunction(Cmatrix X, Cmatrix Y, Cmatrix A, double averageValue, double[] neededValues)
         {
@@ -86,8 +94,8 @@ namespace GreenHouse.Controllers
             Y = A * X;
             for (int i = 0; i < Y.strok(); i++)
             {
-                f += Math.Abs(averageValue - Y.M[i, 1]);
-                if (Y.M[i, 1] > neededValues[1] || Y.M[i, 1] < neededValues[0]) f += 10000;
+                f += Math.Abs(averageValue - Y.M[i, 0]);
+                if (Y.M[i, 0] > neededValues[1] || Y.M[i, 0] < neededValues[0]) f += 10000;
             }
             return f;
         }
@@ -97,9 +105,9 @@ namespace GreenHouse.Controllers
             Cmatrix Xnew = new Cmatrix(X);
             for (int i = 0; i < X.strok(); i++)
             {
-                Xnew.M[i, 1] += H.M[i, 1];
-                if (z < tuskFunction(Xnew, Y, A, averageValue, neededValues)) Xnew.M[i, 1] = X.M[i, 1] - H.M[i, 1];
-                if (z < tuskFunction(Xnew, Y, A, averageValue, neededValues)) Xnew.M[i, 1] = X.M[i, 1];
+                Xnew.M[i, 0] += H.M[i, 0];
+                if (z < tuskFunction(Xnew, Y, A, averageValue, neededValues)) Xnew.M[i, 0] = X.M[i, 0] - H.M[i, 0];
+                if (z < tuskFunction(Xnew, Y, A, averageValue, neededValues)) Xnew.M[i, 0] = X.M[i, 0];
             }
             return Xnew;
         }
