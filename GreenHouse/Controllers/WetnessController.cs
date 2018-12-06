@@ -43,16 +43,16 @@ namespace GreenHouse.Controllers
         }
         public void askSensors()
         {
-            int i = 0;//Counter
+           /* int i = 0;//Counter
             foreach (WetnessSensor sensor in listOfSensors)
             {
                 recievedValues[i] = sensor.returnValue();
                 i++;
-            }
+            }*/
         }
         public void calculate()
         {
-            int regQuantity = listOfRegulators.Count();//Количество регуляторов
+            /*int regQuantity = listOfRegulators.Count();//Количество регуляторов
             int sensQuantity = listOfSensors.Count();//Количество сенсоров
             Cmatrix weightCoefficients = new Cmatrix(sensQuantity, regQuantity);//How sensors are effected by regulators(degrees/degrees)
             int i = 0, j = 0;//Counters
@@ -86,9 +86,9 @@ namespace GreenHouse.Controllers
                 powerValues[i] = regValues.M[i, 0];
                 if (powerValues[i] == 0) commandValues[i] = false;
                 else commandValues[i] = true;
-            }
+            }*/
         }
-        private double tuskFunction(Cmatrix X, Cmatrix Y, Cmatrix A, double averageValue, double[] neededValues)
+        /*private double tuskFunction(Cmatrix X, Cmatrix Y, Cmatrix A, double averageValue, double[] neededValues)
         {
             double f = 0;
             Y = A * X;
@@ -140,7 +140,7 @@ namespace GreenHouse.Controllers
                 };
             };
             return Xb;
-        }
+        }*/
         public void setRegulators()
         {
 

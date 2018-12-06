@@ -33,14 +33,14 @@ namespace GreenHouse
 
         public static void recount()
         {
-            recountTemperature();
+            /*recountTemperature();
             recountLight();
             recountAcidity();
-            recountWetness();
+            recountWetness();*/
         }
         private static void recountTemperature()
         {
-            const double a = 1, b = 1, h = 2;//Lenght of cells(in meters)
+          /*const double a = 1, b = 1, h = 2;//Lenght of cells(in meters)
             const double density = 1.2;//(kg/m^3)
             const double c = 1005;//Thermal conductivity
             const int t = 1;//Time scale(in mins)
@@ -119,11 +119,11 @@ namespace GreenHouse
                     }
 
                 }
-            }
+            }*/
         }
         public static void recountLight()
         {
-            double h = 2;//Height
+            /*double h = 2;//Height
             for (int i = 0; i < X_SIZE; i++)
             {
                 for (int j = 0; j < Y_SIZE; j++)
@@ -140,11 +140,11 @@ namespace GreenHouse
                         light[i, j] += regulator[2] * h * h * h / (R * R * R * R * R) * R1_2 * R1_2;//F*h^3*R1_2^2/R^5
                     }
                 }
-            }
+            }*/
         }
         public static void recountAcidity()
         {
-            const int t = 1;//Time scale(in mins)
+            /*const int t = 1;//Time scale(in mins)
             int kt = 60 / t;//Time intervals quantitaty
             for (int k = 0; k < kt; k++)
             {
@@ -215,11 +215,11 @@ namespace GreenHouse
                         }
                     }
                 }
-            }
+            }*/
         }
         public static void recountWetness()
         {
-            const int t = 1;//Time scale(in mins)
+            /*const int t = 1;//Time scale(in mins)
             int kt = 60 / t;//Time intervals quantitaty
             for (int k = 0; k < kt; k++)
             {
@@ -290,7 +290,7 @@ namespace GreenHouse
                         }
                     }
                 }
-            }
+            }*/
         }
         public static double getAcididty(int x, int y) { return acidity[x, y]; }
         public static double getLight(int x, int y) { return light[x, y]; }
