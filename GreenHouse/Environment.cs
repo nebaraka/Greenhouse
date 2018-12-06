@@ -8,12 +8,16 @@ namespace GreenHouse
 {
     class Environment
     {
+        private struct Cell
+        {
+            public double acidity;
+            public double light;
+            public double temperature;
+            public double wetness;
+        }
+        private static Cell[,] cells;
         public const int X_SIZE = 20;
         public const int Y_SIZE = 20;
-        private static double[,] acidity;
-        private static double[,] light;
-        private static double[,] temperature;
-        private static double[,] wetness;
         public static List<double[]> acidityRegValues;
         public static List<double[]> lightRegValues;
         public static List<double[]> temperatureRegValues;
@@ -21,10 +25,7 @@ namespace GreenHouse
 
         static Environment()
         {
-            acidity = new double[X_SIZE, Y_SIZE];
-            light = new double[X_SIZE, Y_SIZE];
-            temperature = new double[X_SIZE, Y_SIZE];
-            wetness = new double[X_SIZE, Y_SIZE];
+            cells = new Cell[X_SIZE, Y_SIZE];
             acidityRegValues = new List<double[]>();
             lightRegValues = new List<double[]>();
             temperatureRegValues = new List<double[]>();
@@ -292,9 +293,9 @@ namespace GreenHouse
                 }
             }*/
         }
-        public static double getAcididty(int x, int y) { return acidity[x, y]; }
-        public static double getLight(int x, int y) { return light[x, y]; }
-        public static double getTemperature(int x, int y) { return temperature[x, y]; }
-        public static double getWetness(int x, int y) { return wetness[x, y]; }
+        public static double getAcididty(int x, int y) { return cells[x,y].acidity; }
+        public static double getLight(int x, int y) { return cells[x, y].light; }
+        public static double getTemperature(int x, int y) { return cells[x, y].temperature; }
+        public static double getWetness(int x, int y) { return cells[x, y].wetness; }
     }
 }
