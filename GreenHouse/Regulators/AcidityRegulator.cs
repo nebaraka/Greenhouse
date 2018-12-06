@@ -45,11 +45,7 @@ namespace GreenHouse.Regulators
             Environment.acidityRegValues.Add(result);
         }
 
-        public int getX() { return x; }
-        public int getY() { return y; }
         public double getMaxPower() { return maxPower; }
-        public void setX(int x) { this.x = x; }
-        public void setY(int y) { this.y = y; }
         public void setMaxPower(double maxPower) { this.maxPower = maxPower; }
         public bool isActive() { return status; }
     }

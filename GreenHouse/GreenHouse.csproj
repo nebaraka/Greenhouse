@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cmatrix.cs" />
+    <Compile Include="Location.cs" />
     <Compile Include="Controllers\AcidityController.cs" />
     <Compile Include="Controllers\LightController.cs" />
     <Compile Include="Controllers\WetnessController.cs" />
