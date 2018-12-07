@@ -9,23 +9,16 @@ namespace GreenHouse
     class GrowthPlan
     {
         Time time = new Time();
-        public const int NUMBER_OF_INTERVALS = 3;
-        private static paramStruct acidity;
-        private static paramStruct light;
-        private static paramStruct temperature;
-        private static paramStruct wetness;
+        private static ParamValues[] values;
 
         static GrowthPlan()
         {
 
         }
 
-        public static void initialize(paramStruct a, paramStruct l, paramStruct t, paramStruct w)
+        public static void Initialize(ParamValues[] paramValues)
         {
-            acidity = a;
-            light = l;
-            temperature = t;
-            wetness = w;
+            values = paramValues;
             //timer initialization as an alternative way
            /* TimerCallback tcb = new TimerCallback(tick);
             Timer timer = new Timer(tcb, null, 0, 1000);*/
