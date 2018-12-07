@@ -38,14 +38,14 @@ namespace GreenHouse.Controllers
         {
             //TODO
         }
-        public void askSensors()
+        public void AskSensors()
         {
-            /*int i = 0;//Counter
-            foreach (LightSensor sensor in listOfSensors)
+            int i = 0;//Counter
+            foreach (LightSensor sensor in SensorMap.mapOfLightSensors.Values)
             {
                 recievedValues[i] = sensor.returnValue();
                 i++;
-            }*/
+            }
         }
         public void calculate()
         {
