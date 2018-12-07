@@ -39,14 +39,14 @@ namespace GreenHouse
         {
             //TODO
         }
-        public void askSensors()
+        public void AskSensors()
         {
-            /*int i = 0;//Counter
-            foreach (TemperatureSensor sensor in listOfSensors)
+            int i = 0;//Counter
+            foreach (TemperatureSensor sensor in SensorMap.mapOfTemperatureSensors.Values)
             {
                 recievedValues[i] = sensor.returnValue();
                 i++;
-            }*/
+            }
         }
         public void calculate()
         {
