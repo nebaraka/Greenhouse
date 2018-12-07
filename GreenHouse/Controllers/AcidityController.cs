@@ -13,25 +13,26 @@ namespace GreenHouse.Controllers
         private bool[] commandValues;
         private double[] powerValues;
         private double[] recievedValues;
-        private List<AcidityRegulator> listOfRegulators;
-        private List<AciditySensor> listOfSensors;
+        private Dictionary<Location, AcidityRegulator> mapOfRegulators;
+        private Dictionary<Location, AciditySensor> mapOfSensors;
 
         public AcidityController(int sensorsAmount, int regulatorsAmount)
         {
             commandValues = new bool[regulatorsAmount];
             powerValues = new double[regulatorsAmount];
             recievedValues = new double[sensorsAmount];
-            listOfRegulators = new List<AcidityRegulator>(regulatorsAmount);
-            listOfSensors = new List<AciditySensor>(sensorsAmount);
+            mapOfRegulators = new Dictionary<Location, AcidityRegulator>(regulatorsAmount);
+            mapOfSensors = new Dictionary<Location, AciditySensor>(sensorsAmount);
         }
 
-        public void addRegulator(IRegulator r)
+        public void addRegulator(IRegulator r, Location loc)
         {
-            listOfRegulators.Add((AcidityRegulator)r);
+            mapOfRegulators.Add(loc, (AcidityRegulator)r);
+
         }
-        public void addSensor(ISensor s)
+        public void addSensor(ISensor s, Location loc)
         {
-            listOfSensors.Add((AciditySensor)s);
+            mapOfSensors.Add(loc, (AciditySensor)s);
         }
         public void deleteRegulator(string[] strs)
         {

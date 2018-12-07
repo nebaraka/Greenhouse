@@ -14,25 +14,25 @@ namespace GreenHouse
         private bool[] commandValues;
         private double[] powerValues;
         private double[] recievedValues;
-        private List<TemperatureRegulator> listOfRegulators;
-        private List<TemperatureSensor> listOfSensors;
+        private Dictionary<Location, TemperatureRegulator> mapOfRegulators;
+        private Dictionary<Location, TemperatureSensor> mapOfSensors;
 
         public TemperatureController(int sensorsAmount, int regulatorsAmount)
         {
             commandValues = new bool[regulatorsAmount];
             powerValues = new double[regulatorsAmount];
             recievedValues = new double[sensorsAmount];
-            listOfRegulators = new List<TemperatureRegulator>(regulatorsAmount);
-            listOfSensors = new List<TemperatureSensor>(sensorsAmount);
+            mapOfRegulators = new Dictionary<Location, TemperatureRegulator>(regulatorsAmount);
+            mapOfSensors = new Dictionary<Location, TemperatureSensor>(sensorsAmount);
         }
 
-        public void addRegulator(IRegulator r)
+        public void addRegulator(IRegulator r, Location loc)
         {
-            listOfRegulators.Add((TemperatureRegulator)r);
+            mapOfRegulators.Add(loc, (TemperatureRegulator)r);
         }
-        public void addSensor(ISensor s)
+        public void addSensor(ISensor s, Location loc)
         {
-            listOfSensors.Add((TemperatureSensor)s);
+            mapOfSensors.Add(loc, (TemperatureSensor)s);
         }
         public void deleteRegulator(string[] strs)
         {

@@ -13,25 +13,25 @@ namespace GreenHouse.Controllers
         private bool[] commandValues;
         private double[] powerValues;
         private double[] recievedValues;
-        private List<LightRegulator> listOfRegulators;
-        private List<LightSensor> listOfSensors;
+        private Dictionary<Location, LightRegulator> mapOfRegulators;
+        private Dictionary<Location, LightSensor> mapOfSensors;
 
         public LightController(int sensorsAmount, int regulatorsAmount)
         {
             commandValues = new bool[regulatorsAmount];
             powerValues = new double[regulatorsAmount];
             recievedValues = new double[sensorsAmount];
-            listOfRegulators = new List<LightRegulator>(regulatorsAmount);
-            listOfSensors = new List<LightSensor>(sensorsAmount);
+            mapOfRegulators = new Dictionary<Location, LightRegulator>(regulatorsAmount);
+            mapOfSensors = new Dictionary<Location, LightSensor>(sensorsAmount);
         }
 
-        public void addRegulator(IRegulator r)
+        public void addRegulator(IRegulator r, Location loc)
         {
-            listOfRegulators.Add((LightRegulator)r);
+            mapOfRegulators.Add(loc, (LightRegulator)r);
         }
-        public void addSensor(ISensor s)
+        public void addSensor(ISensor s, Location loc)
         {
-            listOfSensors.Add((LightSensor)s);
+            mapOfSensors.Add(loc, (LightSensor)s);
         }
         public void deleteRegulator(string[] strs)
         {

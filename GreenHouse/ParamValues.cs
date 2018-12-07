@@ -7,7 +7,7 @@
     public Corridor wetness;
     public struct Corridor
     {
-        double maxValue;
-        double minValue;
+        public double maxValue;
+        public double minValue;
     }
 }
