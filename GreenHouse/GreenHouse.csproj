@@ -100,6 +100,7 @@
     <Compile Include="Controllers\TemperatureController.cs" />
     <Compile Include="Sensors\TemperatureSensor.cs" />
     <Compile Include="Sensors\WetnessSensor.cs" />
+    <Compile Include="Time.cs" />
     <EmbeddedResource Include="AddDevices.resx">
       <DependentUpon>AddDevices.cs</DependentUpon>
     </EmbeddedResource>

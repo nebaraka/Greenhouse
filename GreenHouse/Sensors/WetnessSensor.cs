@@ -8,17 +8,17 @@ namespace GreenHouse.Sensors
 {
     class WetnessSensor : ISensor
     {
-        private int x, y;
+        private Location location;
 
         public WetnessSensor(int x, int y)
         {
-            this.x = x;
-            this.y = y;
+            location.x = x;
+            location.y = y;
         }
 
         public double returnValue()
         {
-            return Environment.getWetness(x, y);
+            return Environment.getWetness(location.x, location.y);
         }
     }
 }

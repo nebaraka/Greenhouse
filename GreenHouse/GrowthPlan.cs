@@ -8,19 +8,16 @@ namespace GreenHouse
 {
     class GrowthPlan
     {
+        Time time = new Time();
         public const int NUMBER_OF_INTERVALS = 3;
-        
         private static paramStruct acidity;
         private static paramStruct light;
         private static paramStruct temperature;
         private static paramStruct wetness;
-        private static int time;
-        private static int tickSize;
 
         static GrowthPlan()
         {
-            time = 0;
-            tickSize = 1;
+
         }
 
         public static void initialize(paramStruct a, paramStruct l, paramStruct t, paramStruct w)
@@ -34,18 +31,8 @@ namespace GreenHouse
             Timer timer = new Timer(tcb, null, 0, 1000);*/
         }
 
-        public static void tick()
-        {
-            time += tickSize;
-        }
-
-        public static void setTickSize(int size)
-        {
-            tickSize = size;
-        }
-
         //For extensibility algorythms of all theese getters have to be Generizied
-        public static double[] getAcididty()
+        /*public static double[] getAcididty()
         {
             if (acidity.intervals[0] + acidity.intervals[1] + acidity.intervals[2] <= time)
             {
@@ -116,6 +103,6 @@ namespace GreenHouse
                 double[] result = { wetness.vals[0, 0], wetness.vals[0, 1] };
                 return result;
             }
-        }
+        }*/
     }
 }

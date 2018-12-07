@@ -8,14 +8,14 @@ namespace GreenHouse.Regulators
 {
     class AcidityRegulator : IRegulator
     {
-        private int x, y;
+        private Location location;
         private bool status;
         private double maxPower;
 
         public AcidityRegulator(int x, int y, double maxPower)
         {
-            this.x = x;
-            this.y = y;
+            location.x = x;
+            location.y = y;
             this.maxPower = maxPower;
             turnOff();
         }
@@ -32,8 +32,8 @@ namespace GreenHouse.Regulators
         private void work(double currentPower)
         {
             double[] result = new double[3];
-            result[0] = (double)x;
-            result[1] = (double)y;
+            result[0] = (double)location.x;
+            result[1] = (double)location.y;
             if (this.status == true)
             {
                 result[2] = (double)maxPower;

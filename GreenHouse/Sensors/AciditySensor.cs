@@ -8,17 +8,17 @@ namespace GreenHouse.Sensors
 {
     class AciditySensor : ISensor
     {
-        private int x, y;
+        private Location location;
 
         public AciditySensor(int x, int y)
         {
-            this.x = x;
-            this.y = y;
+            location.x = x;
+            location.y = y;
         }
 
         public double returnValue()
         {
-            return Environment.getAcididty(x, y);
+            return Environment.getAcididty(location.x, location.y);
         }
     }
 }

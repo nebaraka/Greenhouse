@@ -8,17 +8,17 @@ namespace GreenHouse.Sensors
 {
     class LightSensor : ISensor
     {
-        private int x, y;
+        private Location location;
 
         public LightSensor(int x, int y)
         {
-            this.x = x;
-            this.y = y;
+            location.x = x;
+            location.y = y;
         }
 
         public double returnValue()
         {
-            return Environment.getLight(x, y);
+            return Environment.getLight(location.x, location.y);
         }
     }
 }
