@@ -10,8 +10,8 @@ namespace GreenHouse
 {
     interface IController
     {
-        void addRegulator(IRegulator r);
-        void addSensor(ISensor s);
+        void addRegulator(IRegulator r, Location loc);
+        void addSensor(ISensor s, Location loc);
         void deleteRegulator(string[] strs);
         void deleteSensor(string[] strs);
         void askSensors();

@@ -9,100 +9,61 @@ namespace GreenHouse
     class GrowthPlan
     {
         Time time = new Time();
-        public const int NUMBER_OF_INTERVALS = 3;
-        private static paramStruct acidity;
-        private static paramStruct light;
-        private static paramStruct temperature;
-        private static paramStruct wetness;
+        private static ParamValues[] values;
 
         static GrowthPlan()
         {
 
         }
 
-        public static void initialize(paramStruct a, paramStruct l, paramStruct t, paramStruct w)
+        public static void Initialize(ParamValues[] paramValues)
         {
-            acidity = a;
-            light = l;
-            temperature = t;
-            wetness = w;
+            values = paramValues;
             //timer initialization as an alternative way
            /* TimerCallback tcb = new TimerCallback(tick);
             Timer timer = new Timer(tcb, null, 0, 1000);*/
         }
 
         //For extensibility algorythms of all theese getters have to be Generizied
-        /*public static double[] getAcididty()
+        public static ParamValues.Corridor getAcidity()
         {
-            if (acidity.intervals[0] + acidity.intervals[1] + acidity.intervals[2] <= time)
+            int currentTime = Time.GetTime();
+            int i =-1;
+            while (currentTime >= 0) 
             {
-                double[] result = {acidity.vals[2, 0], acidity.vals[2, 1] };
-                return result;
+                currentTime -= values[++i].timeSlice;
             }
-            else if (acidity.intervals[0] + acidity.intervals[1] <= time)
-            {
-                double[] result = { acidity.vals[1, 0], acidity.vals[1, 1] };
-                return result;
-            }
-            else
-            {
-                double[] result = { acidity.vals[0, 0], acidity.vals[0, 1] };
-                return result;
-            }
+            return values[i].acidity;
         }
-        public static double[] getLight()
+        public static ParamValues.Corridor getLight()
         {
-            if (light.intervals[0] + light.intervals[1] + light.intervals[2] <= time)
+            int currentTime = Time.GetTime();
+            int i = -1;
+            while (currentTime >= 0)
             {
-                double[] result = { light.vals[2, 0], light.vals[2, 1] };
-                return result;
+                currentTime -= values[++i].timeSlice;
             }
-            else if (light.intervals[0] + light.intervals[1] <= time)
-            {
-                double[] result = { light.vals[1, 0], light.vals[1, 1] };
-                return result;
-            }
-            else
-            {
-                double[] result = { light.vals[0, 0], light.vals[0, 1] };
-                return result;
-            }
+            return values[i].light;
         }
-        public static double[] getTemperature()
+        public static ParamValues.Corridor getTemperature()
         {
-            if (temperature.intervals[0] + temperature.intervals[1] + temperature.intervals[2] <= time)
+            int currentTime = Time.GetTime();
+            int i = -1;
+            while (currentTime >= 0)
             {
-                double[] result = { temperature.vals[2, 0], temperature.vals[2, 1] };
-                return result;
+                currentTime -= values[++i].timeSlice;
             }
-            else if (temperature.intervals[0] + temperature.intervals[1] <= time)
-            {
-                double[] result = { temperature.vals[1, 0], temperature.vals[1, 1] };
-                return result;
-            }
-            else
-            {
-                double[] result = { temperature.vals[0, 0], temperature.vals[0, 1] };
-                return result;
-            }
+            return values[i].temperature;
         }
-        public static double[] getWetness()
+        public static ParamValues.Corridor getWetness()
         {
-            if (wetness.intervals[0] + wetness.intervals[1] + wetness.intervals[2] <= time)
+            int currentTime = Time.GetTime();
+            int i = -1;
+            while (currentTime >= 0)
             {
-                double[] result = { wetness.vals[2, 0], wetness.vals[2, 1] };
-                return result;
+                currentTime -= values[++i].timeSlice;
             }
-            else if (wetness.intervals[0] + wetness.intervals[1] <= time)
-            {
-                double[] result = { wetness.vals[1, 0], wetness.vals[1, 1] };
-                return result;
-            }
-            else
-            {
-                double[] result = { wetness.vals[0, 0], wetness.vals[0, 1] };
-                return result;
-            }
-        }*/
+            return values[i].wetness;
+        }
     }
 }

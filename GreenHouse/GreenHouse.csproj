@@ -33,8 +33,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MathNet.Numerics, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.4.7.0\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,13 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cmatrix.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Controllers\AcidityController.cs" />
     <Compile Include="Controllers\LightController.cs" />
     <Compile Include="Controllers\WetnessController.cs" />
-    <Compile Include="paramStruct.cs" />
-    <Compile Include="Presenters\AddDevicesPresenter.cs" />
+    <Compile Include="ParamValues.cs" />
     <Compile Include="Regulators\AcidityRegulator.cs" />
     <Compile Include="Regulators\LightRegulator.cs" />
     <Compile Include="Regulators\TemperatureRegulator.cs" />
@@ -127,6 +130,7 @@
     <EmbeddedResource Include="SaveConfiguration.resx">
       <DependentUpon>SaveConfiguration.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
