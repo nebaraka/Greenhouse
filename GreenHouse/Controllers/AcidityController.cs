@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GreenHouse.DeviceMaps;
 using GreenHouse.Regulators;
 using GreenHouse.Sensors;
 
@@ -13,26 +14,22 @@ namespace GreenHouse.Controllers
         private bool[] commandValues;
         private double[] powerValues;
         private double[] recievedValues;
-        private Dictionary<Location, AcidityRegulator> mapOfRegulators;
-        private Dictionary<Location, AciditySensor> mapOfSensors;
 
         public AcidityController(int sensorsAmount, int regulatorsAmount)
         {
             commandValues = new bool[regulatorsAmount];
             powerValues = new double[regulatorsAmount];
             recievedValues = new double[sensorsAmount];
-            mapOfRegulators = new Dictionary<Location, AcidityRegulator>(regulatorsAmount);
-            mapOfSensors = new Dictionary<Location, AciditySensor>(sensorsAmount);
         }
 
         public void addRegulator(IRegulator r, Location loc)
         {
-            mapOfRegulators.Add(loc, (AcidityRegulator)r);
+           RegulatorMap.mapOfAcidityRegulators.Add(loc, (AcidityRegulator)r);
 
         }
         public void addSensor(ISensor s, Location loc)
         {
-            mapOfSensors.Add(loc, (AciditySensor)s);
+            SensorMap.mapOfAciditySensors.Add(loc, (AciditySensor)s);
         }
         public void deleteRegulator(string[] strs)
         {

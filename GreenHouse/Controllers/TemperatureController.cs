@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Collections;
 using GreenHouse.Regulators;
 using GreenHouse.Sensors;
+using GreenHouse.DeviceMaps;
 
 namespace GreenHouse
 {
@@ -14,25 +15,21 @@ namespace GreenHouse
         private bool[] commandValues;
         private double[] powerValues;
         private double[] recievedValues;
-        private Dictionary<Location, TemperatureRegulator> mapOfRegulators;
-        private Dictionary<Location, TemperatureSensor> mapOfSensors;
 
         public TemperatureController(int sensorsAmount, int regulatorsAmount)
         {
             commandValues = new bool[regulatorsAmount];
             powerValues = new double[regulatorsAmount];
             recievedValues = new double[sensorsAmount];
-            mapOfRegulators = new Dictionary<Location, TemperatureRegulator>(regulatorsAmount);
-            mapOfSensors = new Dictionary<Location, TemperatureSensor>(sensorsAmount);
         }
 
         public void addRegulator(IRegulator r, Location loc)
         {
-            mapOfRegulators.Add(loc, (TemperatureRegulator)r);
+            RegulatorMap.mapOfTemperatureRegulators.Add(loc, (TemperatureRegulator)r);
         }
         public void addSensor(ISensor s, Location loc)
         {
-            mapOfSensors.Add(loc, (TemperatureSensor)s);
+            SensorMap.mapOfTemperatureSensors.Add(loc, (TemperatureSensor)s);
         }
         public void deleteRegulator(string[] strs)
         {

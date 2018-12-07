@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceMaps\RegulatorMap.cs" />
+    <Compile Include="DeviceMaps\SensorMap.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Controllers\AcidityController.cs" />
     <Compile Include="Controllers\LightController.cs" />
