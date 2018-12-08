@@ -12,10 +12,10 @@ namespace GreenHouse.Regulators
         private bool status;
         private double maxPower;
 
-        public WetnessRegulator(int x, int y, double maxPower)
+        public WetnessRegulator(Location l, double maxPower)
         {
-            location.x = x;
-            location.y = y;
+            location.x = l.x;
+            location.y = l.y;
             this.maxPower = maxPower;
             turnOff();
         }

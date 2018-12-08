@@ -12,10 +12,10 @@ namespace GreenHouse.Regulators
         private bool status;
         private double maxPower;
 
-        public TemperatureRegulator(int x, int y, double maxPower)
+        public TemperatureRegulator(Location l, double maxPower)
         {
-            location.x = x;
-            location.y = y;
+            location.x = l.x;
+            location.y = l.y;
             this.maxPower = maxPower;
             turnOff();
         }

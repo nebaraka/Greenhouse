@@ -12,10 +12,10 @@ namespace GreenHouse.Regulators
         private bool status;
         private double maxPower;
 
-        public LightRegulator(int x, int y, double maxPower)
+        public LightRegulator(Location l, double maxPower)
         {
-            location.x = x;
-            location.y = y;
+            location.x = l.x;
+            location.y = l.y;
             this.maxPower = maxPower;
             turnOff();
         }

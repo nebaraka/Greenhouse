@@ -9,16 +9,16 @@ namespace GreenHouse.DeviceMaps
 {
     static class RegulatorMap
     {
-        public static Dictionary<Location, AcidityRegulator> mapOfAcidityRegulators;
-        public static Dictionary<Location, LightRegulator> mapOfLightRegulators;
-        public static Dictionary<Location, TemperatureRegulator> mapOfTemperatureRegulators;
-        public static Dictionary<Location, WetnessRegulator> mapOfWetnessRegulators;
+        public static Dictionary<Location, IRegulator> mapOfAcidityRegulators;
+        public static Dictionary<Location, IRegulator> mapOfLightRegulators;
+        public static Dictionary<Location, IRegulator> mapOfTemperatureRegulators;
+        public static Dictionary<Location, IRegulator> mapOfWetnessRegulators;
         static RegulatorMap()
         {
-            mapOfAcidityRegulators = new Dictionary<Location, AcidityRegulator>();
-            mapOfLightRegulators = new Dictionary<Location, LightRegulator>();
-            mapOfTemperatureRegulators = new Dictionary<Location, TemperatureRegulator>();
-            mapOfWetnessRegulators = new Dictionary<Location, WetnessRegulator>();
+            mapOfAcidityRegulators = new Dictionary<Location, IRegulator>();
+            mapOfLightRegulators = new Dictionary<Location, IRegulator>();
+            mapOfTemperatureRegulators = new Dictionary<Location, IRegulator>();
+            mapOfWetnessRegulators = new Dictionary<Location, IRegulator>();
         }
     }
 }

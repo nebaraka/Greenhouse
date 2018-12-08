@@ -10,38 +10,38 @@ namespace GreenHouse
 {
     class ConcreteFactory
     {
-        public IRegulator createAcidityRegulator(int x, int y, double power)
+        public static IRegulator createAcidityRegulator(Location l, double power)
         {
-            return new AcidityRegulator(x, y, power);
+            return new AcidityRegulator(l, power);
         }
-        public IRegulator createLightRegulator(int x, int y, double power)
+        public static IRegulator createLightRegulator(Location l, double power)
         {
-            return new LightRegulator(x, y, power);
+            return new LightRegulator(l, power);
         }
-        public IRegulator createTemperatureRegulator(int x, int y, double power)
+        public static IRegulator createTemperatureRegulator(Location l, double power)
         {
-            return new TemperatureRegulator(x, y, power);
+            return new TemperatureRegulator(l, power);
         }
-        public IRegulator createWetnessRegulator(int x, int y, double power)
+        public static IRegulator createWetnessRegulator(Location l, double power)
         {
-            return new WetnessRegulator(x, y, power);
+            return new WetnessRegulator(l, power);
         }
 
-        public ISensor createAciditySensor(int x, int y)
+        public static ISensor createAciditySensor(Location l)
         {
-            return new AciditySensor(x, y);
+            return new AciditySensor(l);
         }
-        public ISensor createLightSensor(int x, int y)
+        public static ISensor createLightSensor(Location l)
         {
-            return new LightSensor(x, y);
+            return new LightSensor(l);
         }
-        public ISensor createTemperatureSensor(int x, int y)
+        public static ISensor createTemperatureSensor(Location l)
         {
-            return new TemperatureSensor(x, y);
+            return new TemperatureSensor(l);
         }
-        public ISensor createWetnessSensor(int x, int y)
+        public static ISensor createWetnessSensor(Location l)
         {
-            return new WetnessSensor(x, y);
+            return new WetnessSensor(l);
         }
     }
 }

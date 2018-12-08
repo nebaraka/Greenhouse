@@ -10,33 +10,94 @@ using System.Windows.Forms;
 using GreenHouse.Controllers;
 using GreenHouse.Regulators;
 using GreenHouse.Sensors;
+using GreenHouse.Presenters;
 
 namespace GreenHouse
 {
     public partial class AddDevices : Form
     {
+        public delegate void actionRegulator(Location l, double power);
+        public delegate void actionSensor(Location l);
+        //reg add
+        public event actionRegulator acidityRegulatorAdd;
+        public event actionRegulator lightRegulatorAdd;
+        public event actionRegulator temperatureRegulatorAdd;
+        public event actionRegulator wetnessRegulatorAdd;
+        //reg del
+        public event actionSensor acidityRegulatorDelete;       //Action sensor delegate type just because of method params
+        public event actionSensor lightRegulatorDelete;
+        public event actionSensor temperatureRegulatorDelete;
+        public event actionSensor wetnessRegulatorDelete;
+
+        //sens add
+        public event actionSensor aciditySensorAdd;
+        public event actionSensor lightSensorAdd;
+        public event actionSensor temperatureSensorAdd;
+        public event actionSensor wetnessSensorAdd;
+        //sens del
+        public event actionSensor aciditySensorDelete;
+        public event actionSensor lightSensorDelete;
+        public event actionSensor temperatureSensorDelete;
+        public event actionSensor wetnessSensorDelete;
+
         public const double ACIDITY_MAX_POWER = 12;
         public const double LIGHT_MAX_POWER = 35;
         public const double TEMPERATURE_MAX_POWER = 120;
         public const double WETNESS_MAX_POWER = 100;
-        private static List<IController> listOfControllers;
-        private static List<ISensor> listOfSensors;
-        private static List<IRegulator> listOfRegulators;
+
+        private static System.Windows.Forms.ListBox stListOfDevices;
+        //private static List<IController> listOfControllers;
+        //private static List<ISensor> listOfSensors;
+        //private static List<IRegulator> listOfRegulators;
 
         static AddDevices()
         {
-            listOfControllers = new List<IController>();
-            listOfSensors = new List<ISensor>();
-            listOfRegulators = new List<IRegulator>();
+            //listOfControllers = new List<IController>();
+            //listOfSensors = new List<ISensor>();
+            //listOfRegulators = new List<IRegulator>();
+            stListOfDevices = new System.Windows.Forms.ListBox();
+            stListOfDevices.FormattingEnabled = true;
+            stListOfDevices.ItemHeight = 16;
+            stListOfDevices.Location = new System.Drawing.Point(13, 13);
+            stListOfDevices.Name = "ListOfDevices";
+            stListOfDevices.Size = new System.Drawing.Size(392, 116);
+            stListOfDevices.TabIndex = 0;
         }
 
         public AddDevices()
         {
+            //reg add
+            acidityRegulatorAdd += AddDevicesPresenter.addAcidityRegulator;
+            lightRegulatorAdd += AddDevicesPresenter.addLightRegulator;
+            temperatureRegulatorAdd += AddDevicesPresenter.addTemperatureRegulator;
+            wetnessRegulatorAdd += AddDevicesPresenter.addWetnessRegulator;
+            //reg del
+            acidityRegulatorDelete += AddDevicesPresenter.deleteAcidityRegulator;
+            lightRegulatorDelete += AddDevicesPresenter.deleteLightRegulator;
+            temperatureRegulatorDelete += AddDevicesPresenter.deleteTemperatureRegulator;
+            wetnessRegulatorDelete += AddDevicesPresenter.deleteWetnessRegulator;
+            //sens add
+            aciditySensorAdd += AddDevicesPresenter.addAciditySensor;
+            lightSensorAdd += AddDevicesPresenter.addLightSensor;
+            temperatureSensorAdd += AddDevicesPresenter.addTemperatureSensor;
+            wetnessSensorAdd += AddDevicesPresenter.addWetnessSensor;
+            //sens del
+            aciditySensorDelete += AddDevicesPresenter.deleteAciditySensor;
+            lightSensorDelete += AddDevicesPresenter.deleteLightSensor;
+            temperatureSensorDelete += AddDevicesPresenter.deleteTemperatureSensor;
+            wetnessSensorDelete += AddDevicesPresenter.deleteWetnessSensor;
+
             InitializeComponent();
+            foreach (object row in stListOfDevices.Items)
+            {
+                ListOfDevices.Items.Add(row.ToString());
+            }
+            //ListOfDevices = stListOfDevices;
         }
         //close
         private void button3_Click(object sender, EventArgs e)
         {
+            /*
             //add devices deployng to ghc
             int acidityCountS = 0;
             int lightCountS = 0;
@@ -83,7 +144,8 @@ namespace GreenHouse
             listOfControllers.Add(lc);
             listOfControllers.Add(tc);
             listOfControllers.Add(wc);
-            GreenhouseClass.set(listOfControllers);
+            GreenhouseClass.set(listOfControllers);*/
+            stListOfDevices = ListOfDevices;
             this.Close();
         }
         //add
@@ -92,44 +154,52 @@ namespace GreenHouse
             //SENSORS
             if (comboBox1.SelectedItem == comboBox1.Items[0])
             {
-                listOfSensors.Add(new AciditySensor(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)));
+                //listOfSensors.Add(new AciditySensor(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)));
+                aciditySensorAdd(new Location(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)));
             }
             else if (comboBox1.SelectedItem == comboBox1.Items[1])
             {
-                listOfSensors.Add(new LightSensor(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)));
+                //listOfSensors.Add(new LightSensor(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)));
+                lightSensorAdd(new Location(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)));
             }
             else if (comboBox1.SelectedItem == comboBox1.Items[2])
             {
-                listOfSensors.Add(new TemperatureSensor(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)));
+                //listOfSensors.Add(new TemperatureSensor(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)));
+                temperatureSensorAdd(new Location(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)));
             }
             else if (comboBox1.SelectedItem == comboBox1.Items[3])
             {
-                listOfSensors.Add(new WetnessSensor(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)));
+                //listOfSensors.Add(new WetnessSensor(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)));
+                wetnessSensorAdd(new Location(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)));
             }
             //REGULATORS
             else if (comboBox1.SelectedItem == comboBox1.Items[4])
             {
-                listOfRegulators.Add(new AcidityRegulator(Int32.Parse(textBox1.Text),
-                    Int32.Parse(textBox2.Text), ACIDITY_MAX_POWER));
+                //listOfRegulators.Add(new AcidityRegulator(Int32.Parse(textBox1.Text),
+                //    Int32.Parse(textBox2.Text), ACIDITY_MAX_POWER));
+                acidityRegulatorAdd(new Location(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)), ACIDITY_MAX_POWER);
             }
             else if (comboBox1.SelectedItem == comboBox1.Items[5])
             {
-                listOfRegulators.Add(new LightRegulator(Int32.Parse(textBox1.Text),
-                    Int32.Parse(textBox2.Text), LIGHT_MAX_POWER));
+                //listOfRegulators.Add(new LightRegulator(Int32.Parse(textBox1.Text),
+                //    Int32.Parse(textBox2.Text), LIGHT_MAX_POWER));
+                lightRegulatorAdd(new Location(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)), LIGHT_MAX_POWER);
             }
             else if (comboBox1.SelectedItem == comboBox1.Items[6])
             {
-                listOfRegulators.Add(new TemperatureRegulator(Int32.Parse(textBox1.Text),
-                    Int32.Parse(textBox2.Text), TEMPERATURE_MAX_POWER));
+                //listOfRegulators.Add(new TemperatureRegulator(Int32.Parse(textBox1.Text),
+                //    Int32.Parse(textBox2.Text), TEMPERATURE_MAX_POWER));
+                temperatureRegulatorAdd(new Location(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)), TEMPERATURE_MAX_POWER);
             }
             else if (comboBox1.SelectedItem == comboBox1.Items[7])
             {
-                listOfRegulators.Add(new WetnessRegulator(Int32.Parse(textBox1.Text),
-                    Int32.Parse(textBox2.Text), WETNESS_MAX_POWER));
+                //listOfRegulators.Add(new WetnessRegulator(Int32.Parse(textBox1.Text),
+                //    Int32.Parse(textBox2.Text), WETNESS_MAX_POWER));
+                wetnessRegulatorAdd(new Location(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)), WETNESS_MAX_POWER);
             }
             else throw new Exception("Type doesn`t match");
             //add to list
-            ListOfDevices.Items.Add(comboBox1.Text + " X:" + textBox1.Text + " Y:" + textBox2.Text);
+            ListOfDevices.Items.Add(comboBox1.Text + ". X:" + textBox1.Text + " Y:" + textBox2.Text);
         }
         //delete
         private void button2_Click(object sender, EventArgs e)
@@ -137,32 +207,35 @@ namespace GreenHouse
             try
             {
                 string str = ListOfDevices.SelectedItem.ToString();
-                string[] strArr = str.Split(' ');
+                string[] strArr = str.Split('.');
+                string[] strArr1 = strArr[1].Split(' ');
+                int xCoord = Int32.Parse(strArr1[1].Split(':')[1]);//strArr1[1].Substring(0, 2));
+                int yCoord = Int32.Parse(strArr1[2].Split(':')[1]);//strArr1[2].Substring(0, 2));
                 switch (strArr[0])
                 {
                     case "Acidity Sensor":
-                        listOfControllers[0].deleteSensor(strArr);
+                        aciditySensorDelete(new Location(xCoord, yCoord));
                         break;
                     case "Light Sensor":
-                        listOfControllers[1].deleteSensor(strArr);
+                        lightSensorDelete(new Location(xCoord, yCoord));
                         break;
                     case "Temperature Sensor":
-                        listOfControllers[2].deleteSensor(strArr);
+                        temperatureSensorDelete(new Location(xCoord, yCoord));
                         break;
                     case "Wetness Sensor":
-                        listOfControllers[3].deleteSensor(strArr);
+                        wetnessSensorDelete(new Location(xCoord, yCoord));
                         break;
                     case "Acidity Regulator":
-                        listOfControllers[0].deleteRegulator(strArr);
+                        acidityRegulatorDelete(new Location(xCoord, yCoord));
                         break;
                     case "Light Regulator":
-                        listOfControllers[1].deleteRegulator(strArr);
+                        lightRegulatorDelete(new Location(xCoord, yCoord));
                         break;
                     case "Temperature Regulator":
-                        listOfControllers[2].deleteRegulator(strArr);
+                        temperatureRegulatorDelete(new Location(xCoord, yCoord));
                         break;
                     case "Wetness Regulator":
-                        listOfControllers[3].deleteRegulator(strArr);
+                        wetnessRegulatorDelete(new Location(xCoord, yCoord));
                         break;
                 }
                 ListOfDevices.Items.Remove(ListOfDevices.SelectedItem);
@@ -172,5 +245,10 @@ namespace GreenHouse
                 MessageBox.Show("You cannot delete unselected item!");
             }
         }
+
+        //private void AddDevices_Load(object sender, EventArgs e)
+        //{
+        //    button3_Click(sender, e);
+        //}
     }
 }

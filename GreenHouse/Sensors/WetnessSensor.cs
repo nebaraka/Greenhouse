@@ -10,10 +10,10 @@ namespace GreenHouse.Sensors
     {
         private Location location;
 
-        public WetnessSensor(int x, int y)
+        public WetnessSensor(Location l)
         {
-            location.x = x;
-            location.y = y;
+            location.x = l.x;
+            location.y = l.y;
         }
 
         public double returnValue()
