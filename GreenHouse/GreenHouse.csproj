@@ -58,6 +58,7 @@
     <Compile Include="Controllers\LightController.cs" />
     <Compile Include="Controllers\WetnessController.cs" />
     <Compile Include="ParamValues.cs" />
+    <Compile Include="Presenters\AddDevicesPresenter.cs" />
     <Compile Include="Regulators\AcidityRegulator.cs" />
     <Compile Include="Regulators\LightRegulator.cs" />
     <Compile Include="Regulators\TemperatureRegulator.cs" />
