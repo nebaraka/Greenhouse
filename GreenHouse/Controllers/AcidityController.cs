@@ -6,18 +6,17 @@ using System.Threading.Tasks;
 using GreenHouse.DeviceMaps;
 using GreenHouse.Regulators;
 using GreenHouse.Sensors;
+using MathNet.Numerics.LinearAlgebra;
 
 namespace GreenHouse.Controllers
 {
     class AcidityController : IController
     {
-        private bool[] commandValues;
         private double[] powerValues;
         private double[] recievedValues;
 
         public AcidityController(int sensorsAmount, int regulatorsAmount)
         {
-            commandValues = new bool[regulatorsAmount];
             powerValues = new double[regulatorsAmount];
             recievedValues = new double[sensorsAmount];
         }
@@ -50,72 +49,59 @@ namespace GreenHouse.Controllers
         }
         public void calculate()
         {
-           /* int regQuantity = listOfRegulators.Count();//Количество регуляторов
-            int sensQuantity = listOfSensors.Count();//Количество сенсоров
-            Cmatrix weightCoefficients = new Cmatrix(sensQuantity, regQuantity);//How sensors are effected by regulators(degrees/degrees)
+            int regQuantity = RegulatorMap.mapOfAcidityRegulators.Count();//Количество регуляторов
+            int sensQuantity = SensorMap.mapOfAciditySensors.Count();//Количество сенсоров
+            Matrix<double> weightCoefficients = Matrix<double>.Build.DenseDiagonal(sensQuantity, regQuantity, 0);//How sensors are effected by regulators(degrees/degrees)
             int i = 0, j = 0;//Counters
-            foreach (AciditySensor sensor in listOfSensors)//Weight Coefficients counting
+            foreach (Location sensLoc in SensorMap.mapOfAciditySensors.Keys)//Weight Coefficients counting
             {
-                int x = sensor.getX();
-                int y = sensor.getY();
-                foreach (AcidityRegulator regulator in listOfRegulators)
+                foreach (Location regLoc in RegulatorMap.mapOfAcidityRegulators.Keys)
                 {
-                    int x1 = regulator.getX();
-                    int y1 = regulator.getY();
-                    double r = Math.Sqrt(Math.Pow((x - x1), 2) + Math.Pow((y - y1), 2));
-                    weightCoefficients.M[i, j] = 1 / (r + 0.5);//Why 0.5? Because.
+                    double r = Math.Sqrt(Math.Pow((sensLoc.x - regLoc.x), 2) + Math.Pow((sensLoc.y - regLoc.y), 2));
+                    weightCoefficients[i, j] = 1 / (r + 0.5);//Why 0.5? Because.
                     j++;
                 }
                 i++;
                 j = 0;
             }
-            double[] neededValues = GrowthPlan.getTemperature();//Corridor
-            double averageValue = (neededValues[0] + neededValues[1]) / 2;//Average Value
-            Cmatrix regValues = new Cmatrix(regQuantity, 1);//X vector
-            Cmatrix sensValues = new Cmatrix(sensQuantity, 1);//Вектор Y
-            Cmatrix H = new Cmatrix(regQuantity, 1);//Step
-            for (i = 0; i < regQuantity; i++)
-            {
-                H.M[i, 0] = 0.5;
-            }
-            regValues = hookJivsMethod(regValues, sensValues, weightCoefficients, H, 2.5, 0.1, averageValue, neededValues);
-            for (i = 0; i < regQuantity; i++)
-            {
-                powerValues[i] = regValues.M[i, 0];
-                if (powerValues[i] == 0) commandValues[i] = false;
-                else commandValues[i] = true;
-            }*/
+            ParamValues.Corridor neededValues = GrowthPlan.getAcidity();//Corridor
+            double averageValue = (neededValues.minValue + neededValues.maxValue) / 2;//Average Value
+            Vector<double> regValues = Vector<double>.Build.Dense(regQuantity);//X vector
+            Vector<double> sensValues = Vector<double>.Build.Dense(sensQuantity);//Вектор Y
+            Vector<double> H = Vector<double>.Build.Dense(regQuantity, 0.5);//Step
+            regValues = HookJivsMethod(regValues, sensValues, weightCoefficients, H, 2.5, 0.1, averageValue, neededValues);
+            powerValues = regValues.ToArray();
         }
-        /*private double tuskFunction(Cmatrix X, Cmatrix Y, Cmatrix A, double averageValue, double[] neededValues)
+        private double TaskFunction(Vector<double> X, Vector<double> Y, Matrix<double> A, double averageValue, ParamValues.Corridor neededValues)
         {
             double f = 0;
-            Y = A * X;
-            for (int i = 0; i < Y.strok(); i++)
+            Y = A * X + Vector<double>.Build.Dense(recievedValues);
+            for (int i = 0; i < Y.Count; i++)
             {
-                f += Math.Abs(averageValue - Y.M[i, 0]);
-                if (Y.M[i, 0] > neededValues[1] || Y.M[i, 0] < neededValues[0]) f += 1000;
+                f += (averageValue - Y[i])* (averageValue - Y[i]);
+                if (Y[i] > neededValues.maxValue || Y[i] < neededValues.maxValue) f += 1000;
             }
             return f;
-        }*/
-        /*private Cmatrix coordSearch(Cmatrix X, Cmatrix Y, Cmatrix H, Cmatrix A, double averageValue, double[] neededValues)
+        }
+        private Vector<double> CoordSearch(Vector<double> X, Vector<double> Y, Vector<double> H, Matrix<double> A, double averageValue, ParamValues.Corridor neededValues)
         {
-            double z = tuskFunction(X, Y, A, averageValue, neededValues);
-            Cmatrix Xnew = new Cmatrix(X);
-            for (int i = 0; i < X.strok(); i++)
+            double z = TaskFunction(X, Y, A, averageValue, neededValues);
+            Vector<double> Xnew = Vector<double>.Build.DenseOfVector(X);
+            for (int i = 0; i < X.Count; i++)
             {
-                Xnew.M[i, 0] += H.M[i, 0];
-                if (z < tuskFunction(Xnew, Y, A, averageValue, neededValues)) Xnew.M[i, 0] = X.M[i, 0] - H.M[i, 0];
-                if (z < tuskFunction(Xnew, Y, A, averageValue, neededValues)) Xnew.M[i, 0] = X.M[i, 0];
+                Xnew[i] += H[i];
+                if (z < TaskFunction(Xnew, Y, A, averageValue, neededValues)) Xnew[i] = X[i] - H[i];
+                if (z < TaskFunction(Xnew, Y, A, averageValue, neededValues)) Xnew[i] = X[i];
             }
             return Xnew;
         }
-        private Cmatrix hookJivsMethod(Cmatrix X0, Cmatrix Y, Cmatrix A, Cmatrix H, double l, double eps, double averageValue, double[] neededValues)
+        private Vector<double> HookJivsMethod(Vector<double> X0, Vector<double> Y, Matrix<double> A, Vector<double> H, double l, double eps, double averageValue, ParamValues.Corridor neededValues)
         {
-            double delta = H.norm();
-            Cmatrix Xb = new Cmatrix(X0);
+            double delta = H.Norm(2);
+            Vector<double> Xb = Vector<double>.Build.DenseOfVector(X0);
             while (true)
             {
-                Cmatrix Xs = coordSearch(Xb, Y, H, A, averageValue, neededValues);
+                Vector<double> Xs = CoordSearch(Xb, Y, H, A, averageValue, neededValues);
                 if (Xs == Xb)
                 {
                     H /= 10; delta /= 10; //Ліміт блізка *)
@@ -124,9 +110,9 @@ namespace GreenHouse.Controllers
                 };
                 while (true)
                 {
-                    Cmatrix Xp = Xb + (Xs - Xb) * 2.5; // Рух уздоўж яра*)
-                    Cmatrix Xq = coordSearch(Xp, Y, H, A, averageValue, neededValues); // Каардынатны спуск *)
-                    if (tuskFunction(Xs, Y, A, averageValue, neededValues) <= tuskFunction(Xq, Y, A, averageValue, neededValues))
+                    Vector<double> Xp = Xb + (Xs - Xb) * 2.5; // Рух уздоўж яра*)
+                    Vector<double> Xq = CoordSearch(Xp, Y, H, A, averageValue, neededValues); // Каардынатны спуск *)
+                    if (TaskFunction(Xs, Y, A, averageValue, neededValues) <= TaskFunction(Xq, Y, A, averageValue, neededValues))
                     {
                         Xb = Xs; break;// Шукаць будзем новае Xs *)
                     }
@@ -138,7 +124,7 @@ namespace GreenHouse.Controllers
                 };
             };
             return Xb;
-        }*/
+        }
         public void setRegulators()
         {
 
