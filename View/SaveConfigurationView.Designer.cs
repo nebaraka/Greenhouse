@@ -49,6 +49,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(272, 22);
             this.textBox1.TabIndex = 1;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // button1
             // 
@@ -69,7 +70,7 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // SaveConfiguration
+            // SaveConfigurationView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -78,7 +79,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
-            this.Name = "SaveConfiguration";
+            this.Name = "SaveConfigurationView";
             this.Text = "SaveConfiguration";
             this.ResumeLayout(false);
             this.PerformLayout();

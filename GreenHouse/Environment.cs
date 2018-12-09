@@ -15,15 +15,15 @@ namespace GreenHouse
             public double temperature;
             public double wetness;
         }
-        private static Cell[,] cells;
+        private Cell[,] cells;
         public const int X_SIZE = 20;
         public const int Y_SIZE = 20;
-        public static List<double[]> acidityRegValues;
-        public static List<double[]> lightRegValues;
-        public static List<double[]> temperatureRegValues;
-        public static List<double[]> wetnessRegValues;
+        public List<double[]> acidityRegValues;
+        public List<double[]> lightRegValues;
+        public List<double[]> temperatureRegValues;
+        public List<double[]> wetnessRegValues;
 
-        static Environment()
+        public Environment()
         {
             cells = new Cell[X_SIZE, Y_SIZE];
             acidityRegValues = new List<double[]>();
@@ -32,16 +32,19 @@ namespace GreenHouse
             wetnessRegValues = new List<double[]>();
         }
 
-        public static void recount()
+        public void recount()
         {
-            /*recountTemperature();
+            recountTemperature();
             recountLight();
             recountAcidity();
-            recountWetness();*/
+            recountWetness();
         }
-        private static void recountTemperature()
+        private void recountTemperature()
         {
-          /*const double a = 1, b = 1, h = 2;//Lenght of cells(in meters)
+            for (int i = 0; i < X_SIZE; i++)
+                for (int j = 0; j < Y_SIZE; j++)
+                    cells[i, j].temperature = 10;
+            /*const double a = 1, b = 1, h = 2;//Lenght of cells(in meters)
             const double density = 1.2;//(kg/m^3)
             const double c = 1005;//Thermal conductivity
             const int t = 1;//Time scale(in mins)
@@ -122,8 +125,11 @@ namespace GreenHouse
                 }
             }*/
         }
-        public static void recountLight()
+        public void recountLight()
         {
+            for (int i = 0; i < X_SIZE; i++)
+                for (int j = 0; j < Y_SIZE; j++)
+                    cells[i, j].light = 20;
             /*double h = 2;//Height
             for (int i = 0; i < X_SIZE; i++)
             {
@@ -143,8 +149,11 @@ namespace GreenHouse
                 }
             }*/
         }
-        public static void recountAcidity()
+        public void recountAcidity()
         {
+            for (int i = 0; i < X_SIZE; i++)
+                for (int j = 0; j < Y_SIZE; j++)
+                    cells[i, j].acidity = 30;
             /*const int t = 1;//Time scale(in mins)
             int kt = 60 / t;//Time intervals quantitaty
             for (int k = 0; k < kt; k++)
@@ -218,8 +227,11 @@ namespace GreenHouse
                 }
             }*/
         }
-        public static void recountWetness()
+        public void recountWetness()
         {
+            for (int i = 0; i < X_SIZE; i++)
+                for (int j = 0; j < Y_SIZE; j++)
+                    cells[i, j].wetness = 40;
             /*const int t = 1;//Time scale(in mins)
             int kt = 60 / t;//Time intervals quantitaty
             for (int k = 0; k < kt; k++)
@@ -293,9 +305,9 @@ namespace GreenHouse
                 }
             }*/
         }
-        public static double getAcididty(int x, int y) { return cells[x,y].acidity; }
-        public static double getLight(int x, int y) { return cells[x, y].light; }
-        public static double getTemperature(int x, int y) { return cells[x, y].temperature; }
-        public static double getWetness(int x, int y) { return cells[x, y].wetness; }
+        public double getAcididty(int x, int y) { return cells[x,y].acidity; }
+        public double getLight(int x, int y) { return cells[x, y].light; }
+        public double getTemperature(int x, int y) { return cells[x, y].temperature; }
+        public double getWetness(int x, int y) { return cells[x, y].wetness; }
     }
 }
