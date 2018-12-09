@@ -7,16 +7,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Presenter;
 
 namespace View
 {
-    public partial class PlanConfigurationView : Form
+    public partial class PlanConfigurationView : Form, IPlanConfigurationView
     {
         public PlanConfigurationView()
         {
             InitializeComponent();
 
         }
+
+        public event Action ConfirmPlan;
+
+        public string GetTemperatureCorridors => textBox1.Text;
+        public string GetLightCorridors => textBox2.Text;
+        public string GetAcidityCorridors => textBox3.Text;
+        public string GetWetnessCorridors => textBox4.Text;
+        public string GetTemperatureIntervals => textBox5.Text;
+        public string GetLightIntervals => textBox6.Text;
+        public string GetAcidityIntervals => textBox7.Text;
+        public string GetWetnessIntervals => textBox8.Text;
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -40,63 +52,17 @@ namespace View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //paramStruct a = new paramStruct();
-            //string[] strs = textBox1.Text.Split(';');
-            //string[] strsInts = textBox5.Text.Split(';');
-            //double[,] d = new double[GrowthPlan.NUMBER_OF_INTERVALS, 2];
-            //int[] ints = new int[GrowthPlan.NUMBER_OF_INTERVALS];
-            //for (int i = 0; i < GrowthPlan.NUMBER_OF_INTERVALS; i++)
-            //{
-            //    string[] strs2 = strs[0].Split('-');
-            //    d[i, 0] = Double.Parse(strs2[0]);
-            //    d[i, 1] = Double.Parse(strs2[1]);
-            //    ints[i] = Int32.Parse(strsInts[i]);
-            //}
-            //a.vals = d;
-            //a.intervals = ints;
-            //paramStruct l = new paramStruct();
-            //strs = textBox2.Text.Split(';');
-            //strsInts = textBox6.Text.Split(';');
-            //d = new double[GrowthPlan.NUMBER_OF_INTERVALS, 2];
-            //ints = new int[GrowthPlan.NUMBER_OF_INTERVALS];
-            //for (int i = 0; i < GrowthPlan.NUMBER_OF_INTERVALS; i++)
-            //{
-            //    string[] strs2 = strs[0].Split('-');
-            //    d[i, 0] = Double.Parse(strs2[0]);
-            //    d[i, 1] = Double.Parse(strs2[1]);
-            //    ints[i] = Int32.Parse(strsInts[i]);
-            //}
-            //l.vals = d;
-            //l.intervals = ints;
-            //paramStruct t = new paramStruct();
-            //strs = textBox3.Text.Split(';');
-            //strsInts = textBox7.Text.Split(';');
-            //d = new double[GrowthPlan.NUMBER_OF_INTERVALS, 2];
-            //ints = new int[GrowthPlan.NUMBER_OF_INTERVALS];
-            //for (int i = 0; i < GrowthPlan.NUMBER_OF_INTERVALS; i++)
-            //{
-            //    string[] strs2 = strs[0].Split('-');
-            //    d[i, 0] = Double.Parse(strs2[0]);
-            //    d[i, 1] = Double.Parse(strs2[1]);
-            //    ints[i] = Int32.Parse(strsInts[i]);
-            //}
-            //t.vals = d;
-            //t.intervals = ints;
-            //paramStruct w = new paramStruct();
-            //strs = textBox4.Text.Split(';');
-            //strsInts = textBox8.Text.Split(';');
-            //d = new double[GrowthPlan.NUMBER_OF_INTERVALS, 2];
-            //ints = new int[GrowthPlan.NUMBER_OF_INTERVALS];
-            //for (int i = 0; i < GrowthPlan.NUMBER_OF_INTERVALS; i++)
-            //{
-            //    string[] strs2 = strs[0].Split('-');
-            //    d[i, 0] = Double.Parse(strs2[0]);
-            //    d[i, 1] = Double.Parse(strs2[1]);
-            //    ints[i] = Int32.Parse(strsInts[i]);
-            //}
-            //w.vals = d;
-            //w.intervals = ints;
-            //GrowthPlan.initialize(a, l, t, w);
+            ConfirmPlan?.Invoke();
+        }
+
+        public void show()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void close()
+        {
+            throw new NotImplementedException();
         }
     }
 }
