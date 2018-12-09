@@ -19,5 +19,7 @@ namespace Presenter
         string GetAcidityIntervals { get; }
         string GetWetnessCorridors { get; }
         string GetWetnessIntervals { get; }
+
+        void show();
     }
 }

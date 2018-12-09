@@ -57,7 +57,7 @@ namespace View
 
         public void show()
         {
-            throw new NotImplementedException();
+            base.Show();
         }
 
         public void close()
