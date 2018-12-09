@@ -8,38 +8,38 @@ using GreenHouse.Sensors;
 
 namespace GreenHouse
 {
-    public class ConcreteFactory
+    public class ConcreteFactory : IFactory
     {
-        public static IRegulator createAcidityRegulator(Location l, double power)
+        public IRegulator createAcidityRegulator(Location l, double power)
         {
             return new AcidityRegulator(l, power);
         }
-        public static IRegulator createLightRegulator(Location l, double power)
+        public IRegulator createLightRegulator(Location l, double power)
         {
             return new LightRegulator(l, power);
         }
-        public static IRegulator createTemperatureRegulator(Location l, double power)
+        public IRegulator createTemperatureRegulator(Location l, double power)
         {
             return new TemperatureRegulator(l, power);
         }
-        public static IRegulator createWetnessRegulator(Location l, double power)
+        public IRegulator createWetnessRegulator(Location l, double power)
         {
             return new WetnessRegulator(l, power);
         }
 
-        public static ISensor createAciditySensor(Location l)
+        public ISensor createAciditySensor(Location l)
         {
             return new AciditySensor(l);
         }
-        public static ISensor createLightSensor(Location l)
+        public ISensor createLightSensor(Location l)
         {
             return new LightSensor(l);
         }
-        public static ISensor createTemperatureSensor(Location l)
+        public ISensor createTemperatureSensor(Location l)
         {
             return new TemperatureSensor(l);
         }
-        public static ISensor createWetnessSensor(Location l)
+        public ISensor createWetnessSensor(Location l)
         {
             return new WetnessSensor(l);
         }
