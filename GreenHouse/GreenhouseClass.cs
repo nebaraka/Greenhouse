@@ -35,7 +35,7 @@ namespace GreenHouse
             {
                foreach(IController c in listOfControllers)
                 {
-                    c.askSensors();
+                    c.AskSensors();
                     c.calculate();
                     c.setRegulators();
                 }
