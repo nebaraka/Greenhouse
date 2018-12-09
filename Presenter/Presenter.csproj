@@ -61,6 +61,7 @@
     </Compile>
     <Compile Include="AddDevicesPresenter.cs" />
     <Compile Include="GreenhousePresenter.cs" />
+    <Compile Include="IAddDevicesView.cs" />
     <Compile Include="IGreenhouseView.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="Program.cs" />

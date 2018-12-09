@@ -16,11 +16,11 @@ namespace Presenter
         private IGreenhouse model;
         private IGreenhouseView view;
 
-        public GreenhousePresenter(IKernel k, IGreenhouse g, IGreenhouseView gw)
+        public GreenhousePresenter(IKernel k, IGreenhouse g, IGreenhouseView v)
         {
             kernel = k;
             model = g;
-            view = gw;
+            view = v;
 
             //event subscription
             view.addDevices += addDevices;
@@ -33,6 +33,7 @@ namespace Presenter
         public void addDevices()
         {
             //open AddDevices form
+            kernel.Get<AddDevicesPresenter>().run();
         }
 
         public void configurePlan()
@@ -80,7 +81,7 @@ namespace Presenter
         public void run()
         {
 
-            view.show();
+            view.Show();
         }
     }
 }

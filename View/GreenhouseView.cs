@@ -51,18 +51,13 @@ namespace View
         }
         public void setRegulators()
         {
-
+            //extension
         }
         public void setSensors()
         {
-
+            //extension
         }
-
-        public void show()
-        {
-            throw new Exception("Method is unsupported");
-        }
-        public void close()
+        public void Close()
         {
             Application.Exit();
         }
@@ -93,7 +88,7 @@ namespace View
 
         private void button10_Click(object sender, EventArgs e)
         {
-            this.close();
+            this.Close();
         }
         //start simulation
         private void button1_Click(object sender, EventArgs e)

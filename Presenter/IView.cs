@@ -8,7 +8,7 @@ namespace Presenter
 {
     public interface IView
     {
-        void show();
-        void close();
+        void Show();
+        void Close();
     }
 }
