@@ -9,7 +9,7 @@ using GreenHouse.Sensors;
 
 namespace GreenHouse.Controllers
 {
-    class LightController : IController
+    public class LightController : IController
     {
         private bool[] commandValues;
         private double[] powerValues;
@@ -38,7 +38,7 @@ namespace GreenHouse.Controllers
         {
             //TODO
         }
-        public void AskSensors()
+        public void askSensors()
         {
             int i = 0;//Counter
             foreach (LightSensor sensor in SensorMap.mapOfLightSensors.Values)

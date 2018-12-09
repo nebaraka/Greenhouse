@@ -9,7 +9,7 @@ using GreenHouse.Sensors;
 
 namespace GreenHouse.Controllers
 {
-    class WetnessController : IController
+    public class WetnessController : IController
     {
         private bool[] commandValues;
         private double[] powerValues;
@@ -38,7 +38,7 @@ namespace GreenHouse.Controllers
         {
             //TODO
         }
-        public void AskSensors()
+        public void askSensors()
         {
            int i = 0;//Counter
             foreach (WetnessSensor sensor in SensorMap.mapOfWetnessSensors.Values)

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GreenHouse.Regulators
 {
-    class AcidityRegulator : IRegulator
+    public class AcidityRegulator : IRegulator
     {
         private Location location;
         private bool status;

@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace GreenHouse
 {
-    class GrowthPlan
+    public class GrowthPlan
     {
         Time time = new Time();
         private static ParamValues[] values;

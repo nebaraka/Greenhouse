@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GreenHouse.Regulators
 {
-    class TemperatureRegulator : IRegulator
+    public class TemperatureRegulator : IRegulator
     {
         private Location location;
         private bool status;

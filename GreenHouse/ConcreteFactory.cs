@@ -8,7 +8,7 @@ using GreenHouse.Sensors;
 
 namespace GreenHouse
 {
-    class ConcreteFactory
+    public class ConcreteFactory
     {
         public static IRegulator createAcidityRegulator(Location l, double power)
         {

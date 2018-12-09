@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GreenHouse.Sensors
 {
-    interface ISensor
+    public interface ISensor
     {
         double returnValue();
     }

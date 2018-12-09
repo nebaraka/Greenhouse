@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GreenHouse
 {
-    interface IRegulator
+    public interface IRegulator
     {
         void turnOn();
         void turnOff();

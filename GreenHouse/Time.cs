@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GreenHouse
 {
-    class Time
+    public class Time
     {
         private static int time;
         private static int tickSize;

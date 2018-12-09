@@ -8,7 +8,7 @@ using GreenHouse.Sensors;
 
 namespace GreenHouse
 {
-    interface IController
+    public interface IController
     {
         void addRegulator(IRegulator r, Location loc);
         void addSensor(ISensor s, Location loc);

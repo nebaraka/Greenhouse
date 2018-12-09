@@ -9,7 +9,7 @@ using GreenHouse.Sensors;
 
 namespace GreenHouse.Controllers
 {
-    class AcidityController : IController
+    public class AcidityController : IController
     {
         private bool[] commandValues;
         private double[] powerValues;
@@ -39,7 +39,7 @@ namespace GreenHouse.Controllers
         {
             //TODO
         }
-        public void AskSensors()
+        public void askSensors()
         {
             int i = 0;//Counter
             foreach (AciditySensor sensor in SensorMap.mapOfAciditySensors.Values)

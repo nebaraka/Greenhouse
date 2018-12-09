@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GreenHouse.Sensors
 {
-    class TemperatureSensor : ISensor
+    public class TemperatureSensor : ISensor
     {
         private Location location;
 

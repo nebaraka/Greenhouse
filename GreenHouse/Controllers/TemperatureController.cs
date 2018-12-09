@@ -8,9 +8,9 @@ using GreenHouse.Regulators;
 using GreenHouse.Sensors;
 using GreenHouse.DeviceMaps;
 
-namespace GreenHouse
+namespace GreenHouse.Controllers
 {
-    class TemperatureController : IController
+    public class TemperatureController : IController
     {
         private bool[] commandValues;
         private double[] powerValues;
@@ -39,7 +39,7 @@ namespace GreenHouse
         {
             //TODO
         }
-        public void AskSensors()
+        public void askSensors()
         {
             int i = 0;//Counter
             foreach (TemperatureSensor sensor in SensorMap.mapOfTemperatureSensors.Values)

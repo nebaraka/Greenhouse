@@ -7,7 +7,7 @@ using GreenHouse.Controllers;
 
 namespace GreenHouse
 {
-    static class GreenhouseClass
+    public static class GreenhouseClass
     {
         private static List<IController> listOfControllers;
         /// <summary>
