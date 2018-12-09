@@ -9,14 +9,14 @@ namespace GreenHouse
     public class GrowthPlan
     {
         Time time = new Time();
-        private static ParamValues[] values;
+        private ParamValues[] values;
 
-        static GrowthPlan()
+        public GrowthPlan(Time time)
         {
-
+            this.time = time;
         }
 
-        public static void Initialize(ParamValues[] paramValues)
+        public void Initialize(ParamValues[] paramValues)
         {
             values = paramValues;
             //timer initialization as an alternative way
@@ -25,7 +25,7 @@ namespace GreenHouse
         }
 
         //For extensibility algorythms of all theese getters have to be Generizied
-        public static ParamValues.Corridor getAcidity()
+        public ParamValues.Corridor getAcidity()
         {
             int currentTime = Time.GetTime();
             int i =-1;
@@ -35,7 +35,7 @@ namespace GreenHouse
             }
             return values[i].acidity;
         }
-        public static ParamValues.Corridor getLight()
+        public ParamValues.Corridor getLight()
         {
             int currentTime = Time.GetTime();
             int i = -1;
@@ -45,7 +45,7 @@ namespace GreenHouse
             }
             return values[i].light;
         }
-        public static ParamValues.Corridor getTemperature()
+        public ParamValues.Corridor getTemperature()
         {
             int currentTime = Time.GetTime();
             int i = -1;
@@ -55,7 +55,7 @@ namespace GreenHouse
             }
             return values[i].temperature;
         }
-        public static ParamValues.Corridor getWetness()
+        public ParamValues.Corridor getWetness()
         {
             int currentTime = Time.GetTime();
             int i = -1;

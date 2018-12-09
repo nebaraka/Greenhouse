@@ -8,23 +8,23 @@ namespace GreenHouse
 {
     public class Time
     {
-        private static int time;
-        private static int tickSize;
-        static Time()
+        private int time;
+        private int tickSize;
+        public Time()
         {
             time = 0;
             tickSize = 1;
         }
-        public static void Tick()
+        public void Tick()
         {
             time += tickSize;
         }
 
-        public static void SetTickSize(int size)
+        public void SetTickSize(int size)
         {
             tickSize = size;
         }
 
-        public static int GetTime() { return time; }
+        public int GetTime() { return time; }
     }
 }

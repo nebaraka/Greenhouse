@@ -39,7 +39,8 @@ namespace GreenHouse
         public Greenhouse()
         {
             listOfControllers = new Controllers();
-            gp = new GrowthPlan();
+            time = new Time();
+            gp = new GrowthPlan(time);
             e = new Environment();
             rm = new RegulatorMap();
             sm = new SensorMap();
@@ -115,10 +116,12 @@ namespace GreenHouse
                 listOfControllers.wc.askSensors();
                 listOfControllers.wc.calculate();
                 listOfControllers.wc.setRegulators();
-                Environment.recount();
+                e.recount();
 
-                tickInfo?.Invoke(Time.GetTime(), GrowthPlan.getAcidity(), GrowthPlan.getLight(),
-                     GrowthPlan.getTemperature(), GrowthPlan.getWetness());
+                time.Tick();
+
+                tickInfo?.Invoke(time.GetTime(), gp.getAcidity(), gp.getLight(),
+                     gp.getTemperature(), gp.getWetness());
                 tickInfo2?.Invoke(0, 0, 0, 0);//HERE MUST BE AVERAGE MEANINGS
 
                 //graphs
