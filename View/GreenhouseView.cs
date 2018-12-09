@@ -31,23 +31,23 @@ namespace View
 
         public void setTime(int t)
         {
-            time_label.Text = t + (t % 10 == 1?" day":" days");
+            time_label.Text = t.ToString() + (t % 10 == 1?" day":" days");
         }
-        public void setAcidity(double a)
+        public void setAcidity(string s)
         {
-            acidity_label.Text = a.ToString();
+            acidity_label.Text = s;
         }
-        public void setLight(double l)
+        public void setLight(string s)
         {
-            light_label.Text = l.ToString();
+            light_label.Text = s;
         }
-        public void setTemperature(double t)
+        public void setTemperature(string s)
         {
-            temperature_label.Text = t.ToString();
+            temperature_label.Text = s + "C";
         }
-        public void setWetness(double w)
+        public void setWetness(string s)
         {
-            wetness_label.Text = w.ToString();
+            wetness_label.Text = s;
         }
         public void setRegulators()
         {

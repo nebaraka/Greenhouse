@@ -19,10 +19,10 @@ namespace Presenter
         event Action wAlloc;
 
         void setTime(int t);
-        void setAcidity(double a);
-        void setLight(double l);
-        void setTemperature(double t);
-        void setWetness(double w);
+        void setAcidity(string s);
+        void setLight(string s);
+        void setTemperature(string s);
+        void setWetness(string s);
         void setRegulators();
         void setSensors();
     }

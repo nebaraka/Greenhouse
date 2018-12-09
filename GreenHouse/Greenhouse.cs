@@ -25,6 +25,7 @@ namespace GreenHouse
         private Time time;
 
         public event Delegates.del tickInfo;
+        public event Delegates.del2 tickInfo2;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -118,6 +119,7 @@ namespace GreenHouse
 
                 tickInfo?.Invoke(Time.GetTime(), GrowthPlan.getAcidity(), GrowthPlan.getLight(),
                      GrowthPlan.getTemperature(), GrowthPlan.getWetness());
+                tickInfo2?.Invoke(0, 0, 0, 0);//HERE MUST BE AVERAGE MEANINGS
 
                 //graphs
             }

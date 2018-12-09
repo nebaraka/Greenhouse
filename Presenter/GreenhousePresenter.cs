@@ -28,6 +28,7 @@ namespace Presenter
             view.startSimulation += startSimulation;
             view.showGrowthRates += showGrowthRates;
             view.saveConfiguration += saveConfiguration;
+            model.tickInfo += tickUpdate;
         }
 
         public void addDevices()
@@ -55,6 +56,16 @@ namespace Presenter
         public void saveConfiguration()
         {
             //open corresponding form
+        }
+
+        public void tickUpdate(int time, ParamValues.Corridor ac, ParamValues.Corridor l,
+            ParamValues.Corridor temp, ParamValues.Corridor w)
+        {
+            view.setTime(time);
+            view.setAcidity(ac.minValue.ToString() + "-" + ac.maxValue.ToString());
+            view.setLight(l.minValue.ToString() + "-" + l.maxValue.ToString());
+            view.setTemperature(temp.minValue.ToString() + "-" + temp.maxValue.ToString());
+            view.setWetness(w.minValue.ToString() + "-" + w.maxValue.ToString());
         }
 
         //Allocation

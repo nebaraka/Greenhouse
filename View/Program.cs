@@ -20,6 +20,10 @@ namespace View
         {
             Ninject.StandardKernel kernel = new StandardKernel();
             kernel.Bind<ApplicationContext>().ToConstant(new ApplicationContext());
+            kernel.Bind<IAddDevicesView>().To<AddDevicesView>();
+            kernel.Bind<IGreenhouseView>().To<GreenhouseView>();
+            kernel.Bind<IGrowthRatesView>().To<GrowthRatesView>();
+            kernel.Bind<IAddDevicesView>().To<AddDevicesView>();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

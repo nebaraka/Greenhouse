@@ -61,8 +61,10 @@
     </Compile>
     <Compile Include="AddDevicesPresenter.cs" />
     <Compile Include="GreenhousePresenter.cs" />
+    <Compile Include="GrowthRatesPresenter.cs" />
     <Compile Include="IAddDevicesView.cs" />
     <Compile Include="IGreenhouseView.cs" />
+    <Compile Include="IGrowthRatesView.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
