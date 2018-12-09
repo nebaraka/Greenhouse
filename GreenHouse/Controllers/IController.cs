@@ -14,7 +14,7 @@ namespace GreenHouse
         void addSensor(ISensor s, Location loc);
         void deleteRegulator(string[] strs);
         void deleteSensor(string[] strs);
-        void AskSensors();
+        void askSensors();
         void calculate();
         void setRegulators();
     }

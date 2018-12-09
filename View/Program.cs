@@ -4,6 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Ninject;
+
+using Presenter;
+
 namespace View
 {
     static class Program
@@ -14,9 +18,13 @@ namespace View
         [STAThread]
         static void Main()
         {
+            Ninject.StandardKernel kernel = new StandardKernel();
+            kernel.Bind<ApplicationContext>().ToConstant(new ApplicationContext());
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            //kernel.Get<GreenhousePresenter>().Run();
+            Application.Run(kernel.Get<ApplicationContext>());
         }
     }
 }

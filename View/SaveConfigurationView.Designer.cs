@@ -1,6 +1,6 @@
-﻿namespace GreenHouse
+﻿namespace View
 {
-    partial class SaveConfiguration
+    partial class SaveConfigurationView
     {
         /// <summary>
         /// Required designer variable.

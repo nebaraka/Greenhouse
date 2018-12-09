@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 using GreenHouse.DeviceMaps;
 using GreenHouse.Sensors;
 using GreenHouse.Regulators;
+using GreenHouse;
 
 
-namespace GreenHouse.Presenters
+namespace Presenter
 {
-    class AddDevicesPresenter
+    public class AddDevicesPresenter
     {
         public static void addAcidityRegulator(Location l, double power)
         {

@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace GreenHouse
+namespace View
 {
-    public partial class PlanConfiguration : Form
+    public partial class PlanConfigurationView : Form
     {
-        public PlanConfiguration()
+        public PlanConfigurationView()
         {
             InitializeComponent();
 

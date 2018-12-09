@@ -1,6 +1,6 @@
-﻿namespace GreenHouse
+﻿namespace View
 {
-    partial class AddDevices
+    partial class AddDevicesView
     {
         /// <summary>
         /// Required designer variable.

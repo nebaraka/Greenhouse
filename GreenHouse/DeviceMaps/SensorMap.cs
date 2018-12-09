@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace GreenHouse.DeviceMaps
 {
-    static class SensorMap
+    public class SensorMap
     {
-        public static Dictionary<Location, ISensor> mapOfAciditySensors;
-        public static Dictionary<Location, ISensor> mapOfLightSensors;
-        public static Dictionary<Location, ISensor> mapOfTemperatureSensors;
-        public static Dictionary<Location, ISensor> mapOfWetnessSensors;
-        static SensorMap()
+        public Dictionary<Location, ISensor> mapOfAciditySensors;
+        public Dictionary<Location, ISensor> mapOfLightSensors;
+        public Dictionary<Location, ISensor> mapOfTemperatureSensors;
+        public Dictionary<Location, ISensor> mapOfWetnessSensors;
+        public SensorMap()
         {
             mapOfAciditySensors = new Dictionary<Location, ISensor>();
             mapOfLightSensors = new Dictionary<Location, ISensor>();

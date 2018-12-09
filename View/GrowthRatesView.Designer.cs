@@ -1,6 +1,6 @@
-﻿namespace GreenHouse
+﻿namespace View
 {
-    partial class GrowthRates
+    partial class GrowthRatesView
     {
         /// <summary>
         /// Required designer variable.
@@ -96,7 +96,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::GreenHouse.Properties.Resources.Graphic;
+            this.pictureBox1.Image = global::View.Properties.Resources.Graphic;
             this.pictureBox1.Location = new System.Drawing.Point(110, 13);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(193, 175);
@@ -105,7 +105,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::GreenHouse.Properties.Resources.Graphic;
+            this.pictureBox2.Image = global::View.Properties.Resources.Graphic;
             this.pictureBox2.Location = new System.Drawing.Point(395, 13);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(193, 175);
@@ -115,7 +115,7 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Image = global::GreenHouse.Properties.Resources.Graphic;
+            this.pictureBox3.Image = global::View.Properties.Resources.Graphic;
             this.pictureBox3.Location = new System.Drawing.Point(110, 243);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(193, 175);
@@ -124,7 +124,7 @@
             // 
             // pictureBox4
             // 
-            this.pictureBox4.Image = global::GreenHouse.Properties.Resources.Graphic;
+            this.pictureBox4.Image = global::View.Properties.Resources.Graphic;
             this.pictureBox4.Location = new System.Drawing.Point(395, 243);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(193, 175);

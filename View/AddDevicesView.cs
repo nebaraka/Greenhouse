@@ -10,11 +10,11 @@ using System.Windows.Forms;
 using GreenHouse.Controllers;
 using GreenHouse.Regulators;
 using GreenHouse.Sensors;
-using GreenHouse.Presenters;
+using Presenter;
 
-namespace GreenHouse
+namespace View
 {
-    public partial class AddDevices : Form
+    public partial class AddDevicesView : Form
     {
         public delegate void actionRegulator(Location l, double power);
         public delegate void actionSensor(Location l);
@@ -50,7 +50,7 @@ namespace GreenHouse
         //private static List<ISensor> listOfSensors;
         //private static List<IRegulator> listOfRegulators;
 
-        static AddDevices()
+        static AddDevicesView()
         {
             //listOfControllers = new List<IController>();
             //listOfSensors = new List<ISensor>();
@@ -64,7 +64,7 @@ namespace GreenHouse
             stListOfDevices.TabIndex = 0;
         }
 
-        public AddDevices()
+        public AddDevicesView()
         {
             //reg add
             acidityRegulatorAdd += AddDevicesPresenter.addAcidityRegulator;

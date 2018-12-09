@@ -53,85 +53,40 @@
   <ItemGroup>
     <Compile Include="DeviceMaps\RegulatorMap.cs" />
     <Compile Include="DeviceMaps\SensorMap.cs" />
+    <Compile Include="IGreenhouse.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Controllers\AcidityController.cs" />
     <Compile Include="Controllers\LightController.cs" />
     <Compile Include="Controllers\WetnessController.cs" />
     <Compile Include="ParamValues.cs" />
-    <Compile Include="Presenters\AddDevicesPresenter.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Regulators\AcidityRegulator.cs" />
     <Compile Include="Regulators\LightRegulator.cs" />
     <Compile Include="Regulators\TemperatureRegulator.cs" />
     <Compile Include="Regulators\WetnessRegulator.cs" />
     <Compile Include="Sensors\AciditySensor.cs" />
-    <Compile Include="AddDevices.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AddDevices.Designer.cs">
-      <DependentUpon>AddDevices.cs</DependentUpon>
-    </Compile>
     <Compile Include="ConcreteFactory.cs" />
     <Compile Include="DAS.cs" />
     <Compile Include="Environment.cs" />
-    <Compile Include="Greenhouse.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Greenhouse.Designer.cs">
-      <DependentUpon>Greenhouse.cs</DependentUpon>
-    </Compile>
     <Compile Include="GrowthPlan.cs" />
-    <Compile Include="GrowthRates.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GrowthRates.Designer.cs">
-      <DependentUpon>GrowthRates.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\IController.cs" />
     <Compile Include="Regulators\IRegulator.cs" />
     <Compile Include="Sensors\ISensor.cs" />
     <Compile Include="Sensors\LightSensor.cs" />
-    <Compile Include="PlanConfiguration.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PlanConfiguration.Designer.cs">
-      <DependentUpon>PlanConfiguration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="GreenhouseClass.cs" />
+    <Compile Include="Greenhouse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SaveConfiguration.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SaveConfiguration.Designer.cs">
-      <DependentUpon>SaveConfiguration.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\TemperatureController.cs" />
     <Compile Include="Sensors\TemperatureSensor.cs" />
     <Compile Include="Sensors\WetnessSensor.cs" />
     <Compile Include="Time.cs" />
-    <EmbeddedResource Include="AddDevices.resx">
-      <DependentUpon>AddDevices.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Greenhouse.resx">
-      <DependentUpon>Greenhouse.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GrowthRates.resx">
-      <DependentUpon>GrowthRates.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PlanConfiguration.resx">
-      <DependentUpon>PlanConfiguration.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="SaveConfiguration.resx">
-      <DependentUpon>SaveConfiguration.cs</DependentUpon>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -146,12 +101,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\memus.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Graphic.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

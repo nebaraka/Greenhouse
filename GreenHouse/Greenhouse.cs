@@ -1,59 +1,109 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using GreenHouse.Controllers;
+using GreenHouse.DeviceMaps;
 
 namespace GreenHouse
 {
-    public partial class Greenhouse : Form
+    public class Greenhouse : IGreenhouse
     {
+        private struct Controllers
+        {
+            public AcidityController ac;
+            public LightController lc;
+            public TemperatureController tc;
+            public WetnessController wc;
+        }
+        private Controllers listOfControllers;
+        private GrowthPlan gp;
+        private Environment e;
+        private RegulatorMap rm;
+        private SensorMap sm;
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        //[STAThread]
+        //static void Main()
+        //{
+        //    Application.EnableVisualStyles();
+        //    Application.SetCompatibleTextRenderingDefault(false);
+        //    //Application.Run(new Greenhouse());
+        //}
         public Greenhouse()
         {
-            InitializeComponent();
-            button2.Click += new EventHandler(button2_click);
-        }
-        private void button2_click(object sender, EventArgs e)
-        {
-            PlanConfiguration pc = new PlanConfiguration();
-            pc.Show();
+            listOfControllers = new Controllers();
+            gp = new GrowthPlan();
+            e = new Environment();
+            rm = new RegulatorMap();
+            sm = new SensorMap();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        public GrowthPlan currentGrowthPlan
         {
-            AddDevices ad = new AddDevices();
-            ad.Show();
+            get { return gp; }
+            set { gp = value; }
+        }
+        public Environment currentEnvironment
+        {
+            get { return e; }
+            set {e = value; }
+        }
+        public RegulatorMap currentRegulatorMap
+        {
+            get { return rm; }
+            set { rm = value; }
+        }
+        public SensorMap currentSensorMap
+        {
+            get { return sm; }
+            set { sm = value; }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        public bool isAnyNull()
         {
-            GrowthRates gr = new GrowthRates();
-            gr.Show();
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            SaveConfiguration sc = new SaveConfiguration();
-            sc.Show();
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-        //start simulation
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (GreenhouseClass.isListNull())
+            if (listOfControllers.ac == null || listOfControllers.lc == null ||
+                listOfControllers.tc == null || listOfControllers.wc == null)
             {
-                MessageBox.Show("Ya canna start dat method weil n' devices!\n"
-                    + "(You cannot simulate while there`s no devices)");
+                return true;
             }
-            else GreenhouseClass.simulate();
+            else
+            {
+                return false;
+            }
+        }
+        public void set(AcidityController ac, LightController lc, TemperatureController tc, WetnessController wc)
+        {
+            listOfControllers.ac = ac;
+            listOfControllers.lc = lc;
+            listOfControllers.tc = tc;
+            listOfControllers.wc = wc;
+            //Init cycle??
+        }
+        public void simulate()
+        {
+            while(true)//Control cycle
+            {
+                listOfControllers.ac.askSensors();
+                listOfControllers.ac.calculate();
+                listOfControllers.ac.setRegulators();
+
+                listOfControllers.lc.askSensors();
+                listOfControllers.lc.calculate();
+                listOfControllers.lc.setRegulators();
+
+                listOfControllers.tc.askSensors();
+                listOfControllers.tc.calculate();
+                listOfControllers.tc.setRegulators();
+
+                listOfControllers.wc.askSensors();
+                listOfControllers.wc.calculate();
+                listOfControllers.wc.setRegulators();
+                Environment.recount();
+                //graphs
+            }
         }
     }
 }
