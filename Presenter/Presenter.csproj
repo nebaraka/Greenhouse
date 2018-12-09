@@ -78,6 +78,7 @@
     <Compile Include="GrowthRatesPresenter.cs" />
     <Compile Include="IAddDevicesView.cs" />
     <Compile Include="IGreenhouseView.cs" />
+    <Compile Include="IGrowthRatesView.cs" />
     <Compile Include="IPlanConfigurationView.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="PlanConfigurationPresenter.cs" />

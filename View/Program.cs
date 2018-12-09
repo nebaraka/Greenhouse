@@ -23,7 +23,7 @@ namespace View
             kernel.Bind<IAddDevicesView>().To<AddDevicesView>();
             kernel.Bind<IGreenhouseView>().To<GreenhouseView>();
             kernel.Bind<IGrowthRatesView>().To<GrowthRatesView>();
-            kernel.Bind<IAddDevicesView>().To<AddDevicesView>();
+            kernel.Bind<IPlanConfigurationView>().To<PlanConfigurationView>();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
