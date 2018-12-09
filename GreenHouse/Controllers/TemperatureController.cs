@@ -15,20 +15,24 @@ namespace GreenHouse.Controllers
     {
         private double[] powerValues;
         private double[] recievedValues;
+        private RegulatorMap rm;
+        private SensorMap sm;
+        private GrowthPlan gp;
 
-        public TemperatureController(int sensorsAmount, int regulatorsAmount)
+        public TemperatureController(RegulatorMap rm, SensorMap sm, GrowthPlan gp)
         {
-            powerValues = new double[regulatorsAmount];
-            recievedValues = new double[sensorsAmount];
+            this.rm = rm;
+            this.sm = sm;
+            this.gp = gp;
         }
 
         public void addRegulator(IRegulator r, Location loc)
         {
-            RegulatorMap.mapOfTemperatureRegulators.Add(loc, (TemperatureRegulator)r);
+            rm.mapOfTemperatureRegulators.Add(loc, (TemperatureRegulator)r);
         }
         public void addSensor(ISensor s, Location loc)
         {
-            SensorMap.mapOfTemperatureSensors.Add(loc, (TemperatureSensor)s);
+            sm.mapOfTemperatureSensors.Add(loc, (TemperatureSensor)s);
         }
         public void deleteRegulator(string[] strs)
         {
@@ -41,7 +45,8 @@ namespace GreenHouse.Controllers
         public void askSensors()
         {
             int i = 0;//Counter
-            foreach (TemperatureSensor sensor in SensorMap.mapOfTemperatureSensors.Values)
+            if (recievedValues == null) recievedValues = new double[sm.mapOfTemperatureSensors.Count];
+            foreach (TemperatureSensor sensor in sm.mapOfTemperatureSensors.Values)
             {
                 recievedValues[i] = sensor.returnValue();
                 i++;
@@ -49,13 +54,13 @@ namespace GreenHouse.Controllers
         }
         public void calculate()
         {
-            int regQuantity = RegulatorMap.mapOfAcidityRegulators.Count();//Количество регуляторов
-            int sensQuantity = SensorMap.mapOfAciditySensors.Count();//Количество сенсоров
+            int regQuantity = rm.mapOfTemperatureRegulators.Count();//Количество регуляторов
+            int sensQuantity = sm.mapOfTemperatureSensors.Count();//Количество сенсоров
             Matrix<double> weightCoefficients = Matrix<double>.Build.DenseDiagonal(sensQuantity, regQuantity, 0);//How sensors are effected by regulators(degrees/degrees)
             int i = 0, j = 0;//Counters
-            foreach (Location sensLoc in SensorMap.mapOfAciditySensors.Keys)//Weight Coefficients counting
+            foreach (Location sensLoc in sm.mapOfTemperatureSensors.Keys)//Weight Coefficients counting
             {
-                foreach (Location regLoc in RegulatorMap.mapOfAcidityRegulators.Keys)
+                foreach (Location regLoc in rm.mapOfTemperatureRegulators.Keys)
                 {
                     double r = Math.Sqrt(Math.Pow((sensLoc.x - regLoc.x), 2) + Math.Pow((sensLoc.y - regLoc.y), 2));
                     weightCoefficients[i, j] = 1 / (r + 0.5);//Why 0.5? Because.
@@ -64,12 +69,13 @@ namespace GreenHouse.Controllers
                 i++;
                 j = 0;
             }
-            ParamValues.Corridor neededValues = GrowthPlan.getTemperature();//Corridor
+            ParamValues.Corridor neededValues = gp.getTemperature();//Corridor
             double averageValue = (neededValues.minValue + neededValues.maxValue) / 2;//Average Value
             Vector<double> regValues = Vector<double>.Build.Dense(regQuantity);//X vector
             Vector<double> sensValues = Vector<double>.Build.Dense(sensQuantity);//Вектор Y
             Vector<double> H = Vector<double>.Build.Dense(regQuantity, 5);//Step
             regValues = HookJivsMethod(regValues, sensValues, weightCoefficients, H, 2.5, 0.1, averageValue, neededValues);
+            if (powerValues == null) powerValues = new double[rm.mapOfTemperatureRegulators.Count];
             powerValues = regValues.ToArray();
         }
         private double TaskFunction(Vector<double> X, Vector<double> Y, Matrix<double> A, double averageValue, ParamValues.Corridor neededValues)
