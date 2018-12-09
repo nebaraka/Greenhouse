@@ -9,9 +9,19 @@ namespace GreenHouse
 {
     public interface IGreenhouse
     {
+        event Delegates.del tickInfo;
+        Greenhouse.Controllers currentListOfControllers { get; set; }
         GrowthPlan currentGrowthPlan { get; set; }
         Environment currentEnvironment { get; set; }
         RegulatorMap currentRegulatorMap { get; set; }
         SensorMap currentSensorMap { get; set; }
+        Time currentTime { get; set; }
+        void simulate();
+    }
+
+    public static class Delegates
+    {
+        public delegate void del(int time, ParamValues.Corridor ac, ParamValues.Corridor l,
+            ParamValues.Corridor temp, ParamValues.Corridor w);
     }
 }

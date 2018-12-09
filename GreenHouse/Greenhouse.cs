@@ -10,7 +10,7 @@ namespace GreenHouse
 {
     public class Greenhouse : IGreenhouse
     {
-        private struct Controllers
+        public struct Controllers
         {
             public AcidityController ac;
             public LightController lc;
@@ -22,6 +22,9 @@ namespace GreenHouse
         private Environment e;
         private RegulatorMap rm;
         private SensorMap sm;
+        private Time time;
+
+        public event Delegates.del tickInfo;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -60,6 +63,16 @@ namespace GreenHouse
         {
             get { return sm; }
             set { sm = value; }
+        }
+        public Controllers currentListOfControllers
+        {
+            get { return listOfControllers; }
+            set { listOfControllers = value; }
+        }
+        public Time currentTime
+        {
+            get { return time; }
+            set { time = value; }
         }
 
         public bool isAnyNull()
@@ -102,6 +115,10 @@ namespace GreenHouse
                 listOfControllers.wc.calculate();
                 listOfControllers.wc.setRegulators();
                 Environment.recount();
+
+                tickInfo?.Invoke(Time.GetTime(), GrowthPlan.getAcidity(), GrowthPlan.getLight(),
+                     GrowthPlan.getTemperature(), GrowthPlan.getWetness());
+
                 //graphs
             }
         }
