@@ -10,7 +10,7 @@ using GreenHouse;
 
 namespace Presenter
 {
-    class GrowthRatesPresenter
+    public class GrowthRatesPresenter
     {
         private IKernel kernel;
         private IGreenhouse model;

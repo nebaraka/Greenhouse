@@ -6,9 +6,9 @@ using System.Threading;
 
 namespace GreenHouse
 {
-    public class GrowthPlan
+    public class GrowthPlan : IGrowthPlan
     {
-        Time time = new Time();
+        Time time;
         private ParamValues[] values;
 
         public GrowthPlan(Time time)
@@ -27,7 +27,7 @@ namespace GreenHouse
         //For extensibility algorythms of all theese getters have to be Generizied
         public ParamValues.Corridor getAcidity()
         {
-            int currentTime = Time.GetTime();
+            int currentTime = time.GetTime();
             int i =-1;
             while (currentTime >= 0) 
             {
@@ -37,7 +37,7 @@ namespace GreenHouse
         }
         public ParamValues.Corridor getLight()
         {
-            int currentTime = Time.GetTime();
+            int currentTime = time.GetTime();
             int i = -1;
             while (currentTime >= 0)
             {
@@ -47,7 +47,7 @@ namespace GreenHouse
         }
         public ParamValues.Corridor getTemperature()
         {
-            int currentTime = Time.GetTime();
+            int currentTime = time.GetTime();
             int i = -1;
             while (currentTime >= 0)
             {
@@ -57,7 +57,7 @@ namespace GreenHouse
         }
         public ParamValues.Corridor getWetness()
         {
-            int currentTime = Time.GetTime();
+            int currentTime = time.GetTime();
             int i = -1;
             while (currentTime >= 0)
             {

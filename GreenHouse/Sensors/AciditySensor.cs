@@ -9,16 +9,23 @@ namespace GreenHouse.Sensors
     public class AciditySensor : ISensor
     {
         private Location location;
+        Environment e;
 
-        public AciditySensor(Location l)
+        public AciditySensor(Location l, Environment e)
         {
             location.x = l.x;
             location.y = l.y;
+            this.e = e;
         }
 
         public double returnValue()
         {
-            return Environment.getAcididty(location.x, location.y);
+            return e.getAcididty(location.x, location.y);
+        }
+
+        public override string ToString()
+        {
+            return "Acidity sensor";
         }
     }
 }

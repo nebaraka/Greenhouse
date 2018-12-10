@@ -11,13 +11,15 @@ namespace GreenHouse.Regulators
         private Location location;
         private bool status;
         private double maxPower;
+        private Environment e;
 
-        public TemperatureRegulator(Location l, double maxPower)
+        public TemperatureRegulator(Location l, double maxPower, Environment e)
         {
             location.x = l.x;
             location.y = l.y;
             this.maxPower = maxPower;
             turnOff();
+            this.e = e;
         }
 
         public void turnOn()
@@ -42,10 +44,15 @@ namespace GreenHouse.Regulators
             {
                 result[2] = 0.0;
             }
-            Environment.temperatureRegValues.Add(result);
+            e.temperatureRegValues.Add(result);
         }
         public double getMaxPower() { return maxPower; }
         public void setMaxPower(double maxPower) { this.maxPower = maxPower; }
         public bool isActive() { return status; }
+
+        public override string ToString()
+        {
+            return "Temperature regulator";
+        }
     }
 }

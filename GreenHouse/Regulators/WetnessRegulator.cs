@@ -11,13 +11,15 @@ namespace GreenHouse.Regulators
         private Location location;
         private bool status;
         private double maxPower;
+        private Environment e;
 
-        public WetnessRegulator(Location l, double maxPower)
+        public WetnessRegulator(Location l, double maxPower, Environment e)
         {
             location.x = l.x;
             location.y = l.y;
             this.maxPower = maxPower;
             turnOff();
+            this.e = e;
         }
 
         public void turnOn()
@@ -42,11 +44,16 @@ namespace GreenHouse.Regulators
             {
                 result[2] = 0.0;
             }
-            Environment.wetnessRegValues.Add(result);
+            e.wetnessRegValues.Add(result);
         }
 
         public double getMaxPower() { return maxPower; }
         public void setMaxPower(double maxPower) { this.maxPower = maxPower; }
         public bool isActive() { return status; }
+
+        public override string ToString()
+        {
+            return "Wetness regulator";
+        }
     }
 }

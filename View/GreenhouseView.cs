@@ -64,26 +64,28 @@ namespace View
 
         private void button2_click(object sender, EventArgs e)
         {
-            PlanConfigurationView pc = new PlanConfigurationView();
-            pc.Show();
+            //PlanConfigurationView pc = new PlanConfigurationView();
+            //pc.Show();
+            configurePlan?.Invoke();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            AddDevicesView ad = new AddDevicesView();
-            ad.Show();
+            addDevices?.Invoke();
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            GrowthRatesView gr = new GrowthRatesView();
-            gr.Show();
+            //GrowthRatesView gr = new GrowthRatesView();
+            //gr.Show();
+            showGrowthRates?.Invoke();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            SaveConfigurationView sc = new SaveConfigurationView();
-            sc.Show();
+            //SaveConfigurationView sc = new SaveConfigurationView();
+            //sc.Show();
+            saveConfiguration?.Invoke();
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -99,6 +101,7 @@ namespace View
                     + "(You cannot simulate while there`s no devices)");
             }
             else GreenhouseClass.simulate();*/
+            startSimulation?.Invoke();
         }
     }
 }

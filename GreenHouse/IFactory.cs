@@ -10,14 +10,14 @@ namespace GreenHouse
 {
     public interface IFactory
     {
-        IRegulator createAcidityRegulator(Location l, double power);
-        IRegulator createLightRegulator(Location l, double power);
-        IRegulator createTemperatureRegulator(Location l, double power);
-        IRegulator createWetnessRegulator(Location l, double power);
+        IRegulator createAcidityRegulator(Location l, double power, Environment e);
+        IRegulator createLightRegulator(Location l, double power, Environment e);
+        IRegulator createTemperatureRegulator(Location l, double power, Environment e);
+        IRegulator createWetnessRegulator(Location l, double power, Environment e);
 
-        ISensor createAciditySensor(Location l);
-        ISensor createLightSensor(Location l);
-        ISensor createTemperatureSensor(Location l);
-        ISensor createWetnessSensor(Location l);
+        ISensor createAciditySensor(Location l, Environment e);
+        ISensor createLightSensor(Location l, Environment e);
+        ISensor createTemperatureSensor(Location l, Environment e);
+        ISensor createWetnessSensor(Location l, Environment e);
     }
 }

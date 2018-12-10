@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GreenHouse;
 
 namespace GreenHouse.Regulators
 {
@@ -11,13 +12,15 @@ namespace GreenHouse.Regulators
         private Location location;
         private bool status;
         private double maxPower;
+        private Environment e;
 
-        public AcidityRegulator(Location l, double maxPower)
+        public AcidityRegulator(Location l, double maxPower, Environment e)
         {
             location.x = l.x;
             location.y = l.y;
             this.maxPower = maxPower;
             turnOff();
+            this.e = e;
         }
 
         public void turnOn()
@@ -42,11 +45,16 @@ namespace GreenHouse.Regulators
             {
                 result[2] = 0.0;
             }
-            Environment.acidityRegValues.Add(result);
+            e.acidityRegValues.Add(result);
         }
 
         public double getMaxPower() { return maxPower; }
         public void setMaxPower(double maxPower) { this.maxPower = maxPower; }
         public bool isActive() { return status; }
+
+        public override string ToString()
+        {
+            return "Acidity regulator";
+        }
     }
 }

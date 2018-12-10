@@ -34,6 +34,10 @@ namespace View
         {
             ListOfDevices.Items.Remove(ListOfDevices.SelectedItem);
         }
+        //public void initializeList()
+        //{
+
+        //}
         public ComboBox currentComboBox
         {
             get { return comboBox1; }
@@ -47,6 +51,7 @@ namespace View
         private void button1_Click(object sender, EventArgs e)
         {
             add?.Invoke(comboBox1.SelectedItem, new Location(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)));
+            //add(comboBox1.SelectedItem, new Location(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)));
         }
         //delete
         private void button2_Click(object sender, EventArgs e)

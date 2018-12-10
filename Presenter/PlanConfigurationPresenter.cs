@@ -8,7 +8,7 @@ using GreenHouse;
 
 namespace Presenter
 {
-    class PlanConfigurationPresenter
+    public class PlanConfigurationPresenter
     {
         private IKernel _kernel;
         private IPlanConfigurationView _view;
@@ -19,9 +19,7 @@ namespace Presenter
             _view = view;
             _model = model;
 
-            _view.ConfirmPlan += () => ConfirmPlan(_view.GetTemperatureCorridors, _view.GetLightCorridors, _view.GetAcidityCorridors,
-                _view.GetWetnessCorridors, _view.GetTemperatureIntervals, _view.GetLightIntervals, _view.GetAcidityIntervals,
-                _view.GetWetnessIntervals);
+            _view.ConfirmPlan += ConfirmPlan;
         }
         public void ConfirmPlan(string temperatureCorridors, string lightCorridors, string acidityCorridors,
             string wetnessCorridors, string temperatureIntervals, string lightIntervals, string acidityIntervals,
@@ -57,7 +55,7 @@ namespace Presenter
         }
         public void run()
         {
-            _view.show();
+            _view.Show();
         }
     }
 }

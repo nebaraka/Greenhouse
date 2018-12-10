@@ -9,16 +9,23 @@ namespace GreenHouse.Sensors
     public class TemperatureSensor : ISensor
     {
         private Location location;
+        Environment e;
 
-        public TemperatureSensor(Location l)
+        public TemperatureSensor(Location l, Environment e)
         {
             location.x = l.x;
             location.y = l.y;
+            this.e = e;
         }
 
         public double returnValue()
         {
-            return Environment.getTemperature(location.x, location.y);
+            return e.getTemperature(location.x, location.y);
+        }
+
+        public override string ToString()
+        {
+            return "Temperature sensor";
         }
     }
 }

@@ -38,16 +38,16 @@ namespace GreenHouse
         //}
         public Greenhouse()
         {
-            listOfControllers = new Controllers();
-            listOfControllers.ac = new AcidityController(rm, sm, gp);
-            listOfControllers.lc = new LightController(rm, sm, gp);
-            listOfControllers.tc = new TemperatureController(rm, sm, gp);
-            listOfControllers.wc = new WetnessController(rm, sm, gp);
             time = new Time();
             gp = new GrowthPlan(time);
             e = new Environment();
             rm = new RegulatorMap();
             sm = new SensorMap();
+            listOfControllers = new Controllers();
+            listOfControllers.ac = new AcidityController(rm, sm, gp);
+            listOfControllers.lc = new LightController(rm, sm, gp);
+            listOfControllers.tc = new TemperatureController(rm, sm, gp);
+            listOfControllers.wc = new WetnessController(rm, sm, gp);
         }
 
         public GrowthPlan currentGrowthPlan

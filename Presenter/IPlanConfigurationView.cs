@@ -8,7 +8,7 @@ namespace Presenter
 {
     public interface IPlanConfigurationView : IView
     {
-        event Action ConfirmPlan;
+        event planDelegates.del ConfirmPlan;
         //event Action PlanConfiguration_Load;
 
         string GetTemperatureCorridors { get; }
@@ -19,7 +19,12 @@ namespace Presenter
         string GetAcidityIntervals { get; }
         string GetWetnessCorridors { get; }
         string GetWetnessIntervals { get; }
-
-        void show();
+        
+    }
+    public static class planDelegates
+    {
+        public delegate void del(string temperatureCorridors, string lightCorridors, string acidityCorridors,
+            string wetnessCorridors, string temperatureIntervals, string lightIntervals, string acidityIntervals,
+            string wetnessIntervals);
     }
 }

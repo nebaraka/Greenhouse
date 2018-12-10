@@ -40,6 +40,7 @@ namespace Presenter
         public void configurePlan()
         {
             //open ConfigurePlan form
+            kernel.Get<PlanConfigurationPresenter>().run();
         }
 
         public void startSimulation()
@@ -51,6 +52,7 @@ namespace Presenter
         public void showGrowthRates()
         {
             //open corresponding form
+            kernel.Get<GrowthRatesPresenter>().run();
         }
 
         public void saveConfiguration()

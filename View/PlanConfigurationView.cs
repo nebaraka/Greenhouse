@@ -19,7 +19,7 @@ namespace View
 
         }
 
-        public event Action ConfirmPlan;
+        public event planDelegates.del ConfirmPlan;
 
         public string GetTemperatureCorridors => textBox1.Text;
         public string GetLightCorridors => textBox2.Text;
@@ -52,17 +52,9 @@ namespace View
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ConfirmPlan?.Invoke();
+            ConfirmPlan?.Invoke(GetTemperatureCorridors, GetLightCorridors, GetAcidityCorridors, GetWetnessCorridors,
+                GetTemperatureIntervals, GetLightIntervals, GetAcidityIntervals, GetWetnessIntervals);
         }
-
-        public void show()
-        {
-            base.Show();
-        }
-
-        public void close()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

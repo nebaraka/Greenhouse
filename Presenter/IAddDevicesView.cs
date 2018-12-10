@@ -14,6 +14,7 @@ namespace Presenter
         event Delegates.del delete;
         void addDeviceToList(string s, Location l);
         void deleteDeviceFromList();
+        //void addToList(string s);
         ComboBox currentComboBox { get; }
     }
 
