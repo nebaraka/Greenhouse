@@ -12,8 +12,8 @@ namespace Presenter
     {
         private IKernel _kernel;
         private IPlanConfigurationView _view;
-        private IGrowthPlan _model;
-        public PlanConfigurationPresenter(IKernel kernel, IPlanConfigurationView view, IGrowthPlan model)
+        private IGreenhouse _model;
+        public PlanConfigurationPresenter(IKernel kernel, IPlanConfigurationView view, IGreenhouse model)
         {
             _kernel = kernel;
             _view = view;
@@ -51,7 +51,8 @@ namespace Presenter
                 paramValues[i].wetness.maxValue = Convert.ToDouble(wetnessVal[1]);
                 paramValues[i].timeSlice = Convert.ToInt32(temperatureInts[i]);
             }
-            _model.Initialize(paramValues);
+            if (paramValues == null) throw new Exception();
+            _model.currentGrowthPlan.Initialize(paramValues);
         }
         public void run()
         {

@@ -12,7 +12,7 @@ namespace GreenHouse
         private int tickSize;
         public Time()
         {
-            time = 0;
+            time = 1;
             tickSize = 1;
         }
         public void Tick()

@@ -29,7 +29,7 @@ namespace GreenHouse
         {
             int currentTime = time.GetTime();
             int i =-1;
-            while (currentTime >= 0) 
+            while (currentTime > 0) 
             {
                 currentTime -= values[++i].timeSlice;
             }
@@ -39,7 +39,7 @@ namespace GreenHouse
         {
             int currentTime = time.GetTime();
             int i = -1;
-            while (currentTime >= 0)
+            while (currentTime > 0)
             {
                 currentTime -= values[++i].timeSlice;
             }
@@ -49,7 +49,7 @@ namespace GreenHouse
         {
             int currentTime = time.GetTime();
             int i = -1;
-            while (currentTime >= 0)
+            while (currentTime > 0)
             {
                 currentTime -= values[++i].timeSlice;
             }
@@ -59,7 +59,7 @@ namespace GreenHouse
         {
             int currentTime = time.GetTime();
             int i = -1;
-            while (currentTime >= 0)
+            while (currentTime > 0)
             {
                 currentTime -= values[++i].timeSlice;
             }
