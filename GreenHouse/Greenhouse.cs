@@ -123,6 +123,7 @@ namespace GreenHouse
                 e.recount();
 
                 time.Tick();
+                if (time.GetTime() > 100) break;
 
                 tickInfo?.Invoke(time.GetTime(), gp.getAcidity(), gp.getLight(),
                      gp.getTemperature(), gp.getWetness());

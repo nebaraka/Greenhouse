@@ -51,7 +51,6 @@ namespace Presenter
                 paramValues[i].wetness.maxValue = Convert.ToDouble(wetnessVal[1]);
                 paramValues[i].timeSlice = Convert.ToInt32(temperatureInts[i]);
             }
-            if (paramValues == null) throw new Exception();
             _model.currentGrowthPlan.Initialize(paramValues);
         }
         public void run()

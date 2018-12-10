@@ -56,7 +56,7 @@ namespace GreenHouse.Controllers
         {
             int regQuantity = rm.mapOfAcidityRegulators.Count();//Количество регуляторов
             int sensQuantity = sm.mapOfAciditySensors.Count();//Количество сенсоров
-            Matrix<double> weightCoefficients = Matrix<double>.Build.DenseDiagonal(sensQuantity, regQuantity, 0);//How sensors are effected by regulators(degrees/degrees)
+            /*Matrix<double> weightCoefficients = Matrix<double>.Build.DenseDiagonal(sensQuantity, regQuantity, 0);//How sensors are effected by regulators(degrees/degrees)
             int i = 0, j = 0;//Counters
             foreach (Location sensLoc in sm.mapOfAciditySensors.Keys)//Weight Coefficients counting
             {
@@ -74,9 +74,10 @@ namespace GreenHouse.Controllers
             Vector<double> regValues = Vector<double>.Build.Dense(regQuantity);//X vector
             Vector<double> sensValues = Vector<double>.Build.Dense(sensQuantity);//Вектор Y
             Vector<double> H = Vector<double>.Build.Dense(regQuantity, 0.5);//Step
-            regValues = HookJivsMethod(regValues, sensValues, weightCoefficients, H, 2.5, 0.1, averageValue, neededValues);
+            regValues = HookJivsMethod(regValues, sensValues, weightCoefficients, H, 2.5, 0.1, averageValue, neededValues);*/
             if (powerValues == null) powerValues = new double[rm.mapOfAcidityRegulators.Count];
-            powerValues = regValues.ToArray();
+            for (int i = 0; i < powerValues.Length; i++) powerValues[i] = 0;
+            //powerValues = regValues.ToArray();
         }
         private double TaskFunction(Vector<double> X, Vector<double> Y, Matrix<double> A, double averageValue, ParamValues.Corridor neededValues)
         {
