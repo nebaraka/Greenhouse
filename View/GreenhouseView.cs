@@ -17,6 +17,7 @@ namespace View
         {
             InitializeComponent();
             button2.Click += new EventHandler(button2_click);
+            base.Invoke(() => this.light_label.Text = "");
         }
 
         public event Action addDevices;
@@ -49,6 +50,7 @@ namespace View
         {
             wetness_label.Text = s;
         }
+
         public void setRegulators()
         {
             //extension

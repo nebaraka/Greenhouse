@@ -65,5 +65,14 @@ namespace GreenHouse
             }
             return values[i].wetness;
         }
+        public int getOverallTime()
+        {
+            int result = 0;
+            foreach (ParamValues t in values)
+            {
+                result += t.timeSlice;
+            }
+            return result;
+        }
     }
 }

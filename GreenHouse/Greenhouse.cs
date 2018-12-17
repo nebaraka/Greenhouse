@@ -122,14 +122,14 @@ namespace GreenHouse
                 listOfControllers.wc.setRegulators();
                 e.recount();
 
-                time.Tick();
-                if (time.GetTime() > 100) break;
 
                 tickInfo?.Invoke(time.GetTime(), gp.getAcidity(), gp.getLight(),
                      gp.getTemperature(), gp.getWetness());
                 tickInfo2?.Invoke(0, 0, 0, 0);//HERE MUST BE AVERAGE MEANINGS
 
                 //graphs
+                time.Tick();
+                if (time.GetTime() > gp.getOverallTime()) break;
             }
         }
     }
