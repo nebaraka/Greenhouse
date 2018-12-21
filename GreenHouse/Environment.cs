@@ -309,5 +309,61 @@ namespace GreenHouse
         public double getLight(int x, int y) { return cells[x, y].light; }
         public double getTemperature(int x, int y) { return cells[x, y].temperature; }
         public double getWetness(int x, int y) { return cells[x, y].wetness; }
+        public double AverageAcidity()
+        {
+            double average = 0;
+            for (int i = 0; i < X_SIZE; i++)
+            {
+                double temp = 0;
+                for (int j = 0; j < Y_SIZE; j++)
+                    temp += cells[i, j].acidity;
+                temp /= Y_SIZE;
+                average += temp;
+            }
+            average /= X_SIZE;
+            return average;
+        }
+        public double AverageLight()
+        {
+            double average = 0;
+            for (int i = 0; i < X_SIZE; i++)
+            {
+                double temp = 0;
+                for (int j = 0; j < Y_SIZE; j++)
+                    temp += cells[i, j].light;
+                temp /= Y_SIZE;
+                average += temp;
+            }
+            average /= X_SIZE;
+            return average;
+        }
+        public double AverageTemperature()
+        {
+            double average = 0;
+            for (int i = 0; i < X_SIZE; i++)
+            {
+                double temp = 0;
+                for (int j = 0; j < Y_SIZE; j++)
+                    temp += cells[i, j].temperature;
+                temp /= Y_SIZE;
+                average += temp;
+            }
+            average /= X_SIZE;
+            return average;
+        }
+        public double AverageWetness()
+        {
+            double average = 0;
+            for (int i = 0; i < X_SIZE; i++)
+            {
+                double temp = 0;
+                for (int j = 0; j < Y_SIZE; j++)
+                    temp += cells[i, j].wetness;
+                temp /= Y_SIZE;
+                average += temp;
+            }
+            average /= X_SIZE;
+            return average;
+        }
     }
 }
