@@ -137,8 +137,9 @@ namespace GreenHouse.Controllers
             int i = 0;
             foreach (TemperatureRegulator regulator in rm.mapOfTemperatureRegulators.Values)
             {
-                if (recievedValues[i] < regulator.getMaxPower() / 100) regulator.turnOff();
-                else { regulator.turnOn(); regulator.work(recievedValues[i]); }
+                if (recievedValues[i] < Math.Abs(regulator.getMaxPower()) / 100) regulator.turnOff();
+                else { regulator.turnOn(); }
+                regulator.work(recievedValues[i]);
                 i++;
             }
         }

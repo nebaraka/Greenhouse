@@ -35,7 +35,8 @@ namespace GreenHouse.Regulators
         {
             regPower result;
             result.loc = location;
-            result.power = currentPower;
+            if (status == true) result.power = currentPower;
+            else result.power = 0;
             e.temperatureRegValues.Add(result);
         }
         public double getMaxPower() { return maxPower; }

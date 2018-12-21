@@ -41,34 +41,34 @@ namespace GreenHouse
         }
         private void recountTemperature()
         {
-            for (int i = 0; i < X_SIZE; i++)
+           /* for (int i = 0; i < X_SIZE; i++)
                 for (int j = 0; j < Y_SIZE; j++)
-                    cells[i, j].temperature = 10;
+                    cells[i, j].temperature = 10;*/
             /*const double a = 1, b = 1, h = 2;//Lenght of cells(in meters)
             const double density = 1.2;//(kg/m^3)
-            const double c = 1005;//Thermal conductivity
+            const double c = 1005;//Thermal conductivity*/
             const int t = 1;//Time scale(in mins)
             int kt = 60 / t;//Time intervals quantitaty
-            foreach (double[] regulator in temperatureRegValues)
+           /* foreach (double[] regulator in temperatureRegValues)
             {
                 regulator[2] = (regulator[2] * t) / (a * b * h * density * c);//Switching power to temperature change
-            }
+            }*/
             for (int k = 0; k < kt; k++)
             {
-                foreach (double[] regulator in temperatureRegValues)//Active regulators recount
+                foreach (regPower regPower in temperatureRegValues)//Active regulators recount
                 {
-                    int x = (int)regulator[0];
-                    int y = (int)regulator[1];
-                    double dt = regulator[2];
-                    temperature[x, y] += dt;
+                    int x = regPower.loc.x;
+                    int y = regPower.loc.y;
+                    double dt = regPower.power;
+                    cells[x, y].temperature += dt;
                 }
                 for (int i = 0; i < X_SIZE; i++)
                 {
                     for (int j = 0; j < Y_SIZE; j++)
                     {
                         bool isActiveRegulator = false;
-                        foreach (double[] regulator in temperatureRegValues)
-                            if ((i == regulator[0]) && (j == regulator[1]) && (regulator[2] != 0))
+                        foreach (regPower regulator in temperatureRegValues)
+                            if ((i == regulator.loc.x) && (j == regulator.loc.y) && (regulator.power != 0))
                             {
                                 isActiveRegulator = true;
                                 break;
@@ -79,99 +79,99 @@ namespace GreenHouse
                             double sum = 0;//Nearby cells sum
                             if (i != 0)
                             {
-                                sum += temperature[i - 1, j];
+                                sum += cells[i - 1, j].temperature;
                                 coef++;
                             }
                             if (i != X_SIZE - 1)
                             {
-                                sum += temperature[i + 1, j];
+                                sum += cells[i + 1, j].temperature;
                                 coef++;
                             }
                             if (j != 0)
                             {
-                                sum += temperature[i, j - 1];
+                                sum += cells[i, j - 1].temperature;
                                 coef++;
                             }
                             if (j != Y_SIZE - 1)
                             {
-                                sum += temperature[i, j + 1];
+                                sum += cells[i, j + 1].temperature;
                                 coef++;
                             }
                             if (i != 0 && j != 0)
                             {
-                                sum += temperature[i - 1, j - 1] / Math.Sqrt(2);
+                                sum += cells[i - 1, j - 1].temperature / Math.Sqrt(2);
                                 coef += Math.Sqrt(2);
                             }
                             if (i != 0 && j != Y_SIZE - 1)
                             {
-                                sum += temperature[i - 1, j + 1] / Math.Sqrt(2);
+                                sum += cells[i - 1, j + 1].temperature / Math.Sqrt(2);
                                 coef += Math.Sqrt(2);
                             }
                             if (i != X_SIZE - 1 && j != 0)
                             {
-                                sum += temperature[i + 1, j - 1] / Math.Sqrt(2);
+                                sum += cells[i + 1, j - 1].temperature / Math.Sqrt(2);
                                 coef += Math.Sqrt(2);
                             }
                             if (i != X_SIZE - 1 && j != Y_SIZE - 1)
                             {
-                                sum += temperature[i + 1, j + 1] / Math.Sqrt(2);
+                                sum += cells[i + 1, j + 1].temperature / Math.Sqrt(2);
                                 coef += Math.Sqrt(2);
                             }
-                            double delta = (sum / coef) - temperature[i, j];
-                            temperature[i, j] += delta * 1.5;//1.5 - relaxation coefficient
+                            double delta = (sum / coef) - cells[i, j].temperature;
+                            cells[i, j].temperature += delta * 1.5;//1.5 - relaxation coefficient
                         }
                     }
 
                 }
-            }*/
+            }
         }
         public void recountLight()
         {
-            for (int i = 0; i < X_SIZE; i++)
+            /*for (int i = 0; i < X_SIZE; i++)
                 for (int j = 0; j < Y_SIZE; j++)
-                    cells[i, j].light = 20;
-            /*double h = 2;//Height
+                    cells[i, j].light = 20;*/
+            double h = 2;//Height
             for (int i = 0; i < X_SIZE; i++)
             {
                 for (int j = 0; j < Y_SIZE; j++)
                 {
-                    light[i, j] = 0;
-                    foreach (double[] regulator in lightRegValues)
+                    cells[i, j].light = 0;
+                    foreach (regPower regulator in lightRegValues)
                     {//regulator[2] in lumens
-                        double dx = regulator[0] - i;
-                        double dy = regulator[1] - j;
+                        double dx = regulator.loc.x - i;
+                        double dy = regulator.loc.y - j;
                         double r = Math.Sqrt(dx * dx + dy * dy);
                         double R = Math.Sqrt(r * r + h * h);
                         double r1_2 = r - Math.Sqrt(2) / 2;
                         double R1_2 = Math.Sqrt(r1_2 * r1_2 + h * h);
-                        light[i, j] += regulator[2] * h * h * h / (R * R * R * R * R) * R1_2 * R1_2;//F*h^3*R1_2^2/R^5
+                        cells[i, j].light += regulator.power * h * h * h / (R * R * R * R * R) * R1_2 * R1_2;//F*h^3*R1_2^2/R^5
                     }
                 }
-            }*/
+            }
         }
         public void recountAcidity()
         {
-            for (int i = 0; i < X_SIZE; i++)
+            /*for (int i = 0; i < X_SIZE; i++)
                 for (int j = 0; j < Y_SIZE; j++)
-                    cells[i, j].acidity = 30;
-            /*const int t = 1;//Time scale(in mins)
+                    cells[i, j].acidity = 30;*/
+            const int t = 1;//Time scale(in mins)
             int kt = 60 / t;//Time intervals quantitaty
             for (int k = 0; k < kt; k++)
             {
-                foreach (double[] regulator in acidityRegValues)//Active regulators recount
+                foreach (regPower regPower in acidityRegValues)//Active regulators recount
                 {
-                    int x = (int)regulator[0];
-                    int y = (int)regulator[1];
-                    double dA = regulator[2];//Delta Acidity
-                    acidity[x, y] += dA;
+                    int x = regPower.loc.x;
+                    int y = regPower.loc.y;
+                    double dt = regPower.power;
+                    cells[x, y].acidity += dt;
                 }
                 for (int i = 0; i < X_SIZE; i++)
                 {
                     for (int j = 0; j < Y_SIZE; j++)
                     {
                         bool isActiveRegulator = false;
-                        foreach (double[] regulator in acidityRegValues)
-                            if ((i == regulator[0]) && (j == regulator[1]) && (regulator[2] != 0))
+                        foreach (regPower regulator in acidityRegValues)
+                            if ((i == regulator.loc.x) && (j == regulator.loc.y) && (regulator.power != 0))
                             {
                                 isActiveRegulator = true;
                                 break;
@@ -182,74 +182,74 @@ namespace GreenHouse
                             double sum = 0;//Nearby cells sum
                             if (i != 0)
                             {
-                                sum += acidity[i - 1, j];
+                                sum += cells[i - 1, j].acidity;
                                 coef++;
                             }
                             if (i != X_SIZE - 1)
                             {
-                                sum += acidity[i + 1, j];
+                                sum += cells[i + 1, j].acidity;
                                 coef++;
                             }
                             if (j != 0)
                             {
-                                sum += acidity[i, j - 1];
+                                sum += cells[i, j - 1].acidity;
                                 coef++;
                             }
                             if (j != Y_SIZE - 1)
                             {
-                                sum += acidity[i, j + 1];
+                                sum += cells[i, j + 1].acidity;
                                 coef++;
                             }
                             if (i != 0 && j != 0)
                             {
-                                sum += acidity[i - 1, j - 1] / Math.Sqrt(2);
+                                sum += cells[i - 1, j - 1].acidity / Math.Sqrt(2);
                                 coef += Math.Sqrt(2);
                             }
                             if (i != 0 && j != Y_SIZE - 1)
                             {
-                                sum += acidity[i - 1, j + 1] / Math.Sqrt(2);
+                                sum += cells[i - 1, j + 1].acidity / Math.Sqrt(2);
                                 coef += Math.Sqrt(2);
                             }
                             if (i != X_SIZE - 1 && j != 0)
                             {
-                                sum += acidity[i + 1, j - 1] / Math.Sqrt(2);
+                                sum += cells[i + 1, j - 1].acidity / Math.Sqrt(2);
                                 coef += Math.Sqrt(2);
                             }
                             if (i != X_SIZE - 1 && j != Y_SIZE - 1)
                             {
-                                sum += acidity[i + 1, j + 1] / Math.Sqrt(2);
+                                sum += cells[i + 1, j + 1].acidity / Math.Sqrt(2);
                                 coef += Math.Sqrt(2);
                             }
-                            double delta = (sum / coef) - acidity[i, j];
-                            acidity[i, j] += delta * 1.5;//1.5 - relaxation coefficient
+                            double delta = (sum / coef) - cells[i, j].acidity;
+                            cells[i, j].acidity += delta * 1.5;//1.5 - relaxation coefficient
                         }
                     }
                 }
-            }*/
+            }
         }
         public void recountWetness()
         {
-            for (int i = 0; i < X_SIZE; i++)
+            /*for (int i = 0; i < X_SIZE; i++)
                 for (int j = 0; j < Y_SIZE; j++)
-                    cells[i, j].wetness = 40;
-            /*const int t = 1;//Time scale(in mins)
+                    cells[i, j].wetness = 40;*/
+            const int t = 1;//Time scale(in mins)
             int kt = 60 / t;//Time intervals quantitaty
             for (int k = 0; k < kt; k++)
             {
-                foreach (double[] regulator in wetnessRegValues)//Active regulators recount
+                foreach (regPower regPower in wetnessRegValues)//Active regulators recount
                 {
-                    int x = (int)regulator[0];
-                    int y = (int)regulator[1];
-                    double dW = regulator[2];//Delta Wetness
-                    wetness[x, y] += dW;
+                    int x = regPower.loc.x;
+                    int y = regPower.loc.y;
+                    double dt = regPower.power;
+                    cells[x, y].wetness += dt;
                 }
                 for (int i = 0; i < X_SIZE; i++)
                 {
                     for (int j = 0; j < Y_SIZE; j++)
                     {
                         bool isActiveRegulator = false;
-                        foreach (double[] regulator in wetnessRegValues)
-                            if ((i == regulator[0]) && (j == regulator[1]) && (regulator[2] != 0))
+                        foreach (regPower regulator in wetnessRegValues)
+                            if ((i == regulator.loc.x) && (j == regulator.loc.y) && (regulator.power != 0))
                             {
                                 isActiveRegulator = true;
                                 break;
@@ -260,50 +260,51 @@ namespace GreenHouse
                             double sum = 0;//Nearby cells sum
                             if (i != 0)
                             {
-                                sum += wetness[i - 1, j];
+                                sum += cells[i - 1, j].wetness;
                                 coef++;
                             }
                             if (i != X_SIZE - 1)
                             {
-                                sum += wetness[i + 1, j];
+                                sum += cells[i + 1, j].wetness;
                                 coef++;
                             }
                             if (j != 0)
                             {
-                                sum += wetness[i, j - 1];
+                                sum += cells[i, j - 1].wetness;
                                 coef++;
                             }
                             if (j != Y_SIZE - 1)
                             {
-                                sum += wetness[i, j + 1];
+                                sum += cells[i, j + 1].wetness;
                                 coef++;
                             }
                             if (i != 0 && j != 0)
                             {
-                                sum += wetness[i - 1, j - 1] / Math.Sqrt(2);
+                                sum += cells[i - 1, j - 1].wetness / Math.Sqrt(2);
                                 coef += Math.Sqrt(2);
                             }
                             if (i != 0 && j != Y_SIZE - 1)
                             {
-                                sum += wetness[i - 1, j + 1] / Math.Sqrt(2);
+                                sum += cells[i - 1, j + 1].wetness / Math.Sqrt(2);
                                 coef += Math.Sqrt(2);
                             }
                             if (i != X_SIZE - 1 && j != 0)
                             {
-                                sum += wetness[i + 1, j - 1] / Math.Sqrt(2);
+                                sum += cells[i + 1, j - 1].wetness / Math.Sqrt(2);
                                 coef += Math.Sqrt(2);
                             }
                             if (i != X_SIZE - 1 && j != Y_SIZE - 1)
                             {
-                                sum += wetness[i + 1, j + 1] / Math.Sqrt(2);
+                                sum += cells[i + 1, j + 1].wetness / Math.Sqrt(2);
                                 coef += Math.Sqrt(2);
                             }
-                            double delta = (sum / coef) - wetness[i, j];
-                            wetness[i, j] += delta * 1.5;//1.5 - relaxation coefficient
+                            double delta = (sum / coef) - cells[i, j].wetness;
+                            cells[i, j].wetness += delta * 1.5;//1.5 - relaxation coefficient
                         }
                     }
+
                 }
-            }*/
+            }
         }
         public double getAcididty(int x, int y) { return cells[x,y].acidity; }
         public double getLight(int x, int y) { return cells[x, y].light; }
@@ -364,6 +365,46 @@ namespace GreenHouse
             }
             average /= X_SIZE;
             return average;
+        }
+        public double MaxAcidity()
+        {
+            double max = 0;
+            for (int i = 0; i < X_SIZE; i++)
+            {
+                for (int j = 0; j < Y_SIZE; j++)
+                    if (max < cells[i, j].acidity) max = cells[i, j].acidity;
+            }
+            return max;
+        }
+        public double MaxLight()
+        {
+            double max = 0;
+            for (int i = 0; i < X_SIZE; i++)
+            {
+                for (int j = 0; j < Y_SIZE; j++)
+                    if (max < cells[i, j].light) max = cells[i, j].light;
+            }
+            return max;
+        }
+        public double MaxTemperature()
+        {
+            double max = 0;
+            for (int i = 0; i < X_SIZE; i++)
+            {
+                for (int j = 0; j < Y_SIZE; j++)
+                    if (max < cells[i, j].temperature) max = cells[i, j].temperature;
+            }
+            return max;
+        }
+        public double MaxWetness()
+        {
+            double max = 0;
+            for (int i = 0; i < X_SIZE; i++)
+            {
+                for (int j = 0; j < Y_SIZE; j++)
+                    if (max < cells[i, j].wetness) max = cells[i, j].wetness;
+            }
+            return max;
         }
     }
 }
