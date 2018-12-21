@@ -134,7 +134,13 @@ namespace GreenHouse.Controllers
         }
         public void setRegulators()
         {
-
+            int i = 0;
+            foreach (AcidityRegulator regulator in rm.mapOfAcidityRegulators.Values)
+            {
+                if (recievedValues[i] < regulator.getMaxPower() / 100) regulator.turnOff();
+                else { regulator.turnOn();regulator.work(recievedValues[i]); }
+                i++;
+            }
         }
     }
 }

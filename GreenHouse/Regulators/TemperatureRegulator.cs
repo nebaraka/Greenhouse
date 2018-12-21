@@ -31,7 +31,7 @@ namespace GreenHouse.Regulators
             this.status = false;
         }
 
-        private void work(double currentPower) //This implementation MUST be changed
+        public void work(double currentPower) //This implementation MUST be changed
         {
             double[] result = new double[3];
             result[0] = (double)location.x;
