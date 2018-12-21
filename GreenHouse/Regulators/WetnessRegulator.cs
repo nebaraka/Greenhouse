@@ -33,17 +33,9 @@ namespace GreenHouse.Regulators
 
         public void work(double currentPower)
         {
-            double[] result = new double[3];
-            result[0] = (double)location.x;
-            result[1] = (double)location.y;
-            if (this.status == true)
-            {
-                result[2] = (double)maxPower;
-            }
-            else
-            {
-                result[2] = 0.0;
-            }
+            regPower result;
+            result.loc = location;
+            result.power = currentPower;
             e.wetnessRegValues.Add(result);
         }
 

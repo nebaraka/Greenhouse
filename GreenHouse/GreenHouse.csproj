@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="regPower.cs" />
     <Compile Include="DeviceMaps\RegulatorMap.cs" />
     <Compile Include="DeviceMaps\SensorMap.cs" />
     <Compile Include="IFactory.cs" />

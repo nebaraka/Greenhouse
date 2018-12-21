@@ -18,18 +18,18 @@ namespace GreenHouse
         private Cell[,] cells;
         public const int X_SIZE = 20;
         public const int Y_SIZE = 20;
-        public List<double[]> acidityRegValues;
-        public List<double[]> lightRegValues;
-        public List<double[]> temperatureRegValues;
-        public List<double[]> wetnessRegValues;
+        public List<regPower> acidityRegValues;
+        public List<regPower> lightRegValues;
+        public List<regPower> temperatureRegValues;
+        public List<regPower> wetnessRegValues;
 
         public Environment()
         {
             cells = new Cell[X_SIZE, Y_SIZE];
-            acidityRegValues = new List<double[]>();
-            lightRegValues = new List<double[]>();
-            temperatureRegValues = new List<double[]>();
-            wetnessRegValues = new List<double[]>();
+            acidityRegValues = new List<regPower>();
+            lightRegValues = new List<regPower>();
+            temperatureRegValues = new List<regPower>();
+            wetnessRegValues = new List<regPower>();
         }
 
         public void recount()
