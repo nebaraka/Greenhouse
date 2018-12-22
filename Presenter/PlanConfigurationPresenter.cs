@@ -40,8 +40,8 @@ namespace Presenter
                 string[] temperatureInts = temperatureIntervals.Split(';');
                 string[] lightCor = lightCorridors.Split(';');
                 string[] lightInts = lightIntervals.Split(';');
-                string[] acidityCor = temperatureCorridors.Split(';');
-                string[] acidityInts = temperatureIntervals.Split(';');
+                string[] acidityCor = acidityCorridors.Split(';');
+                string[] acidityInts = acidityIntervals.Split(';');
                 string[] wetnessCor = wetnessCorridors.Split(';');
                 string[] wetnessInts = wetnessIntervals.Split(';');
                 ParamValues[] paramValues = new ParamValues[temperatureInts.Length];

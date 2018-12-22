@@ -20,8 +20,8 @@ namespace GreenHouse.Verification
             string[] temperatureInts = temperatureInterval.Split(';');
             string[] lightCor = light.Split(';');
             string[] lightInts = lightInterval.Split(';');
-            string[] acidityCor = temperature.Split(';');
-            string[] acidityInts = temperatureInterval.Split(';');
+            string[] acidityCor = acidity.Split(';');
+            string[] acidityInts = acidityInterval.Split(';');
             string[] wetnessCor = wetness.Split(';');
             string[] wetnessInts = wetnessInterval.Split(';');
             ParamValues[] paramValues = new ParamValues[temperatureInts.Length];
@@ -51,26 +51,30 @@ namespace GreenHouse.Verification
             }
             foreach (ParamValues pv in paramValues)
             {
-                if (pv.acidity.minValue > 14 || pv.acidity.minValue < 0 || pv.acidity.maxValue > 14 || 
-                    pv.acidity.maxValue < 0)
+                if (pv.acidity.minValue > 14 || pv.acidity.minValue < 0 || 
+                    pv.acidity.maxValue > 14 || pv.acidity.maxValue < 0 ||
+                    pv.acidity.maxValue < pv.acidity.minValue)
                 {
                     message = "Wrong data! Format: \nCorridors(left):min1-max1;min2-max2 etc. \nIntervals(right):val1;val2 etc.";
                     return false;
                 }
-                if (pv.light.minValue > 500 || pv.light.minValue < 0 || pv.light.maxValue > 500 ||
-                    pv.light.maxValue < 0)
+                if (pv.light.minValue > 500 || pv.light.minValue < 0 || 
+                    pv.light.maxValue > 500 || pv.light.maxValue < 0 ||
+                    pv.light.maxValue < pv.light.minValue)
                 {
                     message = "Wrong data! Format: \nCorridors(left):min1-max1;min2-max2 etc. \nIntervals(right):val1;val2 etc.";
                     return false;
                 }
                 if (pv.temperature.minValue > 80 || pv.temperature.minValue < 0 || 
-                    pv.temperature.maxValue > 80 || pv.temperature.maxValue < 0)
+                    pv.temperature.maxValue > 80 || pv.temperature.maxValue < 0 ||
+                    pv.temperature.maxValue < pv.temperature.minValue)
                 {
                     message = "Wrong data! Format: \nCorridors(left):min1-max1;min2-max2 etc. \nIntervals(right):val1;val2 etc.";
                     return false;
                 }
                 if (pv.wetness.minValue > 100 || pv.wetness.minValue < 0 ||
-                    pv.wetness.maxValue > 100 || pv.wetness.maxValue < 0)
+                    pv.wetness.maxValue > 100 || pv.wetness.maxValue < 0 ||
+                    pv.wetness.maxValue < pv.wetness.minValue)
                 {
                     message = "Wrong data! Format: \nCorridors(left):min1-max1;min2-max2 etc. \nIntervals(right):val1;val2 etc.";
                     return false;
@@ -86,7 +90,8 @@ namespace GreenHouse.Verification
         }
         public bool status()
         {
-            return _status;
+            //return _status;
+            return true;
         }
     }
 }
