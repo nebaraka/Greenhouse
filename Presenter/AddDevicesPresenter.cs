@@ -16,9 +16,9 @@ namespace Presenter
 {
     public class AddDevicesPresenter
     {
-        public const double ACIDITY_MAX_POWER = 12;
-        public const double LIGHT_MAX_POWER = 35;
-        public const double TEMPERATURE_MAX_POWER = 120;
+        public const double ACIDITY_MAX_POWER = 14;
+        public const double LIGHT_MAX_POWER = 1000;
+        public const double TEMPERATURE_MAX_POWER = 100;
         public const double WETNESS_MAX_POWER = 100;
 
         private IKernel kernel;

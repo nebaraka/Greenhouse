@@ -103,7 +103,7 @@ namespace View
         {
             int widthStep = pictureBox1.Width / CELLS_AMOUNT;
             int heightStep = pictureBox1.Height / CELLS_AMOUNT;
-            Color c = Color.FromArgb(255 * (int)relation, Color.Green);
+            Color c = Color.FromArgb((int)(255 * relation), Color.Green);
             SolidBrush b = new SolidBrush(c);
             Rectangle r = new Rectangle(x * widthStep + 1, y * heightStep + 1, widthStep - 1, heightStep - 1);
             g.FillRectangle(b, r);
@@ -112,7 +112,7 @@ namespace View
         {
             int widthStep = pictureBox1.Width / CELLS_AMOUNT;
             int heightStep = pictureBox1.Height / CELLS_AMOUNT;
-            Color c = Color.FromArgb(255 * (int)relation, Color.Yellow);
+            Color c = Color.FromArgb((int)(255 * relation), Color.Yellow);
             SolidBrush b = new SolidBrush(c);
             Rectangle r = new Rectangle(x * widthStep + 1, y * heightStep + 1, widthStep - 1, heightStep - 1);
             g.FillRectangle(b, r);
@@ -121,7 +121,7 @@ namespace View
         {
             int widthStep = pictureBox1.Width / CELLS_AMOUNT;
             int heightStep = pictureBox1.Height / CELLS_AMOUNT;
-            Color c = Color.FromArgb(255 * (int)relation, Color.Red);
+            Color c = Color.FromArgb((int)(255 * relation), Color.Red);
             SolidBrush b = new SolidBrush(c);
             Rectangle r = new Rectangle(x * widthStep + 1, y * heightStep + 1, widthStep - 1, heightStep - 1);
             g.FillRectangle(b, r);
@@ -130,7 +130,7 @@ namespace View
         {
             int widthStep = pictureBox1.Width / CELLS_AMOUNT;
             int heightStep = pictureBox1.Height / CELLS_AMOUNT;
-            Color c = Color.FromArgb(255 * (int)relation, Color.Blue);
+            Color c = Color.FromArgb((int)(255 * relation), Color.Blue);
             SolidBrush b = new SolidBrush(c);
             Rectangle r = new Rectangle(x * widthStep + 1, y * heightStep + 1, widthStep - 1, heightStep - 1);
             g.FillRectangle(b, r);
