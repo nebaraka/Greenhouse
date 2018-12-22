@@ -21,6 +21,6 @@ namespace Presenter
     public static class Delegates
     {
         public delegate void del(string s);
-        public delegate void addDel(object o, Location l);
+        public delegate void addDel(object o, string x, string y);
     }
 }

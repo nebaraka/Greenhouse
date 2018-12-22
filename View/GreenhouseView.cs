@@ -114,6 +114,10 @@ namespace View
             Rectangle r = new Rectangle(x * widthStep + 1, y * heightStep + 1, widthStep - 1, heightStep - 1);
             g.FillRectangle(b, r);
         }
+        public void ShowMessage(string s)
+        {
+            MessageBox.Show(s, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+        }
 
         private void button2_click(object sender, EventArgs e)
         {

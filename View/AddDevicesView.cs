@@ -35,6 +35,10 @@ namespace View
         {
             ListOfDevices.Items.Remove(ListOfDevices.SelectedItem);
         }
+        public void ShowMessage(string s)
+        {
+            MessageBox.Show(s, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+        }
         //public void initializeList()
         //{
 
@@ -51,7 +55,7 @@ namespace View
         //add
         private void button1_Click(object sender, EventArgs e)
         {
-            add?.Invoke(comboBox1.SelectedItem, new Location(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)));
+            add?.Invoke(comboBox1.SelectedItem, textBox1.Text, textBox2.Text);
             //add(comboBox1.SelectedItem, new Location(Int32.Parse(textBox1.Text), Int32.Parse(textBox2.Text)));
         }
         //delete

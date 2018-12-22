@@ -29,6 +29,10 @@ namespace View
         public string GetLightIntervals => textBox6.Text;
         public string GetAcidityIntervals => textBox7.Text;
         public string GetWetnessIntervals => textBox8.Text;
+        public void ShowMessage(string s)
+        {
+            MessageBox.Show(s, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+        }
 
         private void label1_Click(object sender, EventArgs e)
         {

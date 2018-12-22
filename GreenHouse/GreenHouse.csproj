@@ -89,6 +89,13 @@
     <Compile Include="Sensors\TemperatureSensor.cs" />
     <Compile Include="Sensors\WetnessSensor.cs" />
     <Compile Include="Time.cs" />
+    <Compile Include="Verification\AddDevicesVerificationService.cs" />
+    <Compile Include="Verification\GreenhouseVerificationService.cs" />
+    <Compile Include="Verification\IAddDevicesVerificationService.cs" />
+    <Compile Include="Verification\IGreenhouseVerificationService.cs" />
+    <Compile Include="Verification\IPlanConfigurationVerificationService.cs" />
+    <Compile Include="Verification\ISaveConfigurationVerificationService.cs" />
+    <Compile Include="Verification\PlanConfigurationVerificationService.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>

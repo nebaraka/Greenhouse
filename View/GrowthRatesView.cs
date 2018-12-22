@@ -51,6 +51,10 @@ namespace View
         {
             wetness_label.Text = w.ToString();
         }
+        public void ShowMessage(string s)
+        {
+            MessageBox.Show(s, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Ninject;
 
 using GreenHouse;
+using GreenHouse.Verification;
 
 namespace Presenter
 {
@@ -15,12 +16,15 @@ namespace Presenter
         private IKernel kernel;
         private IGreenhouse model;
         private IGreenhouseView view;
+        private IGreenhouseVerificationService verification;
 
-        public GreenhousePresenter(IKernel k, IGreenhouse g, IGreenhouseView v)
+        public GreenhousePresenter(IKernel k, IGreenhouse g, IGreenhouseView v,
+            IGreenhouseVerificationService vs)
         {
             kernel = k;
             model = g;
             view = v;
+            verification = vs;
 
             //event subscription
             view.addDevices += addDevices;
@@ -50,8 +54,10 @@ namespace Presenter
 
         public void startSimulation()
         {
-            //start simulation))0
-            model.simulate();
+            if (verification.GreenhouseVerification())
+                model.simulate();
+            else
+                view.ShowMessage("You have to add at least one device of each type and configure plan.");
         }
 
         public void showGrowthRates()

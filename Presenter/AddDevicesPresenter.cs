@@ -9,6 +9,7 @@ using Ninject;
 using GreenHouse.DeviceMaps;
 using GreenHouse.Sensors;
 using GreenHouse.Regulators;
+using GreenHouse.Verification;
 using GreenHouse;
 
 
@@ -25,13 +26,15 @@ namespace Presenter
         private IGreenhouse model;
         private IAddDevicesView view;
         private IFactory ConcreteFactory;
+        private IAddDevicesVerificationService verification;
 
-        public AddDevicesPresenter(IKernel k, IGreenhouse g, IAddDevicesView v)
+        public AddDevicesPresenter(IKernel k, IGreenhouse g, IAddDevicesView v, IAddDevicesVerificationService vs)
         {
             kernel = k;
             model = g;
             view = v;
             ConcreteFactory = new ConcreteFactory();
+            verification = vs;
 
             //throw new Exception();
 
@@ -40,59 +43,69 @@ namespace Presenter
             view.delete += delete;
         }
 
-        public void add(object o, Location l)
+        public void add(object o, string x, string y)
         {
-            //throw new Exception();
-            //parsing
-            //model manipulation
-            //view manipulation
-            //SENSORS
-            try
+            string message = "";
+            if (verification.addDevicesVerification(x, y, ref message))
             {
-                if (o == view.currentComboBox.Items[0])
+                Location l = new Location(Int32.Parse(x), Int32.Parse(y));
+
+                //throw new Exception();
+                //parsing
+                //model manipulation
+                //view manipulation
+                //SENSORS
+                try
                 {
-                    model.currentSensorMap.mapOfAciditySensors.Add(l, ConcreteFactory.createAciditySensor(l, model.currentEnvironment));
+                    if (o == view.currentComboBox.Items[0])
+                    {
+                        model.currentSensorMap.mapOfAciditySensors.Add(l, ConcreteFactory.createAciditySensor(l, model.currentEnvironment));
+                    }
+                    else if (o == view.currentComboBox.Items[1])
+                    {
+                        model.currentSensorMap.mapOfLightSensors.Add(l, ConcreteFactory.createLightSensor(l, model.currentEnvironment));
+                    }
+                    else if (o == view.currentComboBox.Items[2])
+                    {
+                        model.currentSensorMap.mapOfTemperatureSensors.Add(l, ConcreteFactory.createTemperatureSensor(l, model.currentEnvironment));
+                    }
+                    else if (o == view.currentComboBox.Items[3])
+                    {
+                        model.currentSensorMap.mapOfWetnessSensors.Add(l, ConcreteFactory.createWetnessSensor(l, model.currentEnvironment));
+                    }
+                    //REGULATORS
+                    else if (o == view.currentComboBox.Items[4])
+                    {
+                        model.currentRegulatorMap.mapOfAcidityRegulators.Add(l,
+                                   ConcreteFactory.createAcidityRegulator(l, ACIDITY_MAX_POWER, model.currentEnvironment));
+                    }
+                    else if (o == view.currentComboBox.Items[5])
+                    {
+                        model.currentRegulatorMap.mapOfLightRegulators.Add(l,
+                            ConcreteFactory.createLightRegulator(l, LIGHT_MAX_POWER, model.currentEnvironment));
+                    }
+                    else if (o == view.currentComboBox.Items[6])
+                    {
+                        model.currentRegulatorMap.mapOfTemperatureRegulators.Add(l,
+                            ConcreteFactory.createTemperatureRegulator(l, TEMPERATURE_MAX_POWER, model.currentEnvironment));
+                    }
+                    else if (o == view.currentComboBox.Items[7])
+                    {
+                        model.currentRegulatorMap.mapOfWetnessRegulators.Add(l,
+                            ConcreteFactory.createWetnessRegulator(l, WETNESS_MAX_POWER, model.currentEnvironment));
+                    }
+                    else throw new Exception("Type doesn`t match");
                 }
-                else if (o == view.currentComboBox.Items[1])
+                catch (ArgumentException e)
                 {
-                    model.currentSensorMap.mapOfLightSensors.Add(l, ConcreteFactory.createLightSensor(l, model.currentEnvironment));
+                    //element already exists
                 }
-                else if (o == view.currentComboBox.Items[2])
-                {
-                    model.currentSensorMap.mapOfTemperatureSensors.Add(l, ConcreteFactory.createTemperatureSensor(l, model.currentEnvironment));
-                }
-                else if (o == view.currentComboBox.Items[3])
-                {
-                    model.currentSensorMap.mapOfWetnessSensors.Add(l, ConcreteFactory.createWetnessSensor(l, model.currentEnvironment));
-                }
-                //REGULATORS
-                else if (o == view.currentComboBox.Items[4])
-                {
-                    model.currentRegulatorMap.mapOfAcidityRegulators.Add(l,
-                               ConcreteFactory.createAcidityRegulator(l, ACIDITY_MAX_POWER, model.currentEnvironment));
-                }
-                else if (o == view.currentComboBox.Items[5])
-                {
-                    model.currentRegulatorMap.mapOfLightRegulators.Add(l,
-                        ConcreteFactory.createLightRegulator(l, LIGHT_MAX_POWER, model.currentEnvironment));
-                }
-                else if (o == view.currentComboBox.Items[6])
-                {
-                    model.currentRegulatorMap.mapOfTemperatureRegulators.Add(l,
-                        ConcreteFactory.createTemperatureRegulator(l, TEMPERATURE_MAX_POWER, model.currentEnvironment));
-                }
-                else if (o == view.currentComboBox.Items[7])
-                {
-                    model.currentRegulatorMap.mapOfWetnessRegulators.Add(l,
-                        ConcreteFactory.createWetnessRegulator(l, WETNESS_MAX_POWER, model.currentEnvironment));
-                }
-                else throw new Exception("Type doesn`t match");
+                view.addDeviceToList(o.ToString(), l);
             }
-            catch (ArgumentException e)
+            else
             {
-                //element already exists
+                view.ShowMessage(message);
             }
-            view.addDeviceToList(o.ToString(), l);
         }
         public void delete(string s)
         {

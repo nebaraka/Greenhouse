@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Presenter
+namespace GreenHouse.Verification
 {
-    public interface IView
+    interface ISaveConfigurationVerificationService
     {
-        void Show();
-        void Close();
-        void ShowMessage(string s);
     }
 }
