@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using GreenHouse.Controllers;
@@ -103,7 +104,9 @@ namespace GreenHouse
         }
         public void simulate()
         {
-            while(true)//Control cycle
+            time.ResetTime();
+            e.Clear();
+            while (true)//Control cycle
             {
                 listOfControllers.ac.askSensors();
                 listOfControllers.ac.calculate();
@@ -131,6 +134,7 @@ namespace GreenHouse
                 //graphs
                 time.Tick();
                 if (time.GetTime() > gp.getOverallTime()) break;
+                Thread.Sleep(1000*time.GetTickSize());
             }
         }
     }
