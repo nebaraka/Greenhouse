@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Ninject;
 
 using GreenHouse;
+using System.Threading;
 
 namespace Presenter
 {
@@ -51,7 +52,9 @@ namespace Presenter
         public void startSimulation()
         {
             //start simulation))0
-            model.simulate();
+            Thread thread = new Thread(model.simulate);
+            thread.Start();
+            //model.simulate();
         }
 
         public void showGrowthRates()
@@ -68,11 +71,11 @@ namespace Presenter
         public void tickUpdate(int time, ParamValues.Corridor ac, ParamValues.Corridor l,
             ParamValues.Corridor temp, ParamValues.Corridor w)
         {
-            view.setTime(time);
-            view.setAcidity(ac.minValue.ToString() + "-" + ac.maxValue.ToString());
-            view.setLight(l.minValue.ToString() + "-" + l.maxValue.ToString());
-            view.setTemperature(temp.minValue.ToString() + "-" + temp.maxValue.ToString());
-            view.setWetness(w.minValue.ToString() + "-" + w.maxValue.ToString());
+                view.setTime(time);
+                view.setAcidity(ac.minValue.ToString() + "-" + ac.maxValue.ToString());
+                view.setLight(l.minValue.ToString() + "-" + l.maxValue.ToString());
+                view.setTemperature(temp.minValue.ToString() + "-" + temp.maxValue.ToString());
+                view.setWetness(w.minValue.ToString() + "-" + w.maxValue.ToString());
         }
 
         //Allocation

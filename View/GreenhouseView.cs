@@ -47,23 +47,44 @@ namespace View
 
         public void setTime(int t)
         {
-            time_label.Text = t.ToString() + (t % 10 == 1?" day":" days");
+            Action action = () =>
+            {
+                time_label.Text = t.ToString() + (t % 10 == 1 ? " day" : " days");
+            };
+            Invoke(action);
+
         }
         public void setAcidity(string s)
         {
-            acidity_label.Text = s;
+            Action action = () =>
+            {
+                acidity_label.Text = s;
+            };
+            Invoke(action);
         }
         public void setLight(string s)
         {
-            light_label.Text = s;
+            Action action = () =>
+            {
+                light_label.Text = s;
+            };
+            Invoke(action);
         }
         public void setTemperature(string s)
         {
-            temperature_label.Text = s + "C";
+            Action action = () =>
+            {
+                temperature_label.Text = s + "C";
+            };
+            Invoke(action);
         }
         public void setWetness(string s)
         {
-            wetness_label.Text = s;
+            Action action = () =>
+            {
+                wetness_label.Text = s;
+            };
+            Invoke(action);
         }
 
         public void setRegulators()
