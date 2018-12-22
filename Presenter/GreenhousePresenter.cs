@@ -59,40 +59,6 @@ namespace Presenter
         {
             if (verification.GreenhouseVerification())
             {
-                //add devices pictures
-                foreach (KeyValuePair<Location, IRegulator> r in model.currentRegulatorMap.mapOfAcidityRegulators)
-                {
-                    view.drawAcidityRegulator(r.Key.x, r.Key.y);
-                }
-                foreach (KeyValuePair<Location, IRegulator> r in model.currentRegulatorMap.mapOfLightRegulators)
-                {
-                    view.drawLightRegulator(r.Key.x, r.Key.y);
-                }
-                foreach (KeyValuePair<Location, IRegulator> r in model.currentRegulatorMap.mapOfTemperatureRegulators)
-                {
-                    view.drawTemperatureRegulator(r.Key.x, r.Key.y);
-                }
-                foreach (KeyValuePair<Location, IRegulator> r in model.currentRegulatorMap.mapOfWetnessRegulators)
-                {
-                    view.drawWetnessRegulator(r.Key.x, r.Key.y);
-                }
-                foreach (KeyValuePair<Location, ISensor> r in model.currentSensorMap.mapOfAciditySensors)
-                {
-                    view.drawAciditySensor(r.Key.x, r.Key.y);
-                }
-                foreach (KeyValuePair<Location, ISensor> r in model.currentSensorMap.mapOfLightSensors)
-                {
-                    view.drawLightSensor(r.Key.x, r.Key.y);
-                }
-                foreach (KeyValuePair<Location, ISensor> r in model.currentSensorMap.mapOfTemperatureSensors)
-                {
-                    view.drawTemperatureSensor(r.Key.x, r.Key.y);
-                }
-                foreach (KeyValuePair<Location, ISensor> r in model.currentSensorMap.mapOfWetnessSensors)
-                {
-                    view.drawWetnessSensor(r.Key.x, r.Key.y);
-                }
-                //end add devices pictures
                 Thread thread = new Thread(model.simulate);
                 thread.Start();
             }
@@ -120,61 +86,53 @@ namespace Presenter
                 view.setLight(l.minValue.ToString() + "-" + l.maxValue.ToString());
                 view.setTemperature(temp.minValue.ToString() + "-" + temp.maxValue.ToString());
                 view.setWetness(w.minValue.ToString() + "-" + w.maxValue.ToString());
+            if (view.isAciditySelected()) acidityAllocation();
+            if (view.isLightSelected()) lightAllocation();
+            if (view.isTemperatureSelected()) temperatureAllocation();
+            if (view.isWetnessSelected()) wetnessAllocation();
+            if (view.isSensorSelected()) sensorAllocation();
         }
 
         //Allocation
         public void acidityAllocation()
         {
-            if (verification.GreenhouseVerification())
-            {
-                //request to Greenhouse.Environment
-                GreenHouse.Environment.Cell[,] cells = model.currentEnvironment.getCells();
+            view.button11_Click(this, new EventArgs());
+            //request to Greenhouse.Environment
+            GreenHouse.Environment.Cell[,] cells = model.currentEnvironment.getCells();
                 //const have to be changed
                 for (int i = 0; i < 20; i++)
                     for (int j = 0; j < 20; j++)
                         view.drawAcidityAllocation(i, j,
                             cells[i, j].acidity / model.currentEnvironment.MaxAcidity());
-            }
-            else
-                view.ShowMessage("You have to add at least one device of each type and configure plan.");
         }
 
         public void lightAllocation()
         {
-            if (verification.GreenhouseVerification())
-            {
-                //request to Greenhouse.Environment
-                GreenHouse.Environment.Cell[,] cells = model.currentEnvironment.getCells();
+            view.button11_Click(this, new EventArgs());
+            //request to Greenhouse.Environment
+            GreenHouse.Environment.Cell[,] cells = model.currentEnvironment.getCells();
                 //const have to be changed
                 for (int i = 0; i < 20; i++)
                     for (int j = 0; j < 20; j++)
                         view.drawLightAllocation(i, j,
                             cells[i, j].light / model.currentEnvironment.MaxLight());
-            }
-            else
-                view.ShowMessage("You have to add at least one device of each type and configure plan.");
         }
 
         public void temperatureAllocation()
         {
-            if (verification.GreenhouseVerification())
-            {
-                //request to Greenhouse.Environment
-                GreenHouse.Environment.Cell[,] cells = model.currentEnvironment.getCells();
+            view.button11_Click(this, new EventArgs());
+            //request to Greenhouse.Environment
+            GreenHouse.Environment.Cell[,] cells = model.currentEnvironment.getCells();
                 //const have to be changed
                 for (int i = 0; i < 20; i++)
                     for (int j = 0; j < 20; j++)
                         view.drawTemperatureAllocation(i, j,
                             cells[i, j].temperature / model.currentEnvironment.MaxTemperature());
-            }
-            else
-                view.ShowMessage("You have to add at least one device of each type and configure plan.");
         }
 
         public void wetnessAllocation()
         {
-            if (verification.GreenhouseVerification())
-            {
+            view.button11_Click(this, new EventArgs());
                 //request to Greenhouse.Environment
                 GreenHouse.Environment.Cell[,] cells = model.currentEnvironment.getCells();
                 //const have to be changed
@@ -182,10 +140,26 @@ namespace Presenter
                     for (int j = 0; j < 20; j++)
                         view.drawWetnessAllocation(i, j,
                             cells[i, j].wetness / model.currentEnvironment.MaxWetness());
+        }
+        public void sensorAllocation()
+        {
+            view.button11_Click(this, new EventArgs());
+            foreach (KeyValuePair<Location, ISensor> r in model.currentSensorMap.mapOfAciditySensors)
+            {
+                view.drawAciditySensor(r.Key.x, r.Key.y);
             }
-            else
-                view.ShowMessage("You have to add at least one device of each type and configure plan.");
-            
+            foreach (KeyValuePair<Location, ISensor> r in model.currentSensorMap.mapOfLightSensors)
+            {
+                view.drawLightSensor(r.Key.x, r.Key.y);
+            }
+            foreach (KeyValuePair<Location, ISensor> r in model.currentSensorMap.mapOfTemperatureSensors)
+            {
+                view.drawTemperatureSensor(r.Key.x, r.Key.y);
+            }
+            foreach (KeyValuePair<Location, ISensor> r in model.currentSensorMap.mapOfWetnessSensors)
+            {
+                view.drawWetnessSensor(r.Key.x, r.Key.y);
+            }
         }
 
         public void run()

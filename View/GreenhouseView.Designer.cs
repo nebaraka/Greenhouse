@@ -45,12 +45,13 @@
             this.label9 = new System.Windows.Forms.Label();
             this.acidity_label = new System.Windows.Forms.Label();
             this.wetness_label = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -134,7 +135,7 @@
             // time_label
             // 
             this.time_label.AutoSize = true;
-            this.time_label.Location = new System.Drawing.Point(776, 174);
+            this.time_label.Location = new System.Drawing.Point(754, 174);
             this.time_label.Name = "time_label";
             this.time_label.Size = new System.Drawing.Size(58, 17);
             this.time_label.TabIndex = 8;
@@ -143,7 +144,7 @@
             // temperature_label
             // 
             this.temperature_label.AutoSize = true;
-            this.temperature_label.Location = new System.Drawing.Point(797, 242);
+            this.temperature_label.Location = new System.Drawing.Point(754, 242);
             this.temperature_label.Name = "temperature_label";
             this.temperature_label.Size = new System.Drawing.Size(37, 17);
             this.temperature_label.TabIndex = 9;
@@ -161,7 +162,7 @@
             // light_label
             // 
             this.light_label.AutoSize = true;
-            this.light_label.Location = new System.Drawing.Point(802, 225);
+            this.light_label.Location = new System.Drawing.Point(754, 225);
             this.light_label.Name = "light_label";
             this.light_label.Size = new System.Drawing.Size(32, 17);
             this.light_label.TabIndex = 11;
@@ -197,7 +198,7 @@
             // acidity_label
             // 
             this.acidity_label.AutoSize = true;
-            this.acidity_label.Location = new System.Drawing.Point(806, 208);
+            this.acidity_label.Location = new System.Drawing.Point(754, 208);
             this.acidity_label.Name = "acidity_label";
             this.acidity_label.Size = new System.Drawing.Size(28, 17);
             this.acidity_label.TabIndex = 15;
@@ -206,51 +207,11 @@
             // wetness_label
             // 
             this.wetness_label.AutoSize = true;
-            this.wetness_label.Location = new System.Drawing.Point(798, 259);
+            this.wetness_label.Location = new System.Drawing.Point(754, 259);
             this.wetness_label.Name = "wetness_label";
             this.wetness_label.Size = new System.Drawing.Size(36, 17);
             this.wetness_label.TabIndex = 16;
             this.wetness_label.Text = "37%";
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(659, 377);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(175, 23);
-            this.button6.TabIndex = 17;
-            this.button6.Text = "Temperature allocation";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(658, 348);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(176, 23);
-            this.button7.TabIndex = 18;
-            this.button7.Text = "Light allocation";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(659, 319);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(175, 23);
-            this.button8.TabIndex = 19;
-            this.button8.Text = "Acidity allocation";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(658, 406);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(176, 23);
-            this.button9.TabIndex = 20;
-            this.button9.Text = "Wetness allocation";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button10
             // 
@@ -268,21 +229,72 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(93, 23);
             this.button11.TabIndex = 22;
-            this.button11.Text = "Draw";
+            this.button11.Text = "Clear";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(658, 408);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(139, 21);
+            this.checkBox1.TabIndex = 23;
+            this.checkBox1.Text = "Sensor allocation";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(658, 381);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(150, 21);
+            this.checkBox2.TabIndex = 24;
+            this.checkBox2.Text = "Wetness Allocation";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(658, 354);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(177, 21);
+            this.checkBox3.TabIndex = 25;
+            this.checkBox3.Text = "Temperature Allocation";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(658, 327);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(126, 21);
+            this.checkBox4.TabIndex = 26;
+            this.checkBox4.Text = "Light Allocation";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Location = new System.Drawing.Point(658, 300);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(136, 21);
+            this.checkBox5.TabIndex = 27;
+            this.checkBox5.Text = "Acidity Allocation";
+            this.checkBox5.UseVisualStyleBackColor = true;
             // 
             // GreenhouseView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(843, 470);
+            this.Controls.Add(this.checkBox5);
+            this.Controls.Add(this.checkBox4);
+            this.Controls.Add(this.checkBox3);
+            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
-            this.Controls.Add(this.button9);
-            this.Controls.Add(this.button8);
-            this.Controls.Add(this.button7);
-            this.Controls.Add(this.button6);
             this.Controls.Add(this.wetness_label);
             this.Controls.Add(this.acidity_label);
             this.Controls.Add(this.label9);
@@ -327,12 +339,13 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label acidity_label;
         private System.Windows.Forms.Label wetness_label;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox checkBox5;
     }
 }
 

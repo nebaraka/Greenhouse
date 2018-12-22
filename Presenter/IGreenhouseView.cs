@@ -37,5 +37,11 @@ namespace Presenter
         void drawTemperatureSensor(int x, int y);
         void drawWetnessRegulator(int x, int y);
         void drawWetnessSensor(int x, int y);
+        bool isAciditySelected();
+        bool isLightSelected();
+        bool isTemperatureSelected();
+        bool isWetnessSelected();
+        bool isSensorSelected();
+        void button11_Click(object sender, EventArgs e);
     }
 }

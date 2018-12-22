@@ -106,7 +106,9 @@ namespace View
 
             int widthStep = pictureBox1.Width / CELLS_AMOUNT;
             int heightStep = pictureBox1.Height / CELLS_AMOUNT;
-            Color c = Color.FromArgb((int)(255 * relation), Color.Green);
+            int buf = 0;
+            if (relation >= 0 && relation < 256) buf = (int)(255 * relation);
+            Color c = Color.FromArgb(buf, Color.Green);
             SolidBrush b = new SolidBrush(c);
             Rectangle r = new Rectangle(x * widthStep + 1, y * heightStep + 1, widthStep - 1, heightStep - 1);
             g.FillRectangle(b, r);
@@ -128,7 +130,9 @@ namespace View
             //button11_Click(new object(), new EventArgs());
             int widthStep = pictureBox1.Width / CELLS_AMOUNT;
             int heightStep = pictureBox1.Height / CELLS_AMOUNT;
-            Color c = Color.FromArgb((int)(255 * relation), Color.Red);
+            int buf = 0;
+            if (relation >= 0 && relation < 256) buf = (int)(255 * relation);
+            Color c = Color.FromArgb(buf, Color.Red);
             SolidBrush b = new SolidBrush(c);
             Rectangle r = new Rectangle(x * widthStep + 1, y * heightStep + 1, widthStep - 1, heightStep - 1);
             g.FillRectangle(b, r);
@@ -138,7 +142,9 @@ namespace View
             //button11_Click(new object(), new EventArgs());
             int widthStep = pictureBox1.Width / CELLS_AMOUNT;
             int heightStep = pictureBox1.Height / CELLS_AMOUNT;
-            Color c = Color.FromArgb((int)(255 * relation), Color.Blue);
+            int buf = 0;
+            if (relation >= 0 && relation < 256) buf = (int)(255 * relation);
+            Color c = Color.FromArgb(buf, Color.Blue);
             SolidBrush b = new SolidBrush(c);
             Rectangle r = new Rectangle(x * widthStep + 1, y * heightStep + 1, widthStep - 1, heightStep - 1);
             g.FillRectangle(b, r);
@@ -254,8 +260,8 @@ namespace View
             startSimulation?.Invoke();
         }
 
-        //debug button
-        private void button11_Click(object sender, EventArgs e)
+        //clear button
+        public void button11_Click(object sender, EventArgs e)
         {
             g.Clear(Color.White);
             Pen myPen = new Pen(Color.Black, 1);
@@ -268,6 +274,26 @@ namespace View
             {
                 g.DrawLine(myPen, new Point(0, i), new Point(pictureBox1.Width, i));
             }
+        }
+        public bool isAciditySelected()
+        {
+            return checkBox5.Checked;
+        }
+        public bool isLightSelected()
+        {
+            return checkBox4.Checked;
+        }
+        public bool isTemperatureSelected()
+        {
+            return checkBox3.Checked;
+        }
+        public bool isWetnessSelected()
+        {
+            return checkBox2.Checked;
+        }
+        public bool isSensorSelected()
+        {
+            return checkBox1.Checked;
         }
         //acidity allocation
         private void button8_Click(object sender, EventArgs e)
