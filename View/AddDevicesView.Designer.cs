@@ -137,7 +137,7 @@
             this.label3.TabIndex = 10;
             this.label3.Text = "Device:";
             // 
-            // AddDevices
+            // AddDevicesView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -152,7 +152,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.ListOfDevices);
-            this.Name = "AddDevices";
+            this.Name = "AddDevicesView";
             this.Text = "AddDevices";
             this.ResumeLayout(false);
             this.PerformLayout();

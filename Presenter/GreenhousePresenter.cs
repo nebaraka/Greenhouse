@@ -28,6 +28,11 @@ namespace Presenter
             view.startSimulation += startSimulation;
             view.showGrowthRates += showGrowthRates;
             view.saveConfiguration += saveConfiguration;
+            view.aAlloc += acidityAllocation;
+            view.lAlloc += lightAllocation;
+            view.tAlloc += temperatureAllocation;
+            view.wAlloc += wetnessAllocation;
+
             model.tickInfo += tickUpdate;
         }
 
@@ -74,21 +79,45 @@ namespace Presenter
         public void acidityAllocation()
         {
             //request to Greenhouse.Environment
+            GreenHouse.Environment.Cell[,] cells = model.currentEnvironment.getCells();
+            //const have to be changed
+            for (int i = 0; i < 20; i++)
+                for (int j = 0; j < 20; j++)
+                    view.drawAcidityAllocation(i, j, 
+                        cells[i,j].acidity / model.currentEnvironment.MaxAcidity());
         }
 
         public void lightAllocation()
         {
             //request to Greenhouse.Environment
+            GreenHouse.Environment.Cell[,] cells = model.currentEnvironment.getCells();
+            //const have to be changed
+            for (int i = 0; i < 20; i++)
+                for (int j = 0; j < 20; j++)
+                    view.drawLightAllocation(i, j,
+                        cells[i, j].light / model.currentEnvironment.MaxLight());
         }
 
         public void temperatureAllocation()
         {
             //request to Greenhouse.Environment
+            GreenHouse.Environment.Cell[,] cells = model.currentEnvironment.getCells();
+            //const have to be changed
+            for (int i = 0; i < 20; i++)
+                for (int j = 0; j < 20; j++)
+                    view.drawTemperatureAllocation(i, j,
+                        cells[i, j].temperature / model.currentEnvironment.MaxTemperature());
         }
 
         public void wetnessAllocation()
         {
             //request to Greenhouse.Environment
+            GreenHouse.Environment.Cell[,] cells = model.currentEnvironment.getCells();
+            //const have to be changed
+            for (int i = 0; i < 20; i++)
+                for (int j = 0; j < 20; j++)
+                    view.drawWetnessAllocation(i, j,
+                        cells[i, j].wetness / model.currentEnvironment.MaxWetness());
         }
 
         public void run()

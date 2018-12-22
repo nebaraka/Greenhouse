@@ -24,6 +24,7 @@ namespace View
         public AddDevicesView()
         {
             InitializeComponent();
+            comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         }
 
         public void addDeviceToList(string s, Location l)

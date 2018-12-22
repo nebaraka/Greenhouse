@@ -8,7 +8,7 @@ namespace GreenHouse
 {
     public class Environment
     {
-        private struct Cell
+        public struct Cell
         {
             public double acidity;
             public double light;
@@ -405,6 +405,10 @@ namespace GreenHouse
                     if (max < cells[i, j].wetness) max = cells[i, j].wetness;
             }
             return max;
+        }
+        public Cell[,] getCells()
+        {
+            return cells;
         }
     }
 }

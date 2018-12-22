@@ -25,5 +25,9 @@ namespace Presenter
         void setWetness(string s);
         void setRegulators();
         void setSensors();
+        void drawAcidityAllocation(int x, int y, double relation);
+        void drawLightAllocation(int x, int y, double relation);
+        void drawTemperatureAllocation(int x, int y, double relation);
+        void drawWetnessAllocation(int x, int y, double relation);
     }
 }

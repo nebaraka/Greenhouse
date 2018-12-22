@@ -8,16 +8,31 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Presenter;
+using System.Drawing.Drawing2D;
 
 namespace View
 {
     public partial class GreenhouseView : Form, IGreenhouseView
     {
+        private Graphics g;
+        private const int CELLS_AMOUNT = 20;
         public GreenhouseView()
         {
             InitializeComponent();
             button2.Click += new EventHandler(button2_click);
             //base.Invoke(() => this.light_label.Text = "");
+            g = pictureBox1.CreateGraphics();
+            g.Clear(Color.White);
+            Pen myPen = new Pen(Color.Black, 1);
+            for (int i = 0; i < pictureBox1.Width; i += pictureBox1.Width / CELLS_AMOUNT)
+            {
+                g.DrawLine(myPen, new Point(i, 0), new Point(i, pictureBox1.Height));
+            }
+
+            for (int i = 0; i < pictureBox1.Height; i += pictureBox1.Height / CELLS_AMOUNT)
+            {
+                g.DrawLine(myPen, new Point(0, i), new Point(pictureBox1.Width, i));
+            }
         }
 
         public event Action addDevices;
@@ -63,6 +78,42 @@ namespace View
         {
             Application.Exit();
         }
+        public void drawAcidityAllocation(int x, int y, double relation)
+        {
+            int widthStep = pictureBox1.Width / CELLS_AMOUNT;
+            int heightStep = pictureBox1.Height / CELLS_AMOUNT;
+            Color c = Color.FromArgb(255 * (int)relation, Color.Green);
+            SolidBrush b = new SolidBrush(c);
+            Rectangle r = new Rectangle(x * widthStep + 1, y * heightStep + 1, widthStep - 1, heightStep - 1);
+            g.FillRectangle(b, r);
+        }
+        public void drawLightAllocation(int x, int y, double relation)
+        {
+            int widthStep = pictureBox1.Width / CELLS_AMOUNT;
+            int heightStep = pictureBox1.Height / CELLS_AMOUNT;
+            Color c = Color.FromArgb(255 * (int)relation, Color.Yellow);
+            SolidBrush b = new SolidBrush(c);
+            Rectangle r = new Rectangle(x * widthStep + 1, y * heightStep + 1, widthStep - 1, heightStep - 1);
+            g.FillRectangle(b, r);
+        }
+        public void drawTemperatureAllocation(int x, int y, double relation)
+        {
+            int widthStep = pictureBox1.Width / CELLS_AMOUNT;
+            int heightStep = pictureBox1.Height / CELLS_AMOUNT;
+            Color c = Color.FromArgb(255 * (int)relation, Color.Red);
+            SolidBrush b = new SolidBrush(c);
+            Rectangle r = new Rectangle(x * widthStep + 1, y * heightStep + 1, widthStep - 1, heightStep - 1);
+            g.FillRectangle(b, r);
+        }
+        public void drawWetnessAllocation(int x, int y, double relation)
+        {
+            int widthStep = pictureBox1.Width / CELLS_AMOUNT;
+            int heightStep = pictureBox1.Height / CELLS_AMOUNT;
+            Color c = Color.FromArgb(255 * (int)relation, Color.Blue);
+            SolidBrush b = new SolidBrush(c);
+            Rectangle r = new Rectangle(x * widthStep + 1, y * heightStep + 1, widthStep - 1, heightStep - 1);
+            g.FillRectangle(b, r);
+        }
 
         private void button2_click(object sender, EventArgs e)
         {
@@ -104,6 +155,42 @@ namespace View
             }
             else GreenhouseClass.simulate();*/
             startSimulation?.Invoke();
+        }
+
+        //debug button
+        private void button11_Click(object sender, EventArgs e)
+        {
+            g.Clear(Color.White);
+            Pen myPen = new Pen(Color.Black, 1);
+            for (int i = 0; i < pictureBox1.Width; i += pictureBox1.Width / CELLS_AMOUNT)
+            {
+                g.DrawLine(myPen, new Point(i, 0), new Point(i, pictureBox1.Height));
+            }
+
+            for (int i = 0; i < pictureBox1.Height; i += pictureBox1.Height / CELLS_AMOUNT)
+            {
+                g.DrawLine(myPen, new Point(0, i), new Point(pictureBox1.Width, i));
+            }
+        }
+        //acidity allocation
+        private void button8_Click(object sender, EventArgs e)
+        {
+            aAlloc?.Invoke();
+        }
+        //light allocation
+        private void button7_Click(object sender, EventArgs e)
+        {
+            lAlloc?.Invoke();
+        }
+        //temperature allocation
+        private void button6_Click(object sender, EventArgs e)
+        {
+            tAlloc?.Invoke();
+        }
+        //wetness allocation
+        private void button9_Click(object sender, EventArgs e)
+        {
+            wAlloc?.Invoke();
         }
     }
 }
