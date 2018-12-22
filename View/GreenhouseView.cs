@@ -47,23 +47,44 @@ namespace View
 
         public void setTime(int t)
         {
-            time_label.Text = t.ToString() + (t % 10 == 1?" day":" days");
+            Action action = () =>
+            {
+                time_label.Text = t.ToString() + (t % 10 == 1 ? " day" : " days");
+            };
+            Invoke(action);
+
         }
         public void setAcidity(string s)
         {
-            acidity_label.Text = s;
+            Action action = () =>
+            {
+                acidity_label.Text = s;
+            };
+            Invoke(action);
         }
         public void setLight(string s)
         {
-            light_label.Text = s;
+            Action action = () =>
+            {
+                light_label.Text = s;
+            };
+            Invoke(action);
         }
         public void setTemperature(string s)
         {
-            temperature_label.Text = s + "C";
+            Action action = () =>
+            {
+                temperature_label.Text = s + "C";
+            };
+            Invoke(action);
         }
         public void setWetness(string s)
         {
-            wetness_label.Text = s;
+            Action action = () =>
+            {
+                wetness_label.Text = s;
+            };
+            Invoke(action);
         }
 
         public void setRegulators()
@@ -82,7 +103,7 @@ namespace View
         {
             int widthStep = pictureBox1.Width / CELLS_AMOUNT;
             int heightStep = pictureBox1.Height / CELLS_AMOUNT;
-            Color c = Color.FromArgb(255 * (int)relation, Color.Green);
+            Color c = Color.FromArgb((int)(255 * relation), Color.Green);
             SolidBrush b = new SolidBrush(c);
             Rectangle r = new Rectangle(x * widthStep + 1, y * heightStep + 1, widthStep - 1, heightStep - 1);
             g.FillRectangle(b, r);
@@ -91,7 +112,7 @@ namespace View
         {
             int widthStep = pictureBox1.Width / CELLS_AMOUNT;
             int heightStep = pictureBox1.Height / CELLS_AMOUNT;
-            Color c = Color.FromArgb(255 * (int)relation, Color.Yellow);
+            Color c = Color.FromArgb((int)(255 * relation), Color.Yellow);
             SolidBrush b = new SolidBrush(c);
             Rectangle r = new Rectangle(x * widthStep + 1, y * heightStep + 1, widthStep - 1, heightStep - 1);
             g.FillRectangle(b, r);
@@ -100,7 +121,7 @@ namespace View
         {
             int widthStep = pictureBox1.Width / CELLS_AMOUNT;
             int heightStep = pictureBox1.Height / CELLS_AMOUNT;
-            Color c = Color.FromArgb(255 * (int)relation, Color.Red);
+            Color c = Color.FromArgb((int)(255 * relation), Color.Red);
             SolidBrush b = new SolidBrush(c);
             Rectangle r = new Rectangle(x * widthStep + 1, y * heightStep + 1, widthStep - 1, heightStep - 1);
             g.FillRectangle(b, r);
@@ -109,7 +130,7 @@ namespace View
         {
             int widthStep = pictureBox1.Width / CELLS_AMOUNT;
             int heightStep = pictureBox1.Height / CELLS_AMOUNT;
-            Color c = Color.FromArgb(255 * (int)relation, Color.Blue);
+            Color c = Color.FromArgb((int)(255 * relation), Color.Blue);
             SolidBrush b = new SolidBrush(c);
             Rectangle r = new Rectangle(x * widthStep + 1, y * heightStep + 1, widthStep - 1, heightStep - 1);
             g.FillRectangle(b, r);

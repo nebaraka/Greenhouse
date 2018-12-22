@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Ninject;
 
 using GreenHouse;
-using GreenHouse.Verification;
+using System.Threading;
 
 namespace Presenter
 {
@@ -16,15 +16,12 @@ namespace Presenter
         private IKernel kernel;
         private IGreenhouse model;
         private IGreenhouseView view;
-        private IGreenhouseVerificationService verification;
 
-        public GreenhousePresenter(IKernel k, IGreenhouse g, IGreenhouseView v,
-            IGreenhouseVerificationService vs)
+        public GreenhousePresenter(IKernel k, IGreenhouse g, IGreenhouseView v)
         {
             kernel = k;
             model = g;
             view = v;
-            verification = vs;
 
             //event subscription
             view.addDevices += addDevices;
@@ -54,10 +51,10 @@ namespace Presenter
 
         public void startSimulation()
         {
-            if (verification.GreenhouseVerification())
-                model.simulate();
-            else
-                view.ShowMessage("You have to add at least one device of each type and configure plan.");
+            //start simulation))0
+            Thread thread = new Thread(model.simulate);
+            thread.Start();
+            //model.simulate();
         }
 
         public void showGrowthRates()
@@ -74,11 +71,11 @@ namespace Presenter
         public void tickUpdate(int time, ParamValues.Corridor ac, ParamValues.Corridor l,
             ParamValues.Corridor temp, ParamValues.Corridor w)
         {
-            view.setTime(time);
-            view.setAcidity(ac.minValue.ToString() + "-" + ac.maxValue.ToString());
-            view.setLight(l.minValue.ToString() + "-" + l.maxValue.ToString());
-            view.setTemperature(temp.minValue.ToString() + "-" + temp.maxValue.ToString());
-            view.setWetness(w.minValue.ToString() + "-" + w.maxValue.ToString());
+                view.setTime(time);
+                view.setAcidity(ac.minValue.ToString() + "-" + ac.maxValue.ToString());
+                view.setLight(l.minValue.ToString() + "-" + l.maxValue.ToString());
+                view.setTemperature(temp.minValue.ToString() + "-" + temp.maxValue.ToString());
+                view.setWetness(w.minValue.ToString() + "-" + w.maxValue.ToString());
         }
 
         //Allocation

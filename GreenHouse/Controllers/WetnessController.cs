@@ -136,9 +136,9 @@ namespace GreenHouse.Controllers
             int i = 0;
             foreach (WetnessRegulator regulator in rm.mapOfWetnessRegulators.Values)
             {
-                if (recievedValues[i] < Math.Abs(regulator.getMaxPower()) / 100) regulator.turnOff();
+                if (powerValues[i] < Math.Abs(regulator.getMaxPower()) / 100) regulator.turnOff();
                 else { regulator.turnOn(); }
-                regulator.work(recievedValues[i]);
+                regulator.work(powerValues[i]);
                 i++;
             }
         }
