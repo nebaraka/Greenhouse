@@ -9,6 +9,8 @@ using Ninject;
 using GreenHouse;
 using System.Threading;
 using GreenHouse.Verification;
+using GreenHouse.Sensors;
+using GreenHouse.Regulators;
 
 namespace Presenter
 {
@@ -57,6 +59,40 @@ namespace Presenter
         {
             if (verification.GreenhouseVerification())
             {
+                //add devices pictures
+                foreach (KeyValuePair<Location, IRegulator> r in model.currentRegulatorMap.mapOfAcidityRegulators)
+                {
+                    view.drawAcidityRegulator(r.Key.x, r.Key.y);
+                }
+                foreach (KeyValuePair<Location, IRegulator> r in model.currentRegulatorMap.mapOfLightRegulators)
+                {
+                    view.drawLightRegulator(r.Key.x, r.Key.y);
+                }
+                foreach (KeyValuePair<Location, IRegulator> r in model.currentRegulatorMap.mapOfTemperatureRegulators)
+                {
+                    view.drawTemperatureRegulator(r.Key.x, r.Key.y);
+                }
+                foreach (KeyValuePair<Location, IRegulator> r in model.currentRegulatorMap.mapOfWetnessRegulators)
+                {
+                    view.drawWetnessRegulator(r.Key.x, r.Key.y);
+                }
+                foreach (KeyValuePair<Location, ISensor> r in model.currentSensorMap.mapOfAciditySensors)
+                {
+                    view.drawAciditySensor(r.Key.x, r.Key.y);
+                }
+                foreach (KeyValuePair<Location, ISensor> r in model.currentSensorMap.mapOfLightSensors)
+                {
+                    view.drawLightSensor(r.Key.x, r.Key.y);
+                }
+                foreach (KeyValuePair<Location, ISensor> r in model.currentSensorMap.mapOfTemperatureSensors)
+                {
+                    view.drawTemperatureSensor(r.Key.x, r.Key.y);
+                }
+                foreach (KeyValuePair<Location, ISensor> r in model.currentSensorMap.mapOfWetnessSensors)
+                {
+                    view.drawWetnessSensor(r.Key.x, r.Key.y);
+                }
+                //end add devices pictures
                 Thread thread = new Thread(model.simulate);
                 thread.Start();
             }

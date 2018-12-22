@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Presenter;
 using System.Drawing.Drawing2D;
+using View.Properties;
 
 namespace View
 {
@@ -101,6 +102,8 @@ namespace View
         }
         public void drawAcidityAllocation(int x, int y, double relation)
         {
+            //button11_Click(new object(), new EventArgs());
+
             int widthStep = pictureBox1.Width / CELLS_AMOUNT;
             int heightStep = pictureBox1.Height / CELLS_AMOUNT;
             Color c = Color.FromArgb((int)(255 * relation), Color.Green);
@@ -110,15 +113,19 @@ namespace View
         }
         public void drawLightAllocation(int x, int y, double relation)
         {
+            //button11_Click(new object(), new EventArgs());
             int widthStep = pictureBox1.Width / CELLS_AMOUNT;
             int heightStep = pictureBox1.Height / CELLS_AMOUNT;
-            Color c = Color.FromArgb((int)(255 * relation), Color.Yellow);
+            int buf = 0;
+            if (relation >= 0 && relation < 256) buf = (int)(255 * relation);
+            Color c = Color.FromArgb(buf, Color.Yellow);
             SolidBrush b = new SolidBrush(c);
             Rectangle r = new Rectangle(x * widthStep + 1, y * heightStep + 1, widthStep - 1, heightStep - 1);
             g.FillRectangle(b, r);
         }
         public void drawTemperatureAllocation(int x, int y, double relation)
         {
+            //button11_Click(new object(), new EventArgs());
             int widthStep = pictureBox1.Width / CELLS_AMOUNT;
             int heightStep = pictureBox1.Height / CELLS_AMOUNT;
             Color c = Color.FromArgb((int)(255 * relation), Color.Red);
@@ -128,6 +135,7 @@ namespace View
         }
         public void drawWetnessAllocation(int x, int y, double relation)
         {
+            //button11_Click(new object(), new EventArgs());
             int widthStep = pictureBox1.Width / CELLS_AMOUNT;
             int heightStep = pictureBox1.Height / CELLS_AMOUNT;
             Color c = Color.FromArgb((int)(255 * relation), Color.Blue);
@@ -138,6 +146,70 @@ namespace View
         public void ShowMessage(string s)
         {
             MessageBox.Show(s, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
+        }
+        public void drawAcidityRegulator(int x, int y)
+        {
+            int widthStep = pictureBox1.Width / CELLS_AMOUNT;
+            int heightStep = pictureBox1.Height / CELLS_AMOUNT;
+            Bitmap image = Resources.acidityRegulator;
+            //image.SetResolution(widthStep - 2, heightStep - 2);
+            g.DrawImage(image, x * widthStep + 1, y * heightStep + 1);
+        }
+        public void drawAciditySensor(int x, int y)
+        {
+            int widthStep = pictureBox1.Width / CELLS_AMOUNT;
+            int heightStep = pictureBox1.Height / CELLS_AMOUNT;
+            Bitmap image = Resources.aciditySensor;
+            //image.SetResolution(widthStep - 2, heightStep - 2);
+            g.DrawImage(image, x * widthStep + 1, y * heightStep + 1);
+        }
+        public void drawLightRegulator(int x, int y)
+        {
+            int widthStep = pictureBox1.Width / CELLS_AMOUNT;
+            int heightStep = pictureBox1.Height / CELLS_AMOUNT;
+            Bitmap image = Resources.lightRegulator;
+            //image.SetResolution(widthStep - 2, heightStep - 2);
+            g.DrawImage(image, x * widthStep + 1, y * heightStep + 1);
+        }
+        public void drawLightSensor(int x, int y)
+        {
+            int widthStep = pictureBox1.Width / CELLS_AMOUNT;
+            int heightStep = pictureBox1.Height / CELLS_AMOUNT;
+            Bitmap image = Resources.lightSensor;
+            //image.SetResolution(widthStep - 2, heightStep - 2);
+            g.DrawImage(image, x * widthStep + 1, y * heightStep + 1);
+        }
+        public void drawTemperatureRegulator(int x, int y)
+        {
+            int widthStep = pictureBox1.Width / CELLS_AMOUNT;
+            int heightStep = pictureBox1.Height / CELLS_AMOUNT;
+            Bitmap image = Resources.temperatureRegulator;
+            //image.SetResolution(widthStep - 2, heightStep - 2);
+            g.DrawImage(image, x * widthStep + 1, y * heightStep + 1);
+        }
+        public void drawTemperatureSensor(int x, int y)
+        {
+            int widthStep = pictureBox1.Width / CELLS_AMOUNT;
+            int heightStep = pictureBox1.Height / CELLS_AMOUNT;
+            Bitmap image = Resources.temperatureSensor;
+            //image.SetResolution(widthStep - 2, heightStep - 2);
+            g.DrawImage(image, x * widthStep + 1, y * heightStep + 1);
+        }
+        public void drawWetnessRegulator(int x, int y)
+        {
+            int widthStep = pictureBox1.Width / CELLS_AMOUNT;
+            int heightStep = pictureBox1.Height / CELLS_AMOUNT;
+            Bitmap image = Resources.wetnessRegulator;
+            //image.SetResolution(widthStep - 2, heightStep - 2);
+            g.DrawImage(image, x * widthStep + 1, y * heightStep + 1);
+        }
+        public void drawWetnessSensor(int x, int y)
+        {
+            int widthStep = pictureBox1.Width / CELLS_AMOUNT;
+            int heightStep = pictureBox1.Height / CELLS_AMOUNT;
+            Bitmap image = Resources.wetnessSensor;
+            //image.SetResolution(widthStep - 2, heightStep - 2);
+            g.DrawImage(image, x * widthStep + 1, y * heightStep + 1);
         }
 
         private void button2_click(object sender, EventArgs e)

@@ -137,6 +137,16 @@
   <ItemGroup>
     <None Include="Resources\memus.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\acidityRegulator.jpg" />
+    <Resource Include="Resources\aciditySensor.jpg" />
+    <Resource Include="Resources\lightRegulator.jpg" />
+    <Resource Include="Resources\lightSensor.jpg" />
+    <Resource Include="Resources\temperatureRegulator.jpg" />
+    <Resource Include="Resources\temperatureSensor.jpg" />
+    <Resource Include="Resources\wetnessRegulator.jpg" />
+    <Resource Include="Resources\wetnessSensor.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

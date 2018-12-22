@@ -29,5 +29,13 @@ namespace Presenter
         void drawLightAllocation(int x, int y, double relation);
         void drawTemperatureAllocation(int x, int y, double relation);
         void drawWetnessAllocation(int x, int y, double relation);
+        void drawAcidityRegulator(int x, int y);
+        void drawAciditySensor(int x, int y);
+        void drawLightRegulator(int x, int y);
+        void drawLightSensor(int x, int y);
+        void drawTemperatureRegulator(int x, int y);
+        void drawTemperatureSensor(int x, int y);
+        void drawWetnessRegulator(int x, int y);
+        void drawWetnessSensor(int x, int y);
     }
 }

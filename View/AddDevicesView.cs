@@ -70,5 +70,11 @@ namespace View
                 //messge
             }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            foreach (object o in comboBox1.Items)
+                add?.Invoke(o, textBox1.Text, textBox2.Text);
+        }
     }
 }
