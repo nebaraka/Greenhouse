@@ -410,5 +410,16 @@ namespace GreenHouse
         {
             return cells;
         }
+        public void Clear()
+        {
+            for (int i = 0; i < X_SIZE; i++)
+                for (int j = 0; j < Y_SIZE; j++)
+                {
+                    cells[i, j].acidity = 0;
+                    cells[i, j].light = 0;
+                    cells[i, j].temperature = 0;
+                    cells[i, j].wetness = 0;
+                }
+        }
     }
 }

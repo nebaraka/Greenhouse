@@ -24,6 +24,14 @@ namespace GreenHouse
         {
             tickSize = size;
         }
+        public int GetTickSize()
+        {
+            return tickSize;
+        }
+        public void ResetTime()
+        {
+            time = 1;
+        }
 
         public int GetTime() { return time; }
     }
